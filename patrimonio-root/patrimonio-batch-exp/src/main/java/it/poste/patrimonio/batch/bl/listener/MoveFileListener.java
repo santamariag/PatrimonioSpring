@@ -38,9 +38,9 @@ public class MoveFileListener implements JobExecutionListener {
 	public void afterJob(JobExecution jobExecution) {
 
 		log.info("Finished job {} with result {}",jobExecution.getJobInstance().getInstanceId(), jobExecution.getExitStatus().getExitCode());
-		if(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED)){
+		if(jobExecution.getExitStatus().compareTo(ExitStatus.COMPLETED)==0){
 			moveToCompleted();
-		} else if(jobExecution.getExitStatus().equals(ExitStatus.FAILED)){
+		} else if(jobExecution.getExitStatus().compareTo(ExitStatus.FAILED)==0){
 			moveToDiscarded();
 		} else {
 			moveToNoOp();

@@ -10,6 +10,8 @@ import it.poste.patrimonio.db.model.Price;
 
 public interface IPriceRepository extends MongoRepository<Price, String> {
 	
+	public Optional<Price> findByIsin(String isin);
+	
 	public Optional<Price> findByIsinAndPrice(String isin, BigDecimal price);
 
 }

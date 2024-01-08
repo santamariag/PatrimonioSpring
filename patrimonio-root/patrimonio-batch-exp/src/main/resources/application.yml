@@ -2,7 +2,7 @@ spring:
   application:
     name: PatrimonioBatch  
   profiles:
-    active: dev
+    active: dev, price
     
 ---
 

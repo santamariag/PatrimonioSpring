@@ -55,17 +55,18 @@ public class PriceItemWriter implements ItemStreamWriter<Price>{
 	public void write(Chunk<? extends Price> priceList) throws Exception {
 
 		log.info("Saving {} prices objects", priceList.size());
-		for(Price p:  priceList.getItems())
-			log.info("PRICE "+p);
-		priceRepository.saveAll(priceList);
+		if(priceList.size()!=0) {
+			for(Price p:  priceList.getItems())
+				log.info("PRICE "+p);
+			priceRepository.saveAll(priceList);
 
-		Map<String, BigDecimal> pricemap=priceList.getItems().stream().collect(Collectors.toMap(Price::getIsin, Price::getPrice));
-		
-		log.info("MAP "+pricemap);
-		
-		if(!pricemap.isEmpty()) {
+			Map<String, BigDecimal> pricemap=priceList.getItems().stream().collect(Collectors.toMap(Price::getIsin, Price::getPrice));
+
+			log.info("MAP "+pricemap);
+
+
 			//updatePositions(pricemap); 
-	
+
 			updatePositionsPagedWorkers(pricemap, workerConfig.getPageSize());
 			/** for (Price p: priceList)
 	        	gpmRepository.updatePriceOld(p.getIsin(), p.getPrice());*/
