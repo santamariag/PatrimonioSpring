@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>it.poste.patrimonio</groupId>
+    <artifactId>patrimonio-root</artifactId>
+    <version>${revision}</version>
+  </parent>
+  <artifactId>patrimonio-rs-specs</artifactId>
+  <name>patrimonio-rs-specs</name>
+  <description>Patrimonio RS Specs</description>
+  
+  <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<!--<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>-->
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>patrimonio-rs-specs-generate-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<!-- Input/Output -->
+							<inputSpec>${project.basedir}/src/main/resources/PatrimonioCliente_1.0.2.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources</output>
+							<!-- Language/Library -->
+							<generatorName>spring</generatorName>
+							<library>spring-boot</library>
+							<!-- Packages -->
+							<apiPackage>${project.groupId}.rs.specs.api</apiPackage>
+							<modelPackage>${project.groupId}.rs.specs.model</modelPackage>
+							<!-- Extra Configs -->
+							<configOptions>
+								<configPackage>${project.groupId}.specs.configuration</configPackage>
+								<dateLibrary>java8</dateLibrary>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<interfaceOnly>true</interfaceOnly>
+								<returnSuccessCode>true</returnSuccessCode>
+								<!--<swaggerDocketConfig>true</swaggerDocketConfig>-->
+								<useOptional>true</useOptional>
+								<useTags>true</useTags>
+							</configOptions>
+							<!--<modelNameSuffix>DTO</modelNameSuffix>-->
+							<skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+
+							<!-- Override default implementation of Swagger Docket Config. Scan 
+								'rsApiPackage' instead of 'apiPackage' -->
+							<additionalProperties>
+								<additionalProperty>rsApiPackage=${project.groupId}.rs.api</additionalProperty>
+							</additionalProperties>
+							<templateDirectory>src/main/resources/templates</templateDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

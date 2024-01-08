@@ -1,0 +1,1879 @@
+swagger: '2.0'
+info:
+  x-ibm-name: patrimonio-cliente
+  title: PatrimonioCliente
+  version: 1.0.2
+schemes:
+  - https
+basePath: /titoli
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    description: IGR3BNB
+    in: header
+    name: X-IBM-Client-Id
+    type: apiKey
+security:
+  - clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  gateway: datapower-gateway
+  cors:
+    enabled: true
+  phase: realized
+  targets:
+    SRV-BUS-PatrimonioCliente:
+      swagger: '2.0'
+      info:
+        title: SRV-BUS-PatrimonioCliente
+        description: ''
+        x-ibm-name: srv-bus-patrimoniocliente
+        version: 1.0.0
+      schemes:
+        - https
+      basePath: /SRV-BUS-PatrimonioCliente
+      produces:
+        - application/xml
+      consumes:
+        - text/xml
+      securityDefinitions:
+        clientID:
+          type: apiKey
+          name: X-IBM-Client-Id
+          in: header
+          description: ''
+      security:
+        - clientID: []
+      x-ibm-configuration:
+        phase: realized
+        enforced: true
+        testable: true
+        gateway: datapower-gateway
+        cors:
+          enabled: true
+        assembly:
+          execute:
+            - proxy:
+                title: proxy
+                target-url: ''
+      paths:
+        /dettaglioPatrimonio:
+          post:
+            summary: Operation dettaglioPatrimonio
+            description: ''
+            operationId: dettaglioPatrimonio
+            x-ibm-soap:
+              soap-action: dettaglioPatrimonio
+              soap-operation: >-
+                {http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente}PatrimonioClienteInput
+            parameters:
+              - in: body
+                name: body
+                required: true
+                schema:
+                  $ref: >-
+                    #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/dettaglioPatrimonioInput
+            responses:
+              '500':
+                description: ''
+                schema:
+                  $ref: >-
+                    #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/CommonFault
+              default:
+                description: ''
+                schema:
+                  $ref: >-
+                    #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/dettaglioPatrimonioOutput
+      definitions:
+        Security:
+          xml:
+            namespace: >-
+              http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+            prefix: wsse
+          description: Header for WS-Security
+          type: object
+          properties:
+            UsernameToken:
+              xml:
+                namespace: >-
+                  http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+                prefix: wsse
+              type: object
+              properties:
+                Username:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+                    prefix: wsse
+                  type: string
+                Password:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+                    prefix: wsse
+                  type: string
+                Nonce:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+                    prefix: wsse
+                  type: string
+                  properties:
+                    EncodingType:
+                      xml:
+                        namespace: ''
+                        attribute: true
+                      type: string
+                Created:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+                    prefix: wsu
+                  type: string
+            Timestamp:
+              xml:
+                namespace: >-
+                  http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+                prefix: wsu
+              type: object
+              properties:
+                Created:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+                    prefix: wsu
+                  type: string
+                Expires:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+                    prefix: wsu
+                  type: string
+                Id:
+                  xml:
+                    namespace: >-
+                      http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+                    prefix: wsu
+                    attribute: true
+                  type: string
+        dettaglioPatrimonioInput:
+          type: object
+          properties:
+            Envelope:
+              xml:
+                namespace: http://schemas.xmlsoap.org/soap/envelope/
+                prefix: soapenv
+              type: object
+              properties:
+                Header:
+                  $ref: >-
+                    #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/dettaglioPatrimonioHeader
+                Body:
+                  xml:
+                    namespace: http://schemas.xmlsoap.org/soap/envelope/
+                    prefix: soapenv
+                  type: object
+                  properties:
+                    PatrimonioClienteInput:
+                      $ref: >-
+                        #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/PatrimonioClienteInput_element_ns1
+                  required:
+                    - PatrimonioClienteInput
+              required:
+                - Body
+          required:
+            - Envelope
+          x-ibm-schema:
+            wsdl-port: >-
+              {http://www.posteitaliane.it/esb/schema/wsdl/PatrimonioCliente/SRV-BUS-PatrimonioCliente}BUS-SOAP-HTTPS-PatrimonioCliente-binding
+            wsdl-operation: PatrimonioClienteInput
+            wsdl-message-direction-or-name: PatrimonioClienteInputRequest
+          example: >-
+            <soapenv:Envelope
+            xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+             <soapenv:Header>
+              <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+               <wsse:UsernameToken>
+                <wsse:Username>string</wsse:Username>
+                <wsse:Password>string</wsse:Password>
+                <wsse:Nonce EncodingType="string">string</wsse:Nonce>
+                <wsu:Created>string</wsu:Created>
+               </wsse:UsernameToken>
+               <wsu:Timestamp wsu:Id="string">
+                <wsu:Created>string</wsu:Created>
+                <wsu:Expires>string</wsu:Expires>
+               </wsu:Timestamp>
+              </wsse:Security>
+              <ns0:ENVELOPE xmlns:ns0="http://www.posteitaliane.it/ESBNG/Common/SOEenvelope">
+               <ns0:source><!-- mandatory -->string</ns0:source>
+               <ns0:requestID><!-- mandatory -->string</ns0:requestID>
+               <ns0:routingRole>string</ns0:routingRole>
+               <ns0:creationTime>2016-04-18T14:07:37</ns0:creationTime>
+              </ns0:ENVELOPE>
+             </soapenv:Header>
+             <soapenv:Body>
+              <ns1:PatrimonioClienteInput xmlns:ns1="http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente" xmlns:ns2="http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente"><!-- mandatory -->
+               <ns2:cf>string</ns2:cf>
+               <ns2:cfNdg>string</ns2:cfNdg>
+               <ns2:titoww0a_i_cfunz>string</ns2:titoww0a_i_cfunz>
+               <ns2:ndgList><!-- mandatory -->
+                <ns2:ndg><!-- mandatory --><!-- between 1 and unlimited repetitions of this element -->string</ns2:ndg>
+               </ns2:ndgList>
+               <ns2:flagBuoniPostali>string</ns2:flagBuoniPostali>
+               <ns2:flagCc>string</ns2:flagCc>
+               <ns2:flagLibretti>string</ns2:flagLibretti>
+               <ns2:flagFondi>string</ns2:flagFondi>
+               <ns2:flagPolizze>string</ns2:flagPolizze>
+               <ns2:flagTitoli>string</ns2:flagTitoli>
+               <ns2:flagCarte>string</ns2:flagCarte>
+               <ns2:flagNdgLegati>string</ns2:flagNdgLegati>
+               <ns2:flagGPM>string</ns2:flagGPM>
+               <ns2:flagGestionePrivate>string</ns2:flagGestionePrivate>
+               <ns2:flagPolizzeProtezione>string</ns2:flagPolizzeProtezione>
+              </ns1:PatrimonioClienteInput>
+             </soapenv:Body>
+            </soapenv:Envelope>
+        dettaglioPatrimonioHeader:
+          type: object
+          properties:
+            Security:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Security
+            ENVELOPE:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/ENVELOPE_element_ns0
+        dettaglioPatrimonioOutput:
+          type: object
+          properties:
+            Envelope:
+              xml:
+                namespace: http://schemas.xmlsoap.org/soap/envelope/
+                prefix: soapenv
+              type: object
+              properties:
+                Body:
+                  xml:
+                    namespace: http://schemas.xmlsoap.org/soap/envelope/
+                    prefix: soapenv
+                  type: object
+                  properties:
+                    PatrimonioClienteOutput:
+                      $ref: >-
+                        #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/PatrimonioClienteOutput_element_ns1
+              required:
+                - Body
+          required:
+            - Envelope
+          x-ibm-schema:
+            wsdl-port: >-
+              {http://www.posteitaliane.it/esb/schema/wsdl/PatrimonioCliente/SRV-BUS-PatrimonioCliente}BUS-SOAP-HTTPS-PatrimonioCliente-binding
+            wsdl-operation: PatrimonioClienteInput
+            wsdl-message-direction-or-name: PatrimonioClienteInputResponse
+          example: >-
+            <soapenv:Envelope
+            xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+             <soapenv:Body>
+              <ns1:PatrimonioClienteOutput xmlns:ns1="http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente" xmlns:ns2="http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente">
+               <ns2:dettaglioPatrimonio><!-- between zero and unlimited repetitions of this element -->
+                <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+                <ns2:idBisogno><!-- mandatory -->string</ns2:idBisogno>
+                <ns2:descrizioneBisogno><!-- mandatory -->string</ns2:descrizioneBisogno>
+                <ns2:idFamigliaProdotto><!-- mandatory -->string</ns2:idFamigliaProdotto>
+                <ns2:descrizioneFamigliaProdotto><!-- mandatory -->string</ns2:descrizioneFamigliaProdotto>
+                <ns2:nrap>string</ns2:nrap>
+                <ns2:cstrfin>string</ns2:cstrfin>
+                <ns2:xstrfin>string</ns2:xstrfin>
+                <ns2:csdp>3</ns2:csdp>
+                <ns2:cndgs>string</ns2:cndgs>
+                <ns2:trap>string</ns2:trap>
+                <ns2:strp>string</ns2:strp>
+                <ns2:xint>string</ns2:xint>
+                <ns2:dtaper>2016-04-18</ns2:dtaper>
+                <ns2:xblc>string</ns2:xblc>
+                <ns2:cage>3</ns2:cage>
+                <ns2:xstt>string</ns2:xstt>
+                <ns2:tprm>string</ns2:tprm>
+                <ns2:ddec>2016-04-18</ns2:ddec>
+                <ns2:dsca>2016-04-18</ns2:dsca>
+                <ns2:isin>string</ns2:isin>
+                <ns2:qqta>3</ns2:qqta>
+                <ns2:dreg>2016-04-18</ns2:dreg>
+                <ns2:iprzat>3</ns2:iprzat>
+                <ns2:icamat>3</ns2:icamat>
+                <ns2:ivalbas>3</ns2:ivalbas>
+                <ns2:qqtavin>3</ns2:qqtavin>
+                <ns2:cdivemi>string</ns2:cdivemi>
+                <ns2:cdivtrz>string</ns2:cdivtrz>
+                <ns2:fpac>string</ns2:fpac>
+                <ns2:dulprz>3</ns2:dulprz>
+                <ns2:dultacq>2016-04-18</ns2:dultacq>
+                <ns2:dulcam>3</ns2:dulcam>
+                <ns2:ccdrreg>string</ns2:ccdrreg>
+                <ns2:fese>string</ns2:fese>
+                <ns2:pese_x>
+                 <ns2:pese>3</ns2:pese>
+                </ns2:pese_x>
+                <ns2:cndgc>string</ns2:cndgc>
+                <ns2:ictv_ris_x>3</ns2:ictv_ris_x>
+                <ns2:id_prod>string</ns2:id_prod>
+                <ns2:EsitoStructure>
+                 <ns2:esito><!-- mandatory -->string</ns2:esito>
+                 <ns2:dettaglioErrore><!-- between zero and unlimited repetitions of this element -->
+                  <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+                  <ns2:codiceErrore><!-- mandatory -->string</ns2:codiceErrore>
+                  <ns2:descrizioneErrore><!-- mandatory -->string</ns2:descrizioneErrore>
+                 </ns2:dettaglioErrore>
+                </ns2:EsitoStructure>
+               </ns2:dettaglioPatrimonio>
+               <ns2:dettaglioCards><!-- between zero and unlimited repetitions of this element -->
+                <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+                <ns2:idBisogno><!-- mandatory -->string</ns2:idBisogno>
+                <ns2:descrizioneBisogno><!-- mandatory -->string</ns2:descrizioneBisogno>
+                <ns2:idFamigliaProdotto><!-- mandatory -->string</ns2:idFamigliaProdotto>
+                <ns2:descrizioneFamigliaProdotto><!-- mandatory -->string</ns2:descrizioneFamigliaProdotto>
+                <ns2:ww0a_o_nele_x_cp><!-- mandatory -->
+                 <ns2:ww0a_o_nele_cp><!-- mandatory -->3</ns2:ww0a_o_nele_cp>
+                </ns2:ww0a_o_nele_x_cp>
+                <ns2:ww0a_o_tabpat_ele_cp><!-- mandatory -->
+                 <ns2:ww0a_o_esito><!-- mandatory -->string</ns2:ww0a_o_esito>
+                 <ns2:ww0a_o_mess_erro><!-- mandatory -->string</ns2:ww0a_o_mess_erro>
+                 <ns2:ww0a_o_num_carte_estr><!-- mandatory -->3</ns2:ww0a_o_num_carte_estr>
+                 <ns2:ww0a_o_altre_carte><!-- mandatory -->string</ns2:ww0a_o_altre_carte>
+                 <ns2:ww0a_o_black_list><!-- mandatory -->string</ns2:ww0a_o_black_list>
+                 <ns2:ww0a_o_positivo_ric50k><!-- mandatory -->3</ns2:ww0a_o_positivo_ric50k>
+                 <ns2:ww0a_o_positivo_ric100k><!-- mandatory -->3</ns2:ww0a_o_positivo_ric100k>
+                 <ns2:ww0a_o_positivo_ric200k><!-- mandatory -->3</ns2:ww0a_o_positivo_ric200k>
+                 <ns2:ww0a_o_dati_carte><!-- mandatory -->
+                  <ns2:ww0a_o_elem_tab_carte><!-- between zero and 15 repetitions of this element -->
+                   <ns2:ww0a_o_num_carta>string</ns2:ww0a_o_num_carta>
+                   <ns2:ww0a_o_cod_prod>string</ns2:ww0a_o_cod_prod>
+                   <ns2:ww0a_o_descr_prodotto>string</ns2:ww0a_o_descr_prodotto>
+                   <ns2:ww0a_o_iban>string</ns2:ww0a_o_iban>
+                   <ns2:ww0a_o_scadenza_carta>string</ns2:ww0a_o_scadenza_carta>
+                   <ns2:ww0a_o_segno_contabile>string</ns2:ww0a_o_segno_contabile>
+                   <ns2:ww0a_o_saldo_contabile>3</ns2:ww0a_o_saldo_contabile>
+                   <ns2:ww0a_o_segno_disponibile>string</ns2:ww0a_o_segno_disponibile>
+                   <ns2:ww0a_o_saldo_disponibile>3</ns2:ww0a_o_saldo_disponibile>
+                  </ns2:ww0a_o_elem_tab_carte>
+                 </ns2:ww0a_o_dati_carte>
+                </ns2:ww0a_o_tabpat_ele_cp>
+               </ns2:dettaglioCards>
+               <ns2:esito><!-- mandatory -->
+                <ns2:esito><!-- mandatory -->string</ns2:esito>
+                <ns2:dettaglioErrore><!-- between zero and unlimited repetitions of this element -->
+                 <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+                 <ns2:codiceErrore><!-- mandatory -->string</ns2:codiceErrore>
+                 <ns2:descrizioneErrore><!-- mandatory -->string</ns2:descrizioneErrore>
+                </ns2:dettaglioErrore>
+               </ns2:esito>
+              </ns1:PatrimonioClienteOutput>
+             </soapenv:Body>
+            </soapenv:Envelope>
+        dettaglioPatrimonioFault:
+          type: object
+          properties:
+            Envelope:
+              xml:
+                namespace: http://schemas.xmlsoap.org/soap/envelope/
+                prefix: soapenv
+              type: object
+              properties:
+                Body:
+                  xml:
+                    namespace: http://schemas.xmlsoap.org/soap/envelope/
+                    prefix: soapenv
+                  type: object
+                  properties:
+                    Fault:
+                      xml:
+                        namespace: http://schemas.xmlsoap.org/soap/envelope/
+                        prefix: soapenv
+                      type: object
+                      properties:
+                        faultcode:
+                          xml:
+                            namespace: ''
+                          type: string
+                        faultstring:
+                          xml:
+                            namespace: ''
+                          type: string
+                        faultactor:
+                          xml:
+                            namespace: ''
+                          type: string
+                        detail:
+                          xml:
+                            namespace: ''
+                            prefix: ''
+                          type: object
+                          properties: {}
+              required:
+                - Body
+          required:
+            - Envelope
+          x-ibm-schema:
+            wsdl-port: >-
+              {http://www.posteitaliane.it/esb/schema/wsdl/PatrimonioCliente/SRV-BUS-PatrimonioCliente}BUS-SOAP-HTTPS-PatrimonioCliente-binding
+            wsdl-operation: PatrimonioClienteInput
+            wsdl-message-direction-or-name: PatrimonioClienteInputFault
+        PatrimonioClienteInput_element_ns1:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente
+            prefix: ns1
+            name: PatrimonioClienteInput
+          type: object
+          properties:
+            cf:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType16_type_ns2
+            cfNdg:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+            titoww0a_i_cfunz:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType3_type_ns2
+            ndgList:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/ndgType_type_ns2
+            flagBuoniPostali:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagCc:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagLibretti:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagFondi:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagPolizze:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagTitoli:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagCarte:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagNdgLegati:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagGPM:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagGestionePrivate:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+            flagPolizzeProtezione:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/Flag_type_ns2
+          required:
+            - ndgList
+          example: >-
+            <ns1:PatrimonioClienteInput
+            xmlns:ns1="http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente"
+            xmlns:ns2="http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente">
+             <ns2:cf>string</ns2:cf>
+             <ns2:cfNdg>string</ns2:cfNdg>
+             <ns2:titoww0a_i_cfunz>string</ns2:titoww0a_i_cfunz>
+             <ns2:ndgList><!-- mandatory -->
+              <ns2:ndg><!-- mandatory --><!-- between 1 and unlimited repetitions of this element -->string</ns2:ndg>
+             </ns2:ndgList>
+             <ns2:flagBuoniPostali>string</ns2:flagBuoniPostali>
+             <ns2:flagCc>string</ns2:flagCc>
+             <ns2:flagLibretti>string</ns2:flagLibretti>
+             <ns2:flagFondi>string</ns2:flagFondi>
+             <ns2:flagPolizze>string</ns2:flagPolizze>
+             <ns2:flagTitoli>string</ns2:flagTitoli>
+             <ns2:flagCarte>string</ns2:flagCarte>
+             <ns2:flagNdgLegati>string</ns2:flagNdgLegati>
+             <ns2:flagGPM>string</ns2:flagGPM>
+             <ns2:flagGestionePrivate>string</ns2:flagGestionePrivate>
+             <ns2:flagPolizzeProtezione>string</ns2:flagPolizzeProtezione>
+            </ns1:PatrimonioClienteInput>
+        PatrimonioClienteOutput_element_ns1:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente
+            prefix: ns1
+            name: PatrimonioClienteOutput
+          type: object
+          properties:
+            dettaglioPatrimonio:
+              type: array
+              items:
+                $ref: >-
+                  #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/dettaglioPatrimonioType_type_ns2
+            dettaglioCards:
+              type: array
+              items:
+                $ref: >-
+                  #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/ww0a_o_tabpat_tab_cp_type_ns2
+            esito:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/esitoType_type_ns2
+          required:
+            - esito
+          example: >-
+            <ns1:PatrimonioClienteOutput
+            xmlns:ns1="http://www.posteitaliane.it/esb/schema/cmf/PatrimonioCliente"
+            xmlns:ns2="http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente">
+             <ns2:dettaglioPatrimonio><!-- between zero and unlimited repetitions of this element -->
+              <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+              <ns2:idBisogno><!-- mandatory -->string</ns2:idBisogno>
+              <ns2:descrizioneBisogno><!-- mandatory -->string</ns2:descrizioneBisogno>
+              <ns2:idFamigliaProdotto><!-- mandatory -->string</ns2:idFamigliaProdotto>
+              <ns2:descrizioneFamigliaProdotto><!-- mandatory -->string</ns2:descrizioneFamigliaProdotto>
+              <ns2:nrap>string</ns2:nrap>
+              <ns2:cstrfin>string</ns2:cstrfin>
+              <ns2:xstrfin>string</ns2:xstrfin>
+              <ns2:csdp>3</ns2:csdp>
+              <ns2:cndgs>string</ns2:cndgs>
+              <ns2:trap>string</ns2:trap>
+              <ns2:strp>string</ns2:strp>
+              <ns2:xint>string</ns2:xint>
+              <ns2:dtaper>2016-04-18</ns2:dtaper>
+              <ns2:xblc>string</ns2:xblc>
+              <ns2:cage>3</ns2:cage>
+              <ns2:xstt>string</ns2:xstt>
+              <ns2:tprm>string</ns2:tprm>
+              <ns2:ddec>2016-04-18</ns2:ddec>
+              <ns2:dsca>2016-04-18</ns2:dsca>
+              <ns2:isin>string</ns2:isin>
+              <ns2:qqta>3</ns2:qqta>
+              <ns2:dreg>2016-04-18</ns2:dreg>
+              <ns2:iprzat>3</ns2:iprzat>
+              <ns2:icamat>3</ns2:icamat>
+              <ns2:ivalbas>3</ns2:ivalbas>
+              <ns2:qqtavin>3</ns2:qqtavin>
+              <ns2:cdivemi>string</ns2:cdivemi>
+              <ns2:cdivtrz>string</ns2:cdivtrz>
+              <ns2:fpac>string</ns2:fpac>
+              <ns2:dulprz>3</ns2:dulprz>
+              <ns2:dultacq>2016-04-18</ns2:dultacq>
+              <ns2:dulcam>3</ns2:dulcam>
+              <ns2:ccdrreg>string</ns2:ccdrreg>
+              <ns2:fese>string</ns2:fese>
+              <ns2:pese_x>
+               <ns2:pese>3</ns2:pese>
+              </ns2:pese_x>
+              <ns2:cndgc>string</ns2:cndgc>
+              <ns2:ictv_ris_x>3</ns2:ictv_ris_x>
+              <ns2:id_prod>string</ns2:id_prod>
+              <ns2:EsitoStructure>
+               <ns2:esito><!-- mandatory -->string</ns2:esito>
+               <ns2:dettaglioErrore><!-- between zero and unlimited repetitions of this element -->
+                <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+                <ns2:codiceErrore><!-- mandatory -->string</ns2:codiceErrore>
+                <ns2:descrizioneErrore><!-- mandatory -->string</ns2:descrizioneErrore>
+               </ns2:dettaglioErrore>
+              </ns2:EsitoStructure>
+             </ns2:dettaglioPatrimonio>
+             <ns2:dettaglioCards><!-- between zero and unlimited repetitions of this element -->
+              <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+              <ns2:idBisogno><!-- mandatory -->string</ns2:idBisogno>
+              <ns2:descrizioneBisogno><!-- mandatory -->string</ns2:descrizioneBisogno>
+              <ns2:idFamigliaProdotto><!-- mandatory -->string</ns2:idFamigliaProdotto>
+              <ns2:descrizioneFamigliaProdotto><!-- mandatory -->string</ns2:descrizioneFamigliaProdotto>
+              <ns2:ww0a_o_nele_x_cp><!-- mandatory -->
+               <ns2:ww0a_o_nele_cp><!-- mandatory -->3</ns2:ww0a_o_nele_cp>
+              </ns2:ww0a_o_nele_x_cp>
+              <ns2:ww0a_o_tabpat_ele_cp><!-- mandatory -->
+               <ns2:ww0a_o_esito><!-- mandatory -->string</ns2:ww0a_o_esito>
+               <ns2:ww0a_o_mess_erro><!-- mandatory -->string</ns2:ww0a_o_mess_erro>
+               <ns2:ww0a_o_num_carte_estr><!-- mandatory -->3</ns2:ww0a_o_num_carte_estr>
+               <ns2:ww0a_o_altre_carte><!-- mandatory -->string</ns2:ww0a_o_altre_carte>
+               <ns2:ww0a_o_black_list><!-- mandatory -->string</ns2:ww0a_o_black_list>
+               <ns2:ww0a_o_positivo_ric50k><!-- mandatory -->3</ns2:ww0a_o_positivo_ric50k>
+               <ns2:ww0a_o_positivo_ric100k><!-- mandatory -->3</ns2:ww0a_o_positivo_ric100k>
+               <ns2:ww0a_o_positivo_ric200k><!-- mandatory -->3</ns2:ww0a_o_positivo_ric200k>
+               <ns2:ww0a_o_dati_carte><!-- mandatory -->
+                <ns2:ww0a_o_elem_tab_carte><!-- between zero and 15 repetitions of this element -->
+                 <ns2:ww0a_o_num_carta>string</ns2:ww0a_o_num_carta>
+                 <ns2:ww0a_o_cod_prod>string</ns2:ww0a_o_cod_prod>
+                 <ns2:ww0a_o_descr_prodotto>string</ns2:ww0a_o_descr_prodotto>
+                 <ns2:ww0a_o_iban>string</ns2:ww0a_o_iban>
+                 <ns2:ww0a_o_scadenza_carta>string</ns2:ww0a_o_scadenza_carta>
+                 <ns2:ww0a_o_segno_contabile>string</ns2:ww0a_o_segno_contabile>
+                 <ns2:ww0a_o_saldo_contabile>3</ns2:ww0a_o_saldo_contabile>
+                 <ns2:ww0a_o_segno_disponibile>string</ns2:ww0a_o_segno_disponibile>
+                 <ns2:ww0a_o_saldo_disponibile>3</ns2:ww0a_o_saldo_disponibile>
+                </ns2:ww0a_o_elem_tab_carte>
+               </ns2:ww0a_o_dati_carte>
+              </ns2:ww0a_o_tabpat_ele_cp>
+             </ns2:dettaglioCards>
+             <ns2:esito><!-- mandatory -->
+              <ns2:esito><!-- mandatory -->string</ns2:esito>
+              <ns2:dettaglioErrore><!-- between zero and unlimited repetitions of this element -->
+               <ns2:ndg><!-- mandatory -->string</ns2:ndg>
+               <ns2:codiceErrore><!-- mandatory -->string</ns2:codiceErrore>
+               <ns2:descrizioneErrore><!-- mandatory -->string</ns2:descrizioneErrore>
+              </ns2:dettaglioErrore>
+             </ns2:esito>
+            </ns1:PatrimonioClienteOutput>
+        ENVELOPE_element_ns0:
+          xml:
+            namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+            prefix: ns0
+          description: Struttura della SOEenvelope
+          type: object
+          properties:
+            source:
+              xml:
+                namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+                prefix: ns0
+              description: Identificativo del sistema che sta invocando il servizio
+              type: string
+              pattern: ([a-zA-Z0-9,.;:_+\-\\/$])*(\|([a-zA-Z0-9,.;:_+\-\\/$])*)*
+            requestID:
+              xml:
+                namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+                prefix: ns0
+              description: Identificativo univoco
+              type: string
+              pattern: ([a-zA-Z0-9,.;:_+\-\\/$])*(\|([a-zA-Z0-9,.;:_+\-\\/$])*)*
+            routingRole:
+              xml:
+                namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+                prefix: ns0
+              description: >-
+                Valore opzionale su cui eventualmente applicare regole di
+                content routing, indipendenti dal payload
+              type: string
+            creationTime:
+              xml:
+                namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+                prefix: ns0
+              description: >-
+                Istante dell'invocazione delle piattaforme di integrazione di
+                Poste.
+              type: string
+              format: date-time
+          required:
+            - source
+            - requestID
+          x-xsi-type: SOEenvelope_type
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+            prefix: ns0
+          x-xsi-type-uniquename: SOEenvelope_type_type_ns0
+        simpleType16_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 16
+          x-xsi-type: simpleType16
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType16_type_ns2
+        simpleType13_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 13
+          x-xsi-type: simpleType13
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType13_type_ns2
+        simpleType3_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 3
+          x-xsi-type: simpleType3
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType3_type_ns2
+        ndgType_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            ndg:
+              type: array
+              minItems: 1
+              items:
+                $ref: >-
+                  #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+          required:
+            - ndg
+          x-xsi-type: ndgType
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: ndgType_type_ns2
+        Flag_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          pattern: '[SN]'
+          maxLength: 1
+          x-xsi-type: Flag
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: Flag_type_ns2
+        dettaglioPatrimonioType_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            ndg:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+            idBisogno:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            descrizioneBisogno:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            idFamigliaProdotto:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            descrizioneFamigliaProdotto:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            nrap:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType27_type_ns2
+            cstrfin:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType35_type_ns2
+            xstrfin:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType60_type_ns2
+            csdp:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeInt5_type_ns2
+            cndgs:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+            trap:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType3_type_ns2
+            strp:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType3_type_ns2
+            xint:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType80_type_ns2
+            dtaper:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+              format: date
+            xblc:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType20_type_ns2
+            cage:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeInt5_type_ns2
+            xstt:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType20_type_ns2
+            tprm:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType10_type_ns2
+            ddec:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+              format: date
+            dsca:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+              format: date
+            isin:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType17_type_ns2
+            qqta:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal18_type_ns2
+            dreg:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+              format: date
+            iprzat:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal13_type_ns2
+            icamat:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal15_type_ns2
+            ivalbas:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal18_type_ns2
+            qqtavin:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal18_type_ns2
+            cdivemi:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType3_type_ns2
+            cdivtrz:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType3_type_ns2
+            fpac:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType1_type_ns2
+            dulprz:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeInt8_type_ns2
+            dultacq:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+              format: date
+            dulcam:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeInt8_type_ns2
+            ccdrreg:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType30_type_ns2
+            fese:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType1_type_ns2
+            pese_x:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/pese_xType_type_ns2
+            cndgc:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+            ictv_ris_x:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal18_type_ns2
+            id_prod:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType48_type_ns2
+            EsitoStructure:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/esitoType_type_ns2_nil
+          required:
+            - ndg
+            - idBisogno
+            - descrizioneBisogno
+            - idFamigliaProdotto
+            - descrizioneFamigliaProdotto
+          x-xsi-type: dettaglioPatrimonioType
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: dettaglioPatrimonioType_type_ns2
+        ww0a_o_tabpat_tab_cp_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            ndg:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+            idBisogno:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            descrizioneBisogno:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            idFamigliaProdotto:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            descrizioneFamigliaProdotto:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            ww0a_o_nele_x_cp:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: object
+              properties:
+                ww0a_o_nele_cp:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: integer
+                  format: int32
+                  minimum: -9999
+                  maximum: 9999
+              required:
+                - ww0a_o_nele_cp
+            ww0a_o_tabpat_ele_cp:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: object
+              properties:
+                ww0a_o_esito:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: string
+                  maxLength: 2
+                  x-ibm-whiteSpace: collapse
+                ww0a_o_mess_erro:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: string
+                  maxLength: 70
+                  x-ibm-whiteSpace: collapse
+                ww0a_o_num_carte_estr:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 999
+                ww0a_o_altre_carte:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: string
+                  maxLength: 1
+                  x-ibm-whiteSpace: collapse
+                ww0a_o_black_list:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: string
+                  maxLength: 1
+                  x-ibm-whiteSpace: collapse
+                ww0a_o_positivo_ric50k:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: number
+                  x-ibm-fractionDigits: 3
+                  x-ibm-totalDigits: 18
+                ww0a_o_positivo_ric100k:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: number
+                  x-ibm-fractionDigits: 3
+                  x-ibm-totalDigits: 18
+                ww0a_o_positivo_ric200k:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: number
+                  x-ibm-fractionDigits: 3
+                  x-ibm-totalDigits: 18
+                ww0a_o_dati_carte:
+                  xml:
+                    namespace: >-
+                      http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                    prefix: ns2
+                  type: object
+                  properties:
+                    ww0a_o_elem_tab_carte:
+                      type: array
+                      maxItems: 15
+                      items:
+                        xml:
+                          namespace: >-
+                            http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                          prefix: ns2
+                        type: object
+                        properties:
+                          ww0a_o_num_carta:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 16
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_cod_prod:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 6
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_descr_prodotto:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 30
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_iban:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 27
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_scadenza_carta:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 10
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_segno_contabile:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 1
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_saldo_contabile:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: number
+                            x-ibm-fractionDigits: 3
+                            x-ibm-totalDigits: 18
+                          ww0a_o_segno_disponibile:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: string
+                            maxLength: 1
+                            x-ibm-whiteSpace: collapse
+                          ww0a_o_saldo_disponibile:
+                            xml:
+                              namespace: >-
+                                http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                              prefix: ns2
+                            type: number
+                            x-ibm-fractionDigits: 3
+                            x-ibm-totalDigits: 18
+              required:
+                - ww0a_o_esito
+                - ww0a_o_mess_erro
+                - ww0a_o_num_carte_estr
+                - ww0a_o_altre_carte
+                - ww0a_o_black_list
+                - ww0a_o_positivo_ric50k
+                - ww0a_o_positivo_ric100k
+                - ww0a_o_positivo_ric200k
+                - ww0a_o_dati_carte
+          required:
+            - ndg
+            - idBisogno
+            - descrizioneBisogno
+            - idFamigliaProdotto
+            - descrizioneFamigliaProdotto
+            - ww0a_o_nele_x_cp
+            - ww0a_o_tabpat_ele_cp
+          x-xsi-type: ww0a_o_tabpat_tab_cp
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: ww0a_o_tabpat_tab_cp_type_ns2
+        esitoType_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            esito:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            dettaglioErrore:
+              type: array
+              items:
+                $ref: >-
+                  #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/dettaglioErroreType_type_ns2
+          required:
+            - esito
+          x-xsi-type: esitoType
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: esitoType_type_ns2
+        simpleType27_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 27
+          x-xsi-type: simpleType27
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType27_type_ns2
+        simpleType35_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 35
+          x-xsi-type: simpleType35
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType35_type_ns2
+        simpleType60_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 60
+          x-xsi-type: simpleType60
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType60_type_ns2
+        simpleTypeInt5_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: number
+          x-ibm-totalDigits: 5
+          x-xsi-type: simpleTypeInt5
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleTypeInt5_type_ns2
+        simpleType80_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 80
+          x-xsi-type: simpleType80
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType80_type_ns2
+        simpleType20_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 20
+          x-xsi-type: simpleType20
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType20_type_ns2
+        simpleType10_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 10
+          x-xsi-type: simpleType10
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType10_type_ns2
+        simpleType17_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 17
+          x-xsi-type: simpleType17
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType17_type_ns2
+        simpleTypeDecimal18_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: number
+          x-ibm-fractionDigits: 3
+          x-ibm-totalDigits: 18
+          x-xsi-type: simpleTypeDecimal18
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleTypeDecimal18_type_ns2
+        simpleTypeDecimal13_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: number
+          x-ibm-fractionDigits: 6
+          x-ibm-totalDigits: 13
+          x-xsi-type: simpleTypeDecimal13
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleTypeDecimal13_type_ns2
+        simpleTypeDecimal15_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: number
+          x-ibm-fractionDigits: 6
+          x-ibm-totalDigits: 15
+          x-xsi-type: simpleTypeDecimal15
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleTypeDecimal15_type_ns2
+        simpleType1_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 1
+          x-xsi-type: simpleType1
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType1_type_ns2
+        simpleTypeInt8_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: number
+          x-ibm-totalDigits: 8
+          x-xsi-type: simpleTypeInt8
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleTypeInt8_type_ns2
+        simpleType30_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 30
+          x-xsi-type: simpleType30
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType30_type_ns2
+        pese_xType_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            pese:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleTypeDecimal6_type_ns2
+          x-xsi-type: pese_xType
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: pese_xType_type_ns2
+        simpleType48_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: string
+          maxLength: 48
+          x-xsi-type: simpleType48
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleType48_type_ns2
+        dettaglioErroreType_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            ndg:
+              $ref: >-
+                #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/simpleType13_type_ns2
+            codiceErrore:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            descrizioneErrore:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+          required:
+            - ndg
+            - codiceErrore
+            - descrizioneErrore
+          x-xsi-type: dettaglioErroreType
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: dettaglioErroreType_type_ns2
+        simpleTypeDecimal6_type_ns2:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: number
+          x-ibm-fractionDigits: 3
+          x-ibm-totalDigits: 6
+          x-xsi-type: simpleTypeDecimal6
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: simpleTypeDecimal6_type_ns2
+        esitoType_type_ns2_nil:
+          xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          type: object
+          properties:
+            esito:
+              xml:
+                namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+                prefix: ns2
+              type: string
+            dettaglioErrore:
+              type: array
+              items:
+                $ref: >-
+                  #/x-ibm-configuration/targets/SRV-BUS-PatrimonioCliente/definitions/dettaglioErroreType_type_ns2
+          required:
+            - esito
+          x-nullable: true
+          x-xsi-type: esitoType
+          x-xsi-type-xml:
+            namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+            prefix: ns2
+          x-xsi-type-uniquename: esitoType_type_ns2_nil
+        CommonFault:
+          type: object
+          properties:
+            Envelope:
+              xml:
+                namespace: http://schemas.xmlsoap.org/soap/envelope/
+                prefix: soapenv
+              type: object
+              properties:
+                Header:
+                  xml:
+                    namespace: http://schemas.xmlsoap.org/soap/envelope/
+                    prefix: soapenv
+                  type: object
+                Body:
+                  xml:
+                    namespace: http://schemas.xmlsoap.org/soap/envelope/
+                    prefix: soapenv
+                  type: object
+                  properties:
+                    Fault:
+                      xml:
+                        namespace: http://schemas.xmlsoap.org/soap/envelope/
+                        prefix: soapenv
+                      type: object
+                      properties:
+                        faultcode:
+                          xml:
+                            namespace: ''
+                            prefix: ''
+                          type: string
+                        faultstring:
+                          xml:
+                            namespace: ''
+                            prefix: ''
+                          type: string
+                        faultactor:
+                          xml:
+                            namespace: ''
+                            prefix: ''
+                          type: string
+                        detail:
+                          xml:
+                            namespace: ''
+                            prefix: ''
+                          type: object
+                          properties: {}
+              required:
+                - Body
+          required:
+            - Envelope
+  properties:
+    WS-Security-Password:
+      value: Passw0rd
+      description: ''
+      encoded: false
+    WS-Security-Username:
+      value: TST_BPIESBCOLL
+      description: ''
+      encoded: false
+    endpoint-ESB:
+      value: >-
+        https://nesb.app.coll2.ocprm.testposte/patrimonioclienteesteso/services/PatrimonioCliente/esteso
+      description: ''
+      encoded: false
+  type: rest
+paths:
+  /dettaglioPatrimonio:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/PatrimonioClienteOutput_element_ns1'
+        '500':
+          description: ''
+          schema:
+            $ref: '#/definitions/CommonFault'
+      parameters:
+        - name: request
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/dettaglioPatrimonioInput'
+    parameters:
+      - name: source
+        type: string
+        required: false
+        in: header
+      - name: requestID
+        type: string
+        required: false
+        in: header
+      - name: routingRole
+        type: string
+        required: false
+        in: header
+      - name: creationTime
+        type: string
+        required: false
+        in: header
+definitions:
+  dettaglioPatrimonioInput:
+    type: object
+    properties:
+      PatrimonioClienteInput:
+        $ref: '#/definitions/PatrimonioClienteInput_element_ns1'
+  CommonFault:
+    type: object
+    properties:
+      error:
+        type: string
+      Fault:
+        type: object
+        properties:
+          faultcode:
+            type: string
+          faultstring:
+            type: string
+          faultactor:
+            type: string
+          detail:
+            type: object
+  PatrimonioClienteInput_element_ns1:
+    type: object
+    properties:
+      cf:
+        $ref: '#/definitions/simpleType16_type_ns2'
+      cfNdg:
+        $ref: '#/definitions/simpleType13_type_ns2'
+      titoww0a_i_cfunz:
+        $ref: '#/definitions/simpleType3_type_ns2'
+      ndgList:
+        $ref: '#/definitions/ndgType_type_ns2'
+      flagBuoniPostali:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagCc:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagLibretti:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagFondi:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagPolizze:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagTitoli:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagCarte:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagNdgLegati:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagGPM:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagGestionePrivate:
+        $ref: '#/definitions/Flag_type_ns2'
+      flagPolizzeProtezione:
+        $ref: '#/definitions/Flag_type_ns2'
+    required:
+      - ndgList
+  PatrimonioClienteOutput_element_ns1:
+    type: object
+    properties:
+      dettaglioPatrimonio:
+        type: array
+        items:
+          $ref: '#/definitions/dettaglioPatrimonioType_type_ns2'
+      dettaglioCards:
+        type: array
+        items:
+          $ref: '#/definitions/ww0a_o_tabpat_tab_cp_type_ns2'
+      esito:
+        $ref: '#/definitions/esitoType_type_ns2'
+    required:
+      - esito
+  ENVELOPE_element_ns0:
+    description: Struttura della SOEenvelope
+    type: object
+    properties:
+      source:
+        type: string
+      requestID:
+        type: string
+      routingRole:
+        type: string
+      creationTime:
+        type: string
+    required:
+      - source
+      - requestID
+    x-xsi-type: SOEenvelope_type
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/ESBNG/Common/SOEenvelope
+      prefix: ns0
+    x-xsi-type-uniquename: SOEenvelope_type_type_ns0
+  simpleType16_type_ns2:
+    type: string
+  simpleType13_type_ns2:
+    type: string
+  simpleType3_type_ns2:
+    type: string
+  ndgType_type_ns2:
+    type: object
+    properties:
+      ndg:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/simpleType13_type_ns2'
+    required:
+      - ndg
+    x-xsi-type: ndgType
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: ndgType_type_ns2
+  Flag_type_ns2:
+    type: string
+  dettaglioPatrimonioType_type_ns2:
+    type: object
+    properties:
+      ndg:
+        $ref: '#/definitions/simpleType13_type_ns2'
+      idBisogno:
+        type: string
+      descrizioneBisogno:
+        type: string
+      idFamigliaProdotto:
+        type: string
+      descrizioneFamigliaProdotto:
+        type: string
+      nrap:
+        $ref: '#/definitions/simpleType27_type_ns2'
+      cstrfin:
+        $ref: '#/definitions/simpleType35_type_ns2'
+      xstrfin:
+        $ref: '#/definitions/simpleType60_type_ns2'
+      csdp:
+        $ref: '#/definitions/simpleTypeInt5_type_ns2'
+      cndgs:
+        $ref: '#/definitions/simpleType13_type_ns2'
+      trap:
+        $ref: '#/definitions/simpleType3_type_ns2'
+      strp:
+        $ref: '#/definitions/simpleType3_type_ns2'
+      xint:
+        $ref: '#/definitions/simpleType80_type_ns2'
+      dtaper:
+        type: string
+      xblc:
+        $ref: '#/definitions/simpleType20_type_ns2'
+      cage:
+        $ref: '#/definitions/simpleTypeInt5_type_ns2'
+      xstt:
+        $ref: '#/definitions/simpleType20_type_ns2'
+      tprm:
+        $ref: '#/definitions/simpleType10_type_ns2'
+      ddec:
+        type: string
+      dsca:
+        type: string
+      isin:
+        $ref: '#/definitions/simpleType17_type_ns2'
+      qqta:
+        $ref: '#/definitions/simpleTypeDecimal18_type_ns2'
+      dreg:
+        type: string
+      iprzat:
+        $ref: '#/definitions/simpleTypeDecimal13_type_ns2'
+      icamat:
+        $ref: '#/definitions/simpleTypeDecimal15_type_ns2'
+      ivalbas:
+        $ref: '#/definitions/simpleTypeDecimal18_type_ns2'
+      qqtavin:
+        $ref: '#/definitions/simpleTypeDecimal18_type_ns2'
+      cdivemi:
+        $ref: '#/definitions/simpleType3_type_ns2'
+      cdivtrz:
+        $ref: '#/definitions/simpleType3_type_ns2'
+      fpac:
+        $ref: '#/definitions/simpleType1_type_ns2'
+      dulprz:
+        $ref: '#/definitions/simpleTypeInt8_type_ns2'
+      dultacq:
+        type: string
+      dulcam:
+        $ref: '#/definitions/simpleTypeInt8_type_ns2'
+      ccdrreg:
+        $ref: '#/definitions/simpleType30_type_ns2'
+      fese:
+        $ref: '#/definitions/simpleType1_type_ns2'
+      pese_x:
+        $ref: '#/definitions/pese_xType_type_ns2'
+      cndgc:
+        $ref: '#/definitions/simpleType13_type_ns2'
+      ictv_ris_x:
+        $ref: '#/definitions/simpleTypeDecimal18_type_ns2'
+      id_prod:
+        $ref: '#/definitions/simpleType48_type_ns2'
+      EsitoStructure:
+        $ref: '#/definitions/esitoType_type_ns2_nil'
+    required:
+      - ndg
+      - idBisogno
+      - descrizioneBisogno
+      - idFamigliaProdotto
+      - descrizioneFamigliaProdotto
+    x-xsi-type: dettaglioPatrimonioType
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: dettaglioPatrimonioType_type_ns2
+  ww0a_o_tabpat_tab_cp_type_ns2:
+    type: object
+    properties:
+      ndg:
+        $ref: '#/definitions/simpleType13_type_ns2'
+      idBisogno:
+        type: string
+      descrizioneBisogno:
+        type: string
+      idFamigliaProdotto:
+        type: string
+      descrizioneFamigliaProdotto:
+        type: string
+      ww0a_o_nele_x_cp:
+        type: object
+        properties:
+          ww0a_o_nele_cp:
+            type: string
+        required:
+          - ww0a_o_nele_cp
+      ww0a_o_tabpat_ele_cp:
+        type: object
+        properties:
+          ww0a_o_esito:
+            type: string
+          ww0a_o_mess_erro:
+            type: string
+          ww0a_o_num_carte_estr:
+            type: string
+          ww0a_o_altre_carte:
+            type: string
+          ww0a_o_black_list:
+            type: string
+          ww0a_o_positivo_ric50k:
+            type: string
+          ww0a_o_positivo_ric100k:
+            type: string
+          ww0a_o_positivo_ric200k:
+            type: string
+          ww0a_o_dati_carte:
+            type: object
+            properties:
+              ww0a_o_elem_tab_carte:
+                type: array
+                maxItems: 15
+                items:
+                  type: object
+                  properties:
+                    ww0a_o_num_carta:
+                      type: string
+                    ww0a_o_cod_prod:
+                      type: string
+                    ww0a_o_descr_prodotto:
+                      type: string
+                    ww0a_o_iban:
+                      type: string
+                    ww0a_o_scadenza_carta:
+                      type: string
+                    ww0a_o_segno_contabile:
+                      type: string
+                    ww0a_o_saldo_contabile:
+                      type: string
+                    ww0a_o_segno_disponibile:
+                      type: string
+                    ww0a_o_saldo_disponibile:
+                      type: string
+        required:
+          - ww0a_o_esito
+          - ww0a_o_mess_erro
+          - ww0a_o_num_carte_estr
+          - ww0a_o_altre_carte
+          - ww0a_o_black_list
+          - ww0a_o_positivo_ric50k
+          - ww0a_o_positivo_ric100k
+          - ww0a_o_positivo_ric200k
+          - ww0a_o_dati_carte
+    required:
+      - ndg
+      - idBisogno
+      - descrizioneBisogno
+      - idFamigliaProdotto
+      - descrizioneFamigliaProdotto
+      - ww0a_o_nele_x_cp
+      - ww0a_o_tabpat_ele_cp
+    x-xsi-type: ww0a_o_tabpat_tab_cp
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: ww0a_o_tabpat_tab_cp_type_ns2
+  esitoType_type_ns2:
+    type: object
+    properties:
+      esito:
+        type: string
+      dettaglioErrore:
+        type: array
+        items:
+          $ref: '#/definitions/dettaglioErroreType_type_ns2'
+    required:
+      - esito
+    x-xsi-type: esitoType
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: esitoType_type_ns2
+  simpleType27_type_ns2:
+    type: string
+  simpleType35_type_ns2:
+    type: string
+  simpleType60_type_ns2:
+    type: string
+  simpleTypeInt5_type_ns2:
+    type: string
+  simpleType80_type_ns2:
+    type: string
+  simpleType20_type_ns2:
+    type: string
+  simpleType10_type_ns2:
+    type: string
+  simpleType17_type_ns2:
+    type: string
+  simpleTypeDecimal18_type_ns2:
+    type: string
+  simpleTypeDecimal13_type_ns2:
+    type: string
+  simpleTypeDecimal15_type_ns2:
+    type: string
+  simpleType1_type_ns2:
+    type: string
+  simpleTypeInt8_type_ns2:
+    type: string
+  simpleType30_type_ns2:
+    type: string
+  pese_xType_type_ns2:
+    type: object
+    properties:
+      pese:
+        $ref: '#/definitions/simpleTypeDecimal6_type_ns2'
+    x-xsi-type: pese_xType
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: pese_xType_type_ns2
+  simpleType48_type_ns2:
+    type: string
+  dettaglioErroreType_type_ns2:
+    type: object
+    properties:
+      ndg:
+        $ref: '#/definitions/simpleType13_type_ns2'
+      codiceErrore:
+        type: string
+      descrizioneErrore:
+        type: string
+    required:
+      - ndg
+      - codiceErrore
+      - descrizioneErrore
+    x-xsi-type: dettaglioErroreType
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: dettaglioErroreType_type_ns2
+  simpleTypeDecimal6_type_ns2:
+    type: string
+  esitoType_type_ns2_nil:
+    type: object
+    properties:
+      esito:
+        type: string
+      dettaglioErrore:
+        type: array
+        items:
+          $ref: '#/definitions/dettaglioErroreType_type_ns2'
+    required:
+      - esito
+    x-nullable: true
+    x-xsi-type: esitoType
+    x-xsi-type-xml:
+      namespace: http://www.posteitaliane.it/esb/schema/cdm/PatrimonioCliente
+      prefix: ns2
+    x-xsi-type-uniquename: esitoType_type_ns2_nil
+tags: []

@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: PatrimonioKConsumer 
+  profiles:
+    active: dev
+  kafka:
+    producer:
+      transaction-id-prefix: tx-
+      acks: all
+      properties:
+        enable:
+          idempotence: true
+
+    consumer:
+      enable-auto-commit: false
+      properties:
+        isolation:
+          level: read_committed
+
+server:
+  port: 8091
+  servlet:
+    context-path: /patrimonio
+        
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev 
+  #mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER 
+  data:
+    mongodb:
+      uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      dbName: Poste
+kafka:
+  bootstrapAddress: localhost:9092 #set this to your kafka bootstrap server
+  groupId: gpm
+  jaas: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='; # Set this if you are using authentication
+  topicName: kafka-mongo-integration
+  consumer:
+    backOff:
+      interval: 500
+      maxAttempts: 2
+  
+
+logging:
+  level:
+    org:
+      springframework:
+        data: debug
+        kafka:
+          transaction: trace

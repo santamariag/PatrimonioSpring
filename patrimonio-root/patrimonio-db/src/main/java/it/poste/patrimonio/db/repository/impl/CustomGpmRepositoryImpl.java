@@ -1,0 +1,98 @@
+package it.poste.patrimonio.db.repository.impl;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationUpdate;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
+import org.springframework.data.mongodb.core.aggregation.ConvertOperators;
+import org.springframework.data.mongodb.core.aggregation.SetOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+
+import com.mongodb.client.result.UpdateResult;
+
+import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.repository.CustomGpmRepository;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j
+public class CustomGpmRepositoryImpl<T, ID> implements CustomGpmRepository{
+	
+	@Autowired
+	private MongoTemplate template;
+
+	
+	@Override
+	public Long updateExternalKey(String ndg, String key) {
+	
+		Query query=new Query().addCriteria(Criteria.where("ndg").is(ndg));
+		Update updateDefinition=new Update().set("externalKeys.key1", key);
+			
+		UpdateResult result= template.updateMulti(query, updateDefinition, Gpm.class);
+		
+		return result.getModifiedCount();
+		
+	}
+	
+	
+	@Override
+	public long updatePriceOld(String isin, BigDecimal price) {
+	
+		Query query=new Query().addCriteria(Criteria.where("patrimonioOld.posizioni.isin").is(isin));
+		
+		
+		AggregationUpdate updateDefinition = AggregationUpdate.update()		
+				 											.set(SetOperation.builder().set("patrimonioOld.posizioni.iprzat").toValue(price).and()
+				 											.set("patrimonioOld.posizioni.ivalbas").toValue(ArithmeticOperators.Multiply.valueOf(price)
+				 													.multiplyBy(ArithmeticOperators.Multiply.valueOf(ConvertOperators.ToDecimal.toDecimal("patrimonioOld.posizioni.qqta")))));	 
+		
+		ArrayOperators.Filter.filter("patrimonioOld.posizioni.isin").as(isin).by(isin);
+		
+		AggregationOperation match = Aggregation.match(Criteria.where("patrimonioOld.posizioni.isin").is(isin));
+		AggregationOperation unwind = Aggregation.unwind("patrimonioOld.posizioni");
+		/*AggregationOperation group = Aggregation.group("_id")             
+		        .first("_class").as("_class")                
+		        .push("lang_content_list").as("lang_content_list");*/
+
+		List<AggregationOperation> operations = new ArrayList<>();
+		operations.add(match);
+		operations.add(unwind);
+		operations.add(match);
+		//operations.add(group);
+		Aggregation aggregation = Aggregation.newAggregation(operations);
+		List<Gpm> results = template.aggregate(aggregation, Gpm.class, Gpm.class).getMappedResults();
+		
+		
+		/*Update updateDefinition=new Update()
+								.set("patrimonioOld.posizioni.$[e].iprzat", price)
+								.set("patrimonioOld.posizioni.$[e].ivalbas", "$mul: { patrimonioOld.posizioni.$[e].iprzat: "+price+" }")
+								//.multiply("patrimonioOld.posizioni.$[e].ivalbas", price)
+								.filterArray("e.isin", isin);*/
+			
+		UpdateResult result= template/*.update(Gpm.class).matching(query).apply(updateDefinition).all();*/
+				.updateMulti(query, updateDefinition, Gpm.class);
+		
+		return result.getModifiedCount();
+		
+	}
+
+
+	@Override
+	//@Retryable(include = OptimisticLockingFailureException.class)
+	public Gpm saveGpm(Gpm gpm) {
+		
+		
+		gpm.getPatrimonioOld().getPosizioni().forEach(p->log.debug("----------ISIN {} PRICE {} QUANTITY {} CONTR {}",p.getIsin(), p.getIprzat(), p.getQqta(), p.getIvalbas()));
+		return template.save(gpm);
+	}
+
+}
