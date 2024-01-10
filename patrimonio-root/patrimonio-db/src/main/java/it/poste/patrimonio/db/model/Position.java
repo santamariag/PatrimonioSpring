@@ -31,8 +31,8 @@ public class Position {
 	private String ddec;
 	private String dsca;
 	private String isin;
-	//@Field(targetType = FieldType.DECIMAL128) 
-	private Long qqta;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal qqta;
 	private String dreg;
 	@Field(targetType = FieldType.DECIMAL128) 
 	private BigDecimal iprzat;
@@ -52,6 +52,23 @@ public class Position {
 	private String cndgc;
 	private String ictvRisX;
 	private String idProd;
+	private String branch;
+	private String rapporto;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal cs;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal qs;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal qtaint;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal css;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal qss;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal crs;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal qrs;
+
 
 
 }

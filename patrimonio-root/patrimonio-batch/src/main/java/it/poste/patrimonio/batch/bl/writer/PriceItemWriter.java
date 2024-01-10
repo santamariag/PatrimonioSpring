@@ -48,7 +48,7 @@ public class PriceItemWriter implements ItemWriter<Price>{
         	next.getPatrimonioOld().getPosizioni().forEach(p->{
         		if(pricemap.containsKey(p.getIsin())){
         			p.setIprzat(pricemap.get(p.getIsin()));
-        			p.setIvalbas(p.getIprzat().multiply(new BigDecimal(p.getQqta())));
+        			p.setIvalbas(p.getIprzat().multiply(p.getQqta()));
         			//gpmToUpdate.add(next);
         			gpmRepository.saveGpm(next);
         		}

@@ -74,7 +74,7 @@ public class UpdateGpmPrice implements Callable<Result>{
 				BigDecimal newPrice=pricemap.get(p.getIsin());
 				if(p.getIprzat().compareTo(newPrice)!=0) {
 					p.setIprzat(newPrice);
-					p.setIvalbas(p.getIprzat().multiply(new BigDecimal(p.getQqta())));
+					p.setIvalbas(p.getIprzat().multiply(p.getQqta()));
 					modified=true;
 				} else {
 					log.info("La posizione con isin {} ha già lo stesso prezzo", p.getIsin());

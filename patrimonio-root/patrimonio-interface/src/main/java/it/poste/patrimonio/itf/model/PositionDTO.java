@@ -2,8 +2,6 @@ package it.poste.patrimonio.itf.model;
 
 import java.math.BigDecimal;
 
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import lombok.Data;
 
@@ -31,13 +29,10 @@ public class PositionDTO {
 	private String ddec;
 	private String dsca;
 	private String isin;
-	//@Field(targetType = FieldType.DECIMAL128) 
-	private Long qqta;
+	private BigDecimal qqta;
 	private String dreg;
-	@Field(targetType = FieldType.DECIMAL128) 
 	private BigDecimal iprzat;
 	private String icamat;
-	@Field(targetType = FieldType.DECIMAL128) 
 	private BigDecimal ivalbas;
 	private String qqtavin;
 	private String cdivemi;
@@ -52,6 +47,16 @@ public class PositionDTO {
 	private String cndgc;
 	private String ictvRisX;
 	private String idProd;
+	private String branch;
+	private String rapporto;
+	private BigDecimal cs;
+	private BigDecimal qs;
+	private BigDecimal qtaint;
+	private BigDecimal css;
+	private BigDecimal qss;
+	private BigDecimal crs;
+	private BigDecimal qrs;
+
 
 
 }

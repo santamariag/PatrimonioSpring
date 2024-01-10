@@ -23,15 +23,17 @@ public interface GpmMapper {
 	
 	@Mappings({
 			@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "bigDecimalToString"),
-			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "longToString")
+			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "bigDecimalToString"),
+			@Mapping(target = "esitoStructure.esito", constant = "OK")
 	})
 	List<DettaglioPatrimonioTypeTypeNs2> modelToApi(List<Position> model);
 	
 	@Mappings({
 			@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "stringToBigDecimal"),
-			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "stringToLong")
+			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "stringToBigDecimal")
 	})	
 	List<Position> apiToModel(List<DettaglioPatrimonioTypeTypeNs2> api);
+	
 	
 	@Named("stringToBigDecimal")
     default BigDecimal stringToBigDecimal(String value) {
@@ -45,7 +47,7 @@ public interface GpmMapper {
 		return value.toString();
     }
 	
-	@Named("stringToLong")
+	/*@Named("stringToLong")
     default Long stringToLong(String value) {
        
 		return Long.valueOf(value);
@@ -55,7 +57,7 @@ public interface GpmMapper {
     default String longToString(Long value) {
        
 		return value.toString();
-    }
+    }*/
 	
 	GpmDTO modelToApi(Gpm gpm);
 	

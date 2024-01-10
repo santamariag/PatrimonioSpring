@@ -1,105 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-      
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"> 
   <modelVersion>4.0.0</modelVersion>
-     
-  
   <groupId>it.poste.patrimonio</groupId>
-      
-  
   <artifactId>patrimonio-root</artifactId>
-     
-  
   <version>${revision}</version>
-     
-  
   <packaging>pom</packaging>
-     
-  
   <name>patrimonio-root</name>
       
   
   <description>Patrimonio parent project</description>
     
   
-  <modules>
-        
-    <module>patrimonio-bl</module>
-        
-    <module>patrimonio-db</module>
-        
-    <module>patrimonio-rs-specs</module>
-        
+  <modules>       
+    <module>patrimonio-bl</module>      
+    <module>patrimonio-db</module>    
+    <module>patrimonio-rs-specs</module>   
     <module>patrimonio-config</module>
-        
+    <module>patrimonio-event</module>    
     <module>patrimonio-interface</module>
-    
-    <module>patrimonio-rs-api</module>
-        
-    <module>patrimonio-batch</module>
-    
+    <module>patrimonio-rs-api</module>    
+    <module>patrimonio-batch</module> 
     <module>patrimonio-batch-exp</module>
-    
     <module>patrimonio-kconsumer</module>
-
   </modules>
     
   
-  <properties>
-            
-    <java.version>17</java.version>
-    		
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    		
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    		
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    		
-    <revision>0.0.1-SNAPSHOT</revision>
-    		
-    <!-- Dependencies Versions -->
-    		
-    <apache.maven.assembly.plugin.version>3.3.0</apache.maven.assembly.plugin.version>
-    		
-    <apache.maven.resources.plugin.version>3.2.0</apache.maven.resources.plugin.version>
-    		
-    <apache.maven.surefire.plugin.version>2.22.2</apache.maven.surefire.plugin.version>
-    		
-    <codehaus.mojo.build.helper.version>3.2.0</codehaus.mojo.build.helper.version>
-    		
-    <jacoco.maven.plugin.version>0.8.11</jacoco.maven.plugin.version>
-    		
-    <junit.jupiter.version>5.10.1</junit.jupiter.version>
-    		
-    <openapitools.generator.version>3.3.4</openapitools.generator.version>
-    		
-    <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
-    		
+  <properties>           
+    <java.version>17</java.version>  		
+    <maven.compiler.source>${java.version}</maven.compiler.source>    		
+    <maven.compiler.target>${java.version}</maven.compiler.target>    		
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>    		
+    <revision>0.0.1-SNAPSHOT</revision>    		
+    <!-- Dependencies Versions -->    		
+    <apache.maven.assembly.plugin.version>3.3.0</apache.maven.assembly.plugin.version>    		
+    <apache.maven.resources.plugin.version>3.2.0</apache.maven.resources.plugin.version>    		
+    <apache.maven.surefire.plugin.version>2.22.2</apache.maven.surefire.plugin.version>   		
+    <codehaus.mojo.build.helper.version>3.2.0</codehaus.mojo.build.helper.version>   		
+    <jacoco.maven.plugin.version>0.8.11</jacoco.maven.plugin.version>    		
+    <junit.jupiter.version>5.10.1</junit.jupiter.version>   		
+    <openapitools.generator.version>3.3.4</openapitools.generator.version>    		
+    <springfox.swagger2.version>2.9.2</springfox.swagger2.version>    		
     <springframework.boot.version>2.7.18</springframework.boot.version>
     		
-    <!-- SONAR Code Coverage configuration -->
-    		
-    <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-    		
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    		
-    <sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>
-    		
-    <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
-    		
-    <sonar.java.binaries>${project.build.directory}/classes</sonar.java.binaries>
-    		
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    		
-    <sonar.junit.reportPaths>${project.build.directory}/surefire-reports</sonar.junit.reportPaths>
-    		
-    <sonar.surefire.reportsPath>${project.build.directory}/surefire-reports</sonar.surefire.reportsPath>
-    		
-    <model.mapper.version>3.1.1</model.mapper.version>
-    		
-    <map.struct.version>1.6.0.Beta1</map.struct.version>
-        
+    <!-- SONAR Code Coverage configuration -->    		
+    <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>    		
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>    		
+    <sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>    		
+    <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>    		
+    <sonar.java.binaries>${project.build.directory}/classes</sonar.java.binaries>   		
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>    		
+    <sonar.junit.reportPaths>${project.build.directory}/surefire-reports</sonar.junit.reportPaths>    		
+    <sonar.surefire.reportsPath>${project.build.directory}/surefire-reports</sonar.surefire.reportsPath>    		
+    <model.mapper.version>3.1.1</model.mapper.version>   		
+    <map.struct.version>1.6.0.Beta1</map.struct.version>       
   </properties>
     
   
@@ -120,353 +73,184 @@
     	
   </distributionManagement>
   	
-  <dependencyManagement>
-    		
-    <dependencies>
-      			
-      <!-- Spring Boot Dependencies -->
-      			
-      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-      			
-      <dependency>
-        				
-        <groupId>org.springframework.boot</groupId>
-        				
-        <artifactId>spring-boot-dependencies</artifactId>
-        				
-        <version>${springframework.boot.version}</version>
-        				
-        <type>pom</type>
-        				
-        <scope>import</scope>
-        			
-      </dependency>
-      			
-      <!-- JSON API documentation for spring based applications -->
-      			
-      <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-      			
-      <dependency>
-        				
-        <groupId>io.springfox</groupId>
-        				
-        <artifactId>springfox-swagger2</artifactId>
-        				
-        <version>${springfox.swagger2.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>io.springfox</groupId>
-        				
-        <artifactId>springfox-swagger-ui</artifactId>
-        				
-        <version>${springfox.swagger2.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>org.modelmapper</groupId>
-        				
-        <artifactId>modelmapper</artifactId>
-        				
-        <version>${model.mapper.version}</version>
-        			
-      </dependency>
-      			
-			
-      <dependency>
-            			
-        <groupId>org.mapstruct</groupId>
-            			
-        <artifactId>mapstruct</artifactId>
-            			
-        <version>${map.struct.version}</version>
-         
-			
-      </dependency>
-      			
-			
-      <dependency>
-            			
-        <groupId>org.mapstruct</groupId>
-            			
-        <artifactId>mapstruct-processor</artifactId>
-            			
-        <version>${map.struct.version}</version>
-        			
-      </dependency>
-      			
-      <!-- Patrimonio Dependencies -->
-      			
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-rs-api</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-bl</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-db</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-rs-specs</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-config</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      			
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-interface</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-batch</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-batch-exp</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      
-      <dependency>
-        				
-        <groupId>${project.groupId}</groupId>
-        				
-        <artifactId>patrimonio-kconsumer</artifactId>
-        				
-        <version>${project.version}</version>
-        			
-      </dependency>
-      		
-    </dependencies>
-    	
+  <dependencyManagement>   		
+    <dependencies>      			
+      <!-- Spring Boot Dependencies -->      			
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->     			
+      <dependency>        				
+        <groupId>org.springframework.boot</groupId>       				
+        <artifactId>spring-boot-dependencies</artifactId>        				
+        <version>${springframework.boot.version}</version>       				
+        <type>pom</type>        				
+        <scope>import</scope>       			
+      </dependency>     			
+      <!-- JSON API documentation for spring based applications -->     			
+      <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->     			
+      <dependency>       				
+        <groupId>io.springfox</groupId>        				
+        <artifactId>springfox-swagger2</artifactId>       				
+        <version>${springfox.swagger2.version}</version>       			
+      </dependency>     			
+      <dependency>      				
+        <groupId>io.springfox</groupId>       				
+        <artifactId>springfox-swagger-ui</artifactId>       				
+        <version>${springfox.swagger2.version}</version>       			
+      </dependency>     			
+      <dependency>       				
+        <groupId>org.modelmapper</groupId>      				
+        <artifactId>modelmapper</artifactId>        				
+        <version>${model.mapper.version}</version>       			
+      </dependency>			
+      <dependency>            			
+        <groupId>org.mapstruct</groupId>           			
+        <artifactId>mapstruct</artifactId>           			
+        <version>${map.struct.version}</version>			
+      </dependency>			
+      <dependency>            			
+        <groupId>org.mapstruct</groupId>            			
+        <artifactId>mapstruct-processor</artifactId>           			
+        <version>${map.struct.version}</version>        			
+      </dependency>      			
+      <!-- Patrimonio Dependencies -->     			
+      <dependency>       				
+        <groupId>${project.groupId}</groupId>       				
+        <artifactId>patrimonio-rs-api</artifactId>       				
+        <version>${project.version}</version>       			
+      </dependency>      			
+      <dependency>        				
+        <groupId>${project.groupId}</groupId>       				
+        <artifactId>patrimonio-bl</artifactId>        				
+        <version>${project.version}</version>        			
+      </dependency>      			
+      <dependency>        				
+        <groupId>${project.groupId}</groupId>        				
+        <artifactId>patrimonio-db</artifactId>        				
+        <version>${project.version}</version>        			
+      </dependency>     			
+      <dependency>       				
+        <groupId>${project.groupId}</groupId>        				
+        <artifactId>patrimonio-rs-specs</artifactId>       				
+        <version>${project.version}</version>       			
+      </dependency>     			
+      <dependency>       				
+        <groupId>${project.groupId}</groupId>       				
+        <artifactId>patrimonio-config</artifactId>       				
+        <version>>${project.version}</version>        			
+      </dependency> 
+      <dependency>       				
+        <groupId>${project.groupId}</groupId>       				
+        <artifactId>patrimonio-event</artifactId>       				
+        <version>${project.version}</version>       			
+      </dependency>      			
+      <dependency>       				
+        <groupId>${project.groupId}</groupId>        				
+        <artifactId>patrimonio-interface</artifactId>        				
+        <version>${project.version}</version>        			
+      </dependency>      
+      <dependency>        				
+        <groupId>${project.groupId}</groupId>        				
+        <artifactId>patrimonio-batch</artifactId>       				
+        <version>${project.version}</version>        			
+      </dependency>      
+      <dependency>        				
+        <groupId>${project.groupId}</groupId>       				
+        <artifactId>patrimonio-batch-exp</artifactId>        				
+        <version>${project.version}</version>       			
+      </dependency>      
+      <dependency>        				
+        <groupId>${project.groupId}</groupId>       				
+        <artifactId>patrimonio-kconsumer</artifactId>        				
+        <version>${project.version}</version>        			
+      </dependency>     		
+    </dependencies>    	
   </dependencyManagement>
-  	
-
-	
-  <build>
-    		
-    <plugins>
-      			
-      <!-- Spring Boot Maven Plugin -->
-      			
-      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
-      			
-      <plugin>
-        				
-        <groupId>org.springframework.boot</groupId>
-        				
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        				
-        <version>${springframework.boot.version}</version>
-        			
-      </plugin>
-      			
+  		
+  <build>  		
+    <plugins>      			
+      <!-- Spring Boot Maven Plugin -->      			
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->      			
+      <plugin>       				
+		<groupId>org.springframework.boot</groupId>        				
+        <artifactId>spring-boot-maven-plugin</artifactId>       				
+        <version>${springframework.boot.version}</version>        			
+      </plugin>      			
       <!-- The JaCoCo Maven Plugin provides the JaCoCo runtime agent to your 
-				tests and allows basic report creation. -->
-      			
-      <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
-      			
-     <plugin>
-        				
-        <groupId>org.jacoco</groupId>
-        				
-        <artifactId>jacoco-maven-plugin</artifactId>
-        				
-        <version>${jacoco.maven.plugin.version}</version>
-        				
-        <executions>
-          					
-          <execution>
-            						
-            <id>prepare-agent</id>
-            						
-            <goals>
-              							
-              <goal>prepare-agent</goal>
-              						
-            </goals>
-            					
-          </execution>
-          					
-          <execution>
-            						
-            <id>report</id>
-            						
-            <phase>prepare-package</phase>
-            						
-            <goals>
-              							
-              <goal>report</goal>
-              						
-            </goals>
-            					
-          </execution>
-          					
-          <execution>
-            						
-            <id>post-unit-test</id>
-            						
-            <phase>test</phase>
-            						
-            <goals>
-              							
-              <goal>report</goal>
-              						
-            </goals>
-            						
-            <configuration>
-              							
-              <dataFile>target/jacoco.exec</dataFile>
-              							
-              <outputDirectory>target/jacoco-ut</outputDirectory>
-              						
-            </configuration>
-            					
-          </execution>
-          				
-        </executions>
-        				
-        <configuration>
-          					
-          <systemPropertyVariables>
-            						
-            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-            					
-          </systemPropertyVariables>
-          				
-        </configuration>
-        			
-      </plugin>
-      			
-      <!-- Maven Surefire MOJO in maven-surefire-plugin. -->
-      			
-      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-      			
-      <plugin>
-        				
-        <groupId>org.apache.maven.plugins</groupId>
-        				
-        <artifactId>maven-surefire-plugin</artifactId>
-        				
-        <version>${apache.maven.surefire.plugin.version}</version>
-        				
-        <dependencies>
-          					
-          <dependency>
-            						
-            <groupId>org.junit.jupiter</groupId>
-            						
-            <artifactId>junit-jupiter-engine</artifactId>
-            						
-            <version>${junit.jupiter.version}</version>
-            					
-          </dependency>
-          				
-        </dependencies>
-        				
-        <configuration>
-          					
-          <systemPropertyVariables>
-            						
-            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-            					
-          </systemPropertyVariables>
-          					
-          <runOrder>alphabetical</runOrder>
-          				
-        </configuration>
-        			
-      </plugin>
-      		
-    </plugins>
-    		
-    <pluginManagement>
-      			
-      <plugins>
-        				
-        <!-- maven plugin to build modules from OpenAPI Generator -->
-        				
-        <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
-        				
-        <plugin>
-          					
-          <groupId>org.openapitools</groupId>
-          					
-          <artifactId>openapi-generator-maven-plugin</artifactId>
-          					
-          <version>${openapitools.generator.version}</version>
-          				
-        </plugin>
-        				
+				tests and allows basic report creation. -->     			
+      <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->   			
+     <plugin>       				
+        <groupId>org.jacoco</groupId>        				
+        <artifactId>jacoco-maven-plugin</artifactId>        				
+        <version>${jacoco.maven.plugin.version}</version>       				
+        <executions>         					
+          <execution>           						
+            <id>prepare-agent</id>            						
+            <goals>              							
+              <goal>prepare-agent</goal>              						
+            </goals>            					
+          </execution>          					
+          <execution>            						
+            <id>report</id>            						
+            <phase>prepare-package</phase>            						
+            <goals>              							
+              <goal>report</goal>              						
+            </goals>            					
+          </execution>          					
+          <execution>            						
+            <id>post-unit-test</id>            						
+            <phase>test</phase>            						
+            <goals>             							
+              <goal>report</goal>             						
+            </goals>           						
+            <configuration>             							
+              <dataFile>target/jacoco.exec</dataFile>              							
+              <outputDirectory>target/jacoco-ut</outputDirectory>              						
+            </configuration>            					
+          </execution>          				
+        </executions>        				
+        <configuration>          					
+          <systemPropertyVariables>           						
+            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>           					
+          </systemPropertyVariables>          				
+        </configuration>       			
+      </plugin>     			
+      <!-- Maven Surefire MOJO in maven-surefire-plugin. -->      			
+      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->     			
+      <plugin>        				
+        <groupId>org.apache.maven.plugins</groupId>       				
+        <artifactId>maven-surefire-plugin</artifactId>       				
+        <version>${apache.maven.surefire.plugin.version}</version>       				
+        <dependencies>          					
+          <dependency>           						
+            <groupId>org.junit.jupiter</groupId>           						
+            <artifactId>junit-jupiter-engine</artifactId>           						
+            <version>${junit.jupiter.version}</version>           					
+          </dependency>         				
+        </dependencies>        				
+        <configuration>          					
+          <systemPropertyVariables>            						
+            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>            					
+          </systemPropertyVariables>          					
+          <runOrder>alphabetical</runOrder>          				
+        </configuration>       			
+      </plugin>      		
+    </plugins>    		
+    <pluginManagement>      			
+      <plugins>        				
+        <!-- maven plugin to build modules from OpenAPI Generator -->        				
+        <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->        				
+        <plugin>         					
+          <groupId>org.openapitools</groupId>         					
+          <artifactId>openapi-generator-maven-plugin</artifactId>          					
+          <version>${openapitools.generator.version}</version>          				
+        </plugin>        				
         <!-- This plugin contains various small independent goals to assist with 
-					Maven build lifecycle -->
-        				
-        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
-        				
-        <plugin>
-          					
-          <groupId>org.codehaus.mojo</groupId>
-          					
-          <artifactId>build-helper-maven-plugin</artifactId>
-          					
-          <version>${codehaus.mojo.build.helper.version}</version>
-          				
-        </plugin>
-        				
+					Maven build lifecycle -->       				
+        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->       				
+        <plugin>          					
+          <groupId>org.codehaus.mojo</groupId>          					
+          <artifactId>build-helper-maven-plugin</artifactId>          					
+          <version>${codehaus.mojo.build.helper.version}</version>          				
+        </plugin>        				
         <!-- The Resources Plugin handles the copying of project resources to 
 					the output directory. There are two different kinds of resources: main resources 
 					and test resources. The difference is that the main resources are the resources 
@@ -474,53 +258,29 @@
 					with the test source code. Thus, this allows the separation of resources 
 					for the main source code and its unit tests. -->
         				
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
-        				
-        <plugin>
-          					
-          <groupId>org.apache.maven.plugins</groupId>
-          					
-          <artifactId>maven-resources-plugin</artifactId>
-          					
-          <version>${apache.maven.resources.plugin.version}</version>
-          				
-        </plugin>
-        				
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->        				
+        <plugin>         					
+          <groupId>org.apache.maven.plugins</groupId>          					
+          <artifactId>maven-resources-plugin</artifactId>         					
+          <version>${apache.maven.resources.plugin.version}</version>         				
+        </plugin>       				
         <!-- A Maven plugin to create archives of your project's sources, classes, 
-					dependencies etc. from flexible assembly descriptors. -->
-        				
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
-        				
-        <plugin>
-          					
-          <groupId>org.apache.maven.plugins</groupId>
-          					
-          <artifactId>maven-assembly-plugin</artifactId>
-          					
-          <version>${apache.maven.assembly.plugin.version}</version>
-          				
-        </plugin>
-        			
-      </plugins>
-      		
-    </pluginManagement>
-    	
-  </build>
-  	
-  <dependencies>
-    		
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-    		
-    <!-- Spring Boot Developer Tools -->
-    		
-    <dependency>
-      			
-      <groupId>org.springframework.boot</groupId>
-      			
-      <artifactId>spring-boot-devtools</artifactId>
-      		
-    </dependency>
-    	
-  </dependencies>
-  
+					dependencies etc. from flexible assembly descriptors. -->       				
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->        				
+        <plugin>          					
+          <groupId>org.apache.maven.plugins</groupId>         					
+          <artifactId>maven-assembly-plugin</artifactId>         					
+          <version>${apache.maven.assembly.plugin.version}</version>         				
+        </plugin>       			
+      </plugins>      		
+    </pluginManagement>    	
+  </build>  	
+  <dependencies>    		
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->    		
+    <!-- Spring Boot Developer Tools -->    		
+    <dependency>      			
+      <groupId>org.springframework.boot</groupId>      			
+      <artifactId>spring-boot-devtools</artifactId>     		
+    </dependency>    	
+  </dependencies>  
 </project>
