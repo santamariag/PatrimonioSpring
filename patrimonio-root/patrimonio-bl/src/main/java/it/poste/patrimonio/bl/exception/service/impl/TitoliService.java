@@ -6,36 +6,39 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.poste.patrimonio.bl.exception.service.IGpmService;
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.bl.exception.service.IFoeService;
+import it.poste.patrimonio.bl.exception.service.ITitoliService;
+import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Position;
-import it.poste.patrimonio.db.repository.IGpmRepository;
-import it.poste.patrimonio.itf.mapper.GpmMapper;
+import it.poste.patrimonio.db.model.Titoli;
+import it.poste.patrimonio.db.repository.IFoeRepository;
+import it.poste.patrimonio.db.repository.ITitoliRepository;
+import it.poste.patrimonio.itf.mapper.FoeMapper;
+import it.poste.patrimonio.itf.mapper.TitoliMapper;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 
 @Service
-public class GpmService implements IGpmService {
+public class TitoliService implements ITitoliService {
 	
 	@Autowired
-	private IGpmRepository gpmRepository;
+	private ITitoliRepository titoliRepository;
 	
 	@Autowired
-	private GpmMapper mapper;
+	private TitoliMapper mapper;
 
 
 	@Override
 	public PatrimonioClienteOutputElementNs1 findByNdgs(List<String> ndgs) {
 		
-		List<Gpm> gpms= gpmRepository.findByNdgIn(ndgs);
+		List<Titoli> titoli= titoliRepository.findByNdgIn(ndgs);
 		
 		
 		List<Position> allPositions=new ArrayList<>();
 		
-		for (Gpm gpm : gpms) {
-			if(gpm.getPatrimonioOld()!=null)
-				allPositions.addAll(gpm.getPatrimonioOld().getPosizioni());
+		for (Titoli titolo : titoli) {
+			allPositions.addAll(titolo.getPatrimonioOld().getPosizioni());
 		}
 		
 		PatrimonioClienteOutputElementNs1 output= new PatrimonioClienteOutputElementNs1();
@@ -49,16 +52,16 @@ public class GpmService implements IGpmService {
 	}
 
 	@Override
-	public void add(Gpm gpm) {
+	public void add(Titoli titoli) {
 		
-		gpmRepository.save(gpm);
+		titoliRepository.save(titoli);
 		
 	}
 	
 	@Override
-	public void add(GpmDTO gpm) {
+	public void add(GpmDTO foe) {
 		
-		gpmRepository.save(mapper.apiToModel(gpm));	
+		titoliRepository.save(mapper.apiToModel(foe));	
 	}
 
 }

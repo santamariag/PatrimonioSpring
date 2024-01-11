@@ -6,13 +6,18 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.poste.patrimonio.bl.exception.service.IFoeService;
 import it.poste.patrimonio.bl.exception.service.IGpmService;
+import it.poste.patrimonio.bl.exception.service.ITitoliService;
+import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.rs.specs.api.DefaultApi;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioInput;
 import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2;
@@ -25,6 +30,12 @@ public class DettaglioPatrimonioController implements DefaultApi{
 	
 	@Autowired
 	private IGpmService gpmService;
+	
+	@Autowired
+	private IFoeService foeService;
+	
+	@Autowired
+	private ITitoliService titoliService;
 
 	@Override
 	public ResponseEntity<PatrimonioClienteOutputElementNs1> dettaglioPatrimonioPost(
@@ -68,15 +79,39 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			if(source.get().equals("Postman"))
 				throw new PatrimonioNotFoundException("Not Found", dettaglioPatrimonioInput.getPatrimonioClienteInput().getCfNdg());
 		}*/
-		
-		PatrimonioClienteOutputElementNs1 output= gpmService.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+		PatrimonioClienteOutputElementNs1 output = null;
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGPM())) {
+			output = gpmService.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+
+		}
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagTitoli())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = titoliService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if (output != null) {
+				output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+			} else
+				output = outputtmp;
+		}
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = foeService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if (output != null) {
+				output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+			} else
+				output = outputtmp;
+		}
+		if (output == null) {
+			output = new PatrimonioClienteOutputElementNs1();
+			output.setEsito(new EsitoTypeTypeNs2().esito("KO"));
+
+		}
 		output.setEsito(new EsitoTypeTypeNs2().esito("OK"));
-		
 		return ResponseEntity.ok(output);
-		
 	}
-	
-	@PostMapping(value = "/addGpm")
+
+	@PostMapping(value = "/addGpm", consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> addDettaglioPatrimonioGpm(@RequestBody Gpm gpm) {
 		
 		log.info("REQUEST "+gpm);
@@ -86,6 +121,33 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		
 	}
-
-
+	
+	@PostMapping(value = "/addFoe")
+	public ResponseEntity<Void> addDettaglioPatrimonioFoe(@RequestBody Foe foe) {
+		
+		log.info("REQUEST "+foe);
+		
+		foeService.add(foe);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+		
+	}
+	
+	@PostMapping(value = "/addTitoli")
+	public ResponseEntity<Void> addDettaglioPatrimonioTitoli(@RequestBody Titoli titoli) {
+		
+		log.info("REQUEST "+titoli);
+		
+		titoliService.add(titoli);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+		
+	}
+	//TODO
+	public boolean stringtoBoolean(String flag) {
+		if(flag!=null && !flag.isBlank()&& flag.equals("true")) {
+		return true;	
+	}
+		return false;
+	}
 }
