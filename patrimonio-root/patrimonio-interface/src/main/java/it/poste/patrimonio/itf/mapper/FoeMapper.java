@@ -3,8 +3,10 @@ package it.poste.patrimonio.itf.mapper;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
@@ -17,14 +19,14 @@ import it.poste.patrimonio.itf.model.EventDTO;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import it.poste.patrimonio.itf.model.PatrimonioDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
+import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2Nil;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring" )
 public interface FoeMapper {
 	
 	@Mappings({
 			@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "bigDecimalToString"),
-			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "bigDecimalToString"),
-			@Mapping(target = "esitoStructure.esito", constant = "OK")
+			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "bigDecimalToString")
 	})
 	List<DettaglioPatrimonioTypeTypeNs2> modelToApi(List<Position> model);
 	
@@ -33,6 +35,14 @@ public interface FoeMapper {
 			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "stringToBigDecimal")
 	})	
 	List<Position> apiToModel(List<DettaglioPatrimonioTypeTypeNs2> api);
+	
+	@AfterMapping
+    default void afterMapping(@MappingTarget DettaglioPatrimonioTypeTypeNs2 patrimonio, Position position) {
+        
+		EsitoTypeTypeNs2Nil esito=new EsitoTypeTypeNs2Nil();
+		esito.setEsito("OK");
+		patrimonio.setEsitoStructure(esito);
+    }    
 	
 	
 	@Named("stringToBigDecimal")

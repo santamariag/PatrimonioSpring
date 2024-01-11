@@ -14,9 +14,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import it.poste.patrimonio.db.model.Foe;
-import it.poste.patrimonio.db.model.Gpm;
 
-public interface IFoeRepository extends MongoRepository<Foe, String>, CustomGpmRepository {
+public interface IFoeRepository extends MongoRepository<Foe, String>, CustomFoeRepository {
 	
 	@Query(value = "{ 'ndg' : ?0 and 'externalKeys.key1' : ?1 }")
 	public List<Foe> findByNdgExternaKey(String ndg, String key);

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.FileSystemResource;
 
 import it.poste.patrimonio.batch.bl.config.FileConfig;
@@ -34,7 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 //@EnableAsync
 @Slf4j
-public class BusinessConfig {
+@Profile("price")
+public class PriceBusinessConfig {
 
 	public static final String MOVE_FILE_LISTENER_QUALIF = "moveFileListener";
 	public static final String PRICE_FILE_PROCESSOR_QUALIF = "priceFileProcessor";

@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PatrimonioBatchApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

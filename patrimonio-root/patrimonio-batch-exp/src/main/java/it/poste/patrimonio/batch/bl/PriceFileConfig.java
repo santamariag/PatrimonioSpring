@@ -29,12 +29,12 @@ import it.poste.patrimonio.batch.bl.util.BatchConstants;
 import it.poste.patrimonio.db.model.Price;
 import it.poste.patrimonio.itf.model.PriceDTO;
 
-import static it.poste.patrimonio.batch.bl.BusinessConfig.PRICE_FILE_CSV_READER_QUALIF;
-import static it.poste.patrimonio.batch.bl.BusinessConfig.PRICE_FILE_FIXED_READER_QUALIF;
-import static it.poste.patrimonio.batch.bl.BusinessConfig.PRICE_FILE_PROCESSOR_QUALIF;
-import static it.poste.patrimonio.batch.bl.BusinessConfig.PRICE_FILE_WRITER_QUALIF;
-import static it.poste.patrimonio.batch.bl.BusinessConfig.PRICE_FILE_SYNC_WRITER_QUALIF;
-import static it.poste.patrimonio.batch.bl.BusinessConfig.MOVE_FILE_LISTENER_QUALIF;
+import static it.poste.patrimonio.batch.bl.PriceBusinessConfig.PRICE_FILE_CSV_READER_QUALIF;
+import static it.poste.patrimonio.batch.bl.PriceBusinessConfig.PRICE_FILE_FIXED_READER_QUALIF;
+import static it.poste.patrimonio.batch.bl.PriceBusinessConfig.PRICE_FILE_PROCESSOR_QUALIF;
+import static it.poste.patrimonio.batch.bl.PriceBusinessConfig.PRICE_FILE_WRITER_QUALIF;
+import static it.poste.patrimonio.batch.bl.PriceBusinessConfig.PRICE_FILE_SYNC_WRITER_QUALIF;
+import static it.poste.patrimonio.batch.bl.PriceBusinessConfig.MOVE_FILE_LISTENER_QUALIF;
 
 
 

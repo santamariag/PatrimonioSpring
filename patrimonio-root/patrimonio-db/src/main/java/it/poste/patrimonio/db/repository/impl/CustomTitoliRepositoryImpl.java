@@ -3,9 +3,8 @@ package it.poste.patrimonio.db.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import it.poste.patrimonio.db.model.Foe;
+
 import it.poste.patrimonio.db.model.Titoli;
-import it.poste.patrimonio.db.repository.CustomFoeRepository;
 import it.poste.patrimonio.db.repository.CustomTitoliRepository;
 import lombok.extern.slf4j.Slf4j;
 

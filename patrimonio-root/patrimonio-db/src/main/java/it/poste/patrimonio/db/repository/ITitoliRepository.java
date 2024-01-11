@@ -13,8 +13,6 @@ import org.springframework.data.mongodb.repository.Meta;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import it.poste.patrimonio.db.model.Foe;
-import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.model.Titoli;
 
 public interface ITitoliRepository extends MongoRepository<Titoli, String>, CustomTitoliRepository {

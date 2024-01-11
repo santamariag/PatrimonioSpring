@@ -1,6 +1,7 @@
 package it.poste.patrimonio.db.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -43,7 +44,7 @@ public class Position {
 	private String cdivemi;
 	private String cdivtrz;
 	private String fpac;
-	private String dulprz;
+	private LocalDate dulprz;
 	private String dultacq;
 	private String dulcam;
 	private String ccdrreg;
@@ -52,6 +53,7 @@ public class Position {
 	private String cndgc;
 	private String ictvRisX;
 	private String idProd;
+	private String fiscalCode;
 	private String branch;
 	private String rapporto;
 	@Field(targetType = FieldType.DECIMAL128) 

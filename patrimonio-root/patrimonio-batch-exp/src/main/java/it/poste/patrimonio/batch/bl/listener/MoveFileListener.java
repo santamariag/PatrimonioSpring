@@ -23,6 +23,7 @@ public class MoveFileListener implements JobExecutionListener {
 
 	@Autowired
 	private FileConfig fileConfig;
+	
 
 	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
@@ -31,7 +32,7 @@ public class MoveFileListener implements JobExecutionListener {
 	public void beforeJob(JobExecution jobExecution) {
 
 		log.info("Launched job {}",jobExecution.getJobInstance().getInstanceId());
-		moveToProcessing();
+		moveToProcessing(jobExecution.getExecutionContext().getString("filename"));
 	}
 
 	@Override
@@ -39,55 +40,55 @@ public class MoveFileListener implements JobExecutionListener {
 
 		log.info("Finished job {} with result {}",jobExecution.getJobInstance().getInstanceId(), jobExecution.getExitStatus().getExitCode());
 		if(jobExecution.getExitStatus().compareTo(ExitStatus.COMPLETED)==0){
-			moveToCompleted();
+			moveToCompleted(jobExecution.getExecutionContext().getString("filename"));
 		} else if(jobExecution.getExitStatus().compareTo(ExitStatus.FAILED)==0){
-			moveToDiscarded();
+			moveToDiscarded(jobExecution.getExecutionContext().getString("filename"));
 		} else {
 			moveToNoOp();
 		}
 	}
 
-	private void moveToProcessing() {
+	private void moveToProcessing(String filename) {
 
 		String inputFile=new StringBuilder()
 				.append(fileConfig.getInputPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName())
+				.append(filename)
 				.toString();
 		String targetPath=new StringBuilder()
 				.append(fileConfig.getProcessingPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName())
+				.append(filename)
 				.toString();
 		moveFile(inputFile, targetPath);
 	}
 
-	private void moveToCompleted() {
+	private void moveToCompleted(String filename) {
 
 		String processingFile=new StringBuilder()
 				.append(fileConfig.getProcessingPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName())
+				.append(filename)
 				.toString();
 		String targetPath=new StringBuilder()
 				.append(fileConfig.getCompletedPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName()+".completed_"+LocalDateTime.now().format(dtf))
+				.append(filename+".completed_"+LocalDateTime.now().format(dtf))
 				.toString();
 		moveFile(processingFile, targetPath);
 	}
 
-	private void moveToDiscarded() {
+	private void moveToDiscarded(String filename) {
 
 		String processingFile=new StringBuilder()
 				.append(fileConfig.getProcessingPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName())
+				.append(filename)
 				.toString();
 		String outputPath=new StringBuilder()
 				.append(fileConfig.getDiscardedPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName()+".discarded_"+LocalDateTime.now().format(dtf))
+				.append(filename+".discarded_"+LocalDateTime.now().format(dtf))
 				.toString();
 		moveFile(processingFile, outputPath);
 

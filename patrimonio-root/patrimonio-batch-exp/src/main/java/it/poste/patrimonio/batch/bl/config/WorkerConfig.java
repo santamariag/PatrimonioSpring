@@ -15,5 +15,5 @@ public class WorkerConfig {
 	
 	private int pageSize;
 	private Long maxNumber;
-	private int  chunkSize;
+	private int  chunkSize=1;
 }
