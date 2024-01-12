@@ -93,4 +93,49 @@ logging:
         patrimonio: INFO  
     root: INFO
     
+---
 
+spring:
+  config:
+    activate:
+      on-profile: foe-afb
+  #mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
+  data:
+    mongodb:
+      uri: mongodb://localhost:28017 # Set this to mongodb connection string
+      dbname: Poste
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+
+job:
+  multi-exec:
+    always: true #generate random id to append to job name - job launch always generates a new launch
+    allowed: false #append the fixed suffix defined in name-suffix key - to control job name, allows execution only if the previous one in not completed with succes
+    name-suffix: _test
+
+  #worker:
+  #  pageSize: 5
+  #  maxNumber: 10
+  #  chunkSize: 1
+
+file-config:
+  inputPath: src/main/resources
+  fileNamePattern: FIB5BE05_[^_]*
+  processingPath: src/main/resources/processing
+  completedPath: src/main/resources/completed
+  discardedPath: src/main/resources/discarded
+  noOpPath: src/main/resources/noop
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb: INFO
+    it:
+      poste:
+        patrimonio: INFO
+    root: INFO

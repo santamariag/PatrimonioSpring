@@ -9,4 +9,6 @@ public class BatchConstants {
     
     public static final String LOAD_CSV_MFM_FILE_JOB = "loadCsvMfmFileJob";
     public static final String LOAD_CSV_MFM_STEP = "loadCsvMfmStep";
+    public static final String LOAD_AFB_STEP = "loadAfbStep";
+    public static final String LOAD_AFB_FILE_JOB = "loadCsvMfmFileJob";
 }
