@@ -13,7 +13,7 @@ import lombok.Setter;
 public class FileConfig {
 		
 	private String inputPath;
-	private String fileName;
+	private String fileNamePattern;
 	private String processingPath;
 	private String completedPath;
 	private String discardedPath;

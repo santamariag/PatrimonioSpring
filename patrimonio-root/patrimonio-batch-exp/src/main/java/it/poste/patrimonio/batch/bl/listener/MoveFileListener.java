@@ -44,7 +44,7 @@ public class MoveFileListener implements JobExecutionListener {
 		} else if(jobExecution.getExitStatus().compareTo(ExitStatus.FAILED)==0){
 			moveToDiscarded(jobExecution.getExecutionContext().getString("filename"));
 		} else {
-			moveToNoOp();
+			moveToNoOp(jobExecution.getExecutionContext().getString("filename"));
 		}
 	}
 
@@ -94,17 +94,17 @@ public class MoveFileListener implements JobExecutionListener {
 
 	}
 
-	private void moveToNoOp() {
+	private void moveToNoOp(String filename) {
 
 		String processingFile=new StringBuilder()
 				.append(fileConfig.getProcessingPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName())
+				.append(filename)
 				.toString();
 		String outputPath=new StringBuilder()
 				.append(fileConfig.getNoOpPath())
 				.append(System.getProperty("file.separator"))
-				.append(fileConfig.getFileName()+".noop_"+LocalDateTime.now().format(dtf))
+				.append(filename+".noop_"+LocalDateTime.now().format(dtf))
 				.toString();
 		moveFile(processingFile, outputPath);
 

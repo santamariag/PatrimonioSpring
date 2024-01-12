@@ -105,7 +105,7 @@ public class PriceBusinessConfig {
         	reader.setMaxItemCount(Math.toIntExact(lastLine));
         
         reader.setStrict(false);
-        reader.setResource(new FileSystemResource(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileName())));
+        reader.setResource(new FileSystemResource(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileNamePattern()))); //Non usare pattern ma recuperare il filename dal contesto impostato da listener precedente
         
         
         reader.setLineMapper(new DefaultLineMapper<PriceDTO>() {
@@ -157,7 +157,7 @@ public class PriceBusinessConfig {
         	reader.setLinesToSkip(Math.toIntExact(firstLine));
         if(lastLine!=null)
         	reader.setMaxItemCount(Math.toIntExact(lastLine));
-        reader.setResource(new FileSystemResource(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileName())));
+        reader.setResource(new FileSystemResource(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileNamePattern()))); //Non usare pattern ma recuperare il filename dal contesto impostato da listener precedente
         reader.setStrict(false);
         reader.setLineMapper(new DefaultLineMapper<PriceDTO>() {
             {

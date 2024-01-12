@@ -45,31 +45,33 @@ public class FileNameListener implements JobExecutionListener {
 		String filename= switch (type) {
 		case MFM ->{
 			
+			log.info("Listing MFM files...");
 			files = dir.listFiles(new FilenameFilter() {
 				
 		    	@Override
 		        public boolean accept(File dir, String name) {
-		            return name.matches("POSTE-MF-AUM-[^_]*_V1.CSV");
+		            return name.matches(fileConfig.getFileNamePattern());
 		        }        
 		    });
 			Arrays.sort(files, Comparator.comparingLong(File::lastModified));
 			
-			yield files[0].getName();
+			yield files.length!=0 ? files[0].getName() : "";
 		}
 
 		
 		case AFB ->{
 
+			log.info("Listing AFB files...");
 			files = dir.listFiles(new FilenameFilter() {
 
 				@Override
 				public boolean accept(File dir, String name) {
-					return name.matches("FIB5BE05_[^_]*");
+					return name.matches(fileConfig.getFileNamePattern());
 				}        
 			});
 			Arrays.sort(files, Comparator.comparingLong(File::lastModified));
 
-			yield files[0].getName();
+			yield files.length!=0 ? files[0].getName() : "";
 		}
 
 		default ->{
@@ -78,6 +80,7 @@ public class FileNameListener implements JobExecutionListener {
 		
 		};
 
+		log.info("Retrieving filename [{}]", filename);
 		return filename;
 		
 	}

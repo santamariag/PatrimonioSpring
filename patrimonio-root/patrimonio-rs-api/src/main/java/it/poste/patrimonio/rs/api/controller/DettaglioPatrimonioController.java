@@ -19,6 +19,7 @@ import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.rs.specs.api.DefaultApi;
+import it.poste.patrimonio.rs.specs.model.DettaglioErroreTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioInput;
 import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
@@ -93,7 +94,12 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			} else
 				output = outputtmp;
 		}
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) {
+		/**
+		 * Da capire se il flag fondi governa solo il verticale fondi o anche quello foe
+		 * -se governa entrambi i verticali allora la sezione deve essere costruita sia andando sul nostro db che invocando servizio per recuperare i dati di fondi
+		 * -se governa solo il verticale fondi allora probabilmente anche foe è indirizzato dal flag gpm che quindi porterà all'interrogazione di entrambe le collection gpm e foe
+		 */
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) { 
 			PatrimonioClienteOutputElementNs1 outputtmp = foeService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if (output != null) {
@@ -104,7 +110,11 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		}
 		if (output == null) {
 			output = new PatrimonioClienteOutputElementNs1();
-			output.setEsito(new EsitoTypeTypeNs2().esito("KO"));
+			output.setEsito(new EsitoTypeTypeNs2()
+					.esito("KO")
+					.addDettaglioErroreItem(new DettaglioErroreTypeTypeNs2()
+							.codiceErrore("TODO")
+							.descrizioneErrore("TODO"))); //TODO
 
 		}
 		output.setEsito(new EsitoTypeTypeNs2().esito("OK"));
@@ -143,9 +153,10 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		
 	}
-	//TODO
+	
 	public boolean stringtoBoolean(String flag) {
-		if(flag!=null && !flag.isBlank()&& flag.equals("true")) {
+		if(flag!=null && !flag.isBlank()&& 
+				(flag.equals("true") || flag.equals("S") || flag.equals("Y")) ) {
 		return true;	
 	}
 		return false;

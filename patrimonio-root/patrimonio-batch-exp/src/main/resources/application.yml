@@ -76,7 +76,7 @@ job:
   
 file-config:
   inputPath: src/main/resources
-  fileName: flussoMFM.csv
+  fileNamePattern: POSTE-MF-AUM-[^_]*_V1.CSV
   processingPath: src/main/resources/processing
   completedPath: src/main/resources/completed
   discardedPath: src/main/resources/discarded

@@ -68,5 +68,10 @@
     "name": "worker.chunkSize",
     "type": "java.lang.String",
     "description": "A description for 'worker.chunkSize'"
+  },
+  {
+    "name": "file-config.fileNamePattern",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.fileNamePattern'"
   }
 ]}

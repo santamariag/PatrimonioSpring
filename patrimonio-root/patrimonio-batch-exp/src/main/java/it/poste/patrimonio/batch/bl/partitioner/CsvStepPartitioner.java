@@ -28,7 +28,7 @@ public class CsvStepPartitioner implements Partitioner {
 
         int noOfLines = 0;
         try {
-            noOfLines = getNoOfLines(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileName()));
+            noOfLines = getNoOfLines(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileNamePattern())); //Non usare pattern ma recuperare il filename dal contesto impostato da listener precedente
         } catch (IOException e) {
             e.printStackTrace();
         }
