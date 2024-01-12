@@ -1,5 +1,6 @@
 package it.poste.patrimonio.rs.api.controller;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -12,9 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.poste.patrimonio.bl.exception.service.IFoeService;
-import it.poste.patrimonio.bl.exception.service.IGpmService;
-import it.poste.patrimonio.bl.exception.service.ITitoliService;
+import it.poste.patrimonio.bl.service.IBPService;
+import it.poste.patrimonio.bl.service.ICCService;
+import it.poste.patrimonio.bl.service.ICardService;
+import it.poste.patrimonio.bl.service.IFoeService;
+import it.poste.patrimonio.bl.service.IFondiService;
+import it.poste.patrimonio.bl.service.IGpmService;
+import it.poste.patrimonio.bl.service.ILibrettiService;
+import it.poste.patrimonio.bl.service.IPolizzePrService;
+import it.poste.patrimonio.bl.service.IPolizzeService;
+import it.poste.patrimonio.bl.service.ITitoliService;
+import it.poste.patrimonio.bl.service.IRNdgService;
 import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.model.Titoli;
@@ -37,6 +46,30 @@ public class DettaglioPatrimonioController implements DefaultApi{
 	
 	@Autowired
 	private ITitoliService titoliService;
+	
+	@Autowired
+	private IBPService bpService;
+	
+	@Autowired
+	private ICardService cardService;
+	
+	@Autowired
+	private ICCService ccService;
+	
+	@Autowired
+	private IFondiService fondiService;
+	
+	@Autowired
+	private ILibrettiService librettiService;
+	
+	@Autowired
+	private IRNdgService rNdgService;
+	
+	@Autowired
+	private IPolizzeService polizzeService;
+	
+	@Autowired
+	private IPolizzePrService polizzePrService;
 
 	@Override
 	public ResponseEntity<PatrimonioClienteOutputElementNs1> dettaglioPatrimonioPost(
@@ -50,64 +83,131 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		
 		log.info("REQUEST "+dettaglioPatrimonioInput);
 		
-		
-		/*PatrimonioClienteOutputElementNs1 output=new PatrimonioClienteOutputElementNs1();
-		
-		EsitoTypeTypeNs2 esito=new EsitoTypeTypeNs2();
-		esito.setEsito("OK");
-		
-		output.setEsito(esito);
-		
-		DettaglioPatrimonioTypeTypeNs2 dettaglioP=new DettaglioPatrimonioTypeTypeNs2();
-		dettaglioP.setNdg("12345");
-		
-		List<DettaglioPatrimonioTypeTypeNs2> dettaglioPList=new ArrayList<>();
-		dettaglioPList.add(dettaglioP);
-		
-		output.setDettaglioPatrimonio(dettaglioPList);
-		
-		
-		Ww0aOTabpatTabCpTypeNs2 dettaglioC=new Ww0aOTabpatTabCpTypeNs2();
-		dettaglioC.setIdFamigliaProdotto("1");
-		dettaglioC.setNdg("123456");
-		
-		List<Ww0aOTabpatTabCpTypeNs2> dettaglioCList=new ArrayList<>();
-		dettaglioCList.add(dettaglioC);
-		
-		output.setDettaglioCards(dettaglioCList);
-		
-		if(source.isPresent()) {
-			if(source.get().equals("Postman"))
-				throw new PatrimonioNotFoundException("Not Found", dettaglioPatrimonioInput.getPatrimonioClienteInput().getCfNdg());
-		}*/
 		PatrimonioClienteOutputElementNs1 output = null;
 		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGPM())) {
 			output = gpmService.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 
 		}
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGestionePrivate())) { 
+			PatrimonioClienteOutputElementNs1 outputtmp = foeService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
 		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagTitoli())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = titoliService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
-			if (output != null) {
-				output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
 
-			} else
-				output = outputtmp;
+				} else
+					output = outputtmp;
+			}
 		}
-		/**
-		 * Da capire se il flag fondi governa solo il verticale fondi o anche quello foe
-		 * -se governa entrambi i verticali allora la sezione deve essere costruita sia andando sul nostro db che invocando servizio per recuperare i dati di fondi
-		 * -se governa solo il verticale fondi allora probabilmente anche foe è indirizzato dal flag gpm che quindi porterà all'interrogazione di entrambe le collection gpm e foe
-		 */
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) { 
-			PatrimonioClienteOutputElementNs1 outputtmp = foeService
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagBuoniPostali())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = bpService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
-			if (output != null) {
-				output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
 
-			} else
-				output = outputtmp;
+				} else
+					output = outputtmp;
+			}
 		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagCc())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = ccService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = fondiService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagLibretti())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = librettiService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagNdgLegati())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = rNdgService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagPolizze())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = polizzeService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagPolizzeProtezione())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = polizzePrService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioPatrimonio().addAll(outputtmp.getDettaglioPatrimonio());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagCarte())) {
+			PatrimonioClienteOutputElementNs1 outputtmp = cardService
+					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
+			if(outputtmp!=null) {
+				if (output != null) {
+					output.getDettaglioCards().addAll(outputtmp.getDettaglioCards());
+
+				} else
+					output = outputtmp;
+			}
+		}
+		
+		
 		if (output == null) {
 			output = new PatrimonioClienteOutputElementNs1();
 			output.setEsito(new EsitoTypeTypeNs2()
@@ -117,7 +217,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 							.descrizioneErrore("TODO"))); //TODO
 
 		}
-		output.setEsito(new EsitoTypeTypeNs2().esito("OK"));
+		output.setEsito(new EsitoTypeTypeNs2().esito("OK").dettaglioErrore(new ArrayList<>()));
 		return ResponseEntity.ok(output);
 	}
 
@@ -156,7 +256,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 	
 	public boolean stringtoBoolean(String flag) {
 		if(flag!=null && !flag.isBlank()&& 
-				(flag.equals("true") || flag.equals("S") || flag.equals("Y")) ) {
+				(flag.equals("S") || flag.equals("Y")) ) {
 		return true;	
 	}
 		return false;

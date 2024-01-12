@@ -1,19 +1,19 @@
-package it.poste.patrimonio.bl.exception.service;
+package it.poste.patrimonio.bl.service;
 
 import java.util.List;
 
-import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 
 
-public interface IFoeService {
+public interface ITitoliService {
 	
 	public PatrimonioClienteOutputElementNs1 findByNdgs(List<String> ndgs);
 	
-	public void add(Foe foe);
+	public void add(Titoli titoli);
 	
-	public void add(GpmDTO foe);
+	public void add(GpmDTO gpm);
 	
 	
 

@@ -1,4 +1,4 @@
-package it.poste.patrimonio.bl.exception.service.impl;
+package it.poste.patrimonio.bl.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,14 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.poste.patrimonio.bl.exception.service.IFoeService;
-import it.poste.patrimonio.bl.exception.service.ITitoliService;
-import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.bl.service.ITitoliService;
 import it.poste.patrimonio.db.model.Position;
 import it.poste.patrimonio.db.model.Titoli;
-import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.db.repository.ITitoliRepository;
-import it.poste.patrimonio.itf.mapper.FoeMapper;
 import it.poste.patrimonio.itf.mapper.TitoliMapper;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;

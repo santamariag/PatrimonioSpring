@@ -1,6 +1,7 @@
 package it.poste.patrimonio.itf.mapper;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mapstruct.AfterMapping;
@@ -9,6 +10,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.mapstruct.NullValueCheckStrategy;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
 import it.poste.patrimonio.db.model.Event;
@@ -21,7 +24,10 @@ import it.poste.patrimonio.itf.model.PatrimonioDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2Nil;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring" )
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, 
+		nullValuePropertyMappingStrategy =  NullValuePropertyMappingStrategy.IGNORE,
+		nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS , 
+		componentModel = "spring")
 public interface TitoliMapper {
 	
 	@Mappings({
@@ -41,6 +47,7 @@ public interface TitoliMapper {
         
 		EsitoTypeTypeNs2Nil esito=new EsitoTypeTypeNs2Nil();
 		esito.setEsito("OK");
+		esito.setDettaglioErrore(new ArrayList<>());
 		patrimonio.setEsitoStructure(esito);
     }    
 	

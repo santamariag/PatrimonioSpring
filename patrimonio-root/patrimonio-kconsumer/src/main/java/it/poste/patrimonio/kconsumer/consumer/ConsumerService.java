@@ -6,7 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.poste.patrimonio.bl.exception.service.IGpmService;
+import it.poste.patrimonio.bl.service.IGpmService;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import lombok.extern.slf4j.Slf4j;
 
