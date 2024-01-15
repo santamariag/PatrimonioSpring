@@ -19,7 +19,7 @@ import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Patrimonio;
 import it.poste.patrimonio.db.model.Position;
 import it.poste.patrimonio.itf.model.EventDTO;
-import it.poste.patrimonio.itf.model.GpmDTO;
+import it.poste.patrimonio.itf.model.FoeDTO;
 import it.poste.patrimonio.itf.model.PatrimonioDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2Nil;
@@ -31,16 +31,20 @@ import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2Nil;
 public interface FoeMapper {
 	
 	@Mappings({
-			@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "bigDecimalToString"),
-			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "bigDecimalToString")
-	})
-	List<DettaglioPatrimonioTypeTypeNs2> modelToApi(List<Position> model);
-	
-	@Mappings({
-			@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "stringToBigDecimal"),
-			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "stringToBigDecimal")
+		@Mapping(source = "qqta", target = "qqta", qualifiedByName = "bigDecimalToStringScale3" ),
+		@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "bigDecimalToStringScale6"),
+		@Mapping(source = "icamat", target = "icamat", qualifiedByName = "bigDecimalToStringScale6"),
+		@Mapping(source = "ivalbas", target = "ivalbas", qualifiedByName = "bigDecimalToStringScale3"),
+		@Mapping(source = "qqtavin", target = "qqtavin", qualifiedByName = "bigDecimalToStringScale3"),			
+		@Mapping(source = "dulprz", target = "dulprz", dateFormat = "yyyyMMdd"),
+		@Mapping(source = "dulcam", target = "dulcam", dateFormat = "yyyyMMdd")
+
 	})	
-	List<Position> apiToModel(List<DettaglioPatrimonioTypeTypeNs2> api);
+	DettaglioPatrimonioTypeTypeNs2 modelToApi(Position model);
+	
+	List<DettaglioPatrimonioTypeTypeNs2> modelListToApiList(List<Position> model);
+	
+	List<Position> apiListToModelList(List<DettaglioPatrimonioTypeTypeNs2> api);
 	
 	@AfterMapping
     default void afterMapping(@MappingTarget DettaglioPatrimonioTypeTypeNs2 patrimonio, Position position) {
@@ -52,33 +56,21 @@ public interface FoeMapper {
     }    
 	
 	
-	@Named("stringToBigDecimal")
-    default BigDecimal stringToBigDecimal(String value) {
+	@Named("bigDecimalToStringScale3")
+    default String bigDecimalToStringScale3(BigDecimal value) {
        
-		return new BigDecimal(value);
+		return value.setScale(3).toString();
     }
 	
-	@Named("bigDecimalToString")
-    default String bigDecimalToString(BigDecimal value) {
+	@Named("bigDecimalToStringScale6")
+    default String bigDecimalToStringScale6(BigDecimal value) {
        
-		return value.toString();
+		return value.setScale(6).toString();
     }
 	
-	/*@Named("stringToLong")
-    default Long stringToLong(String value) {
-       
-		return Long.valueOf(value);
-    }
+	FoeDTO modelToApi(Foe foe);
 	
-	@Named("longToString")
-    default String longToString(Long value) {
-       
-		return value.toString();
-    }*/
-	
-	GpmDTO modelToApi(Foe foe);
-	
-	Foe apiToModel(GpmDTO foe);
+	Foe apiToModel(FoeDTO foe);
 	
 	PatrimonioDTO map(Patrimonio value);
 	

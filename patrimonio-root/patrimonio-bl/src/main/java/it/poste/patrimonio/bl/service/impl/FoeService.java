@@ -11,7 +11,7 @@ import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Position;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.mapper.FoeMapper;
-import it.poste.patrimonio.itf.model.GpmDTO;
+import it.poste.patrimonio.itf.model.FoeDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 
@@ -38,7 +38,7 @@ public class FoeService implements IFoeService {
 		}
 		
 		PatrimonioClienteOutputElementNs1 output= new PatrimonioClienteOutputElementNs1();
-		List<DettaglioPatrimonioTypeTypeNs2> dettaglioPatrimonio =mapper.modelToApi(allPositions);
+		List<DettaglioPatrimonioTypeTypeNs2> dettaglioPatrimonio =mapper.modelListToApiList(allPositions);
 		
 		output.setDettaglioPatrimonio(dettaglioPatrimonio);
 		
@@ -55,7 +55,7 @@ public class FoeService implements IFoeService {
 	}
 	
 	@Override
-	public void add(GpmDTO foe) {
+	public void add(FoeDTO foe) {
 		
 		foeRepository.save(mapper.apiToModel(foe));	
 	}

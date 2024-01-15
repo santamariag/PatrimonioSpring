@@ -1,7 +1,6 @@
 package it.poste.patrimonio.db.repository.impl;
 
 
-import it.poste.patrimonio.db.model.Gpm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import it.poste.patrimonio.db.model.Foe;

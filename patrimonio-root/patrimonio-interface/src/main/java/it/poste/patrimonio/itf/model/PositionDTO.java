@@ -39,8 +39,8 @@ public class PositionDTO {
 	private String cdivtrz;
 	private String fpac;
 	private LocalDate dulprz;
-	private String dultacq;
-	private String dulcam;
+	private LocalDate dultacq;
+	private LocalDate dulcam;
 	private String ccdrreg;
 	private String fese;
 	private PeseXDTO peseX;

@@ -39,7 +39,7 @@ public class GpmService implements IGpmService {
 		}
 		
 		PatrimonioClienteOutputElementNs1 output= new PatrimonioClienteOutputElementNs1();
-		List<DettaglioPatrimonioTypeTypeNs2> dettaglioPatrimonio =mapper.modelToApi(allPositions);
+		List<DettaglioPatrimonioTypeTypeNs2> dettaglioPatrimonio =mapper.modelListToApiList(allPositions);
 		
 		output.setDettaglioPatrimonio(dettaglioPatrimonio);
 		
