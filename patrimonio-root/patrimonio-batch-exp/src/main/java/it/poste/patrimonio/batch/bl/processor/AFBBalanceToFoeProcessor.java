@@ -36,6 +36,7 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 	@Override
 	public List<Foe> process(AFBBalanceDTO item) throws Exception {
 		
+		log.info("AFB Item {}", item);
 		String productPrevinet=item.getProduct();
 		String rapporto=item.getBranch().concat(item.getAgency()).concat(item.getNumber()).concat(item.getIndex());
 		List<Foe> foeList=foeRepository.findByKey(rapporto, productPrevinet, item.getProductId());

@@ -38,6 +38,8 @@ public class MFMBalanceToGpmProcessor implements ItemProcessor<MFMBalanceDTO, Li
 	@Override
 	public List<Gpm> process(MFMBalanceDTO item) throws Exception {
 		
+		log.info("MDM Item {}", item);
+		
 		String productMifid=retrieveProductMifid(item.getProduct());
 		
 		String referenceDate=(String)this.stepExecution.getExecutionContext().get("referenceDate");
