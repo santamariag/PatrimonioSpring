@@ -8,6 +8,6 @@ public interface CustomFoeRepository {
 	
 	Foe saveFoe(Foe foe);
 
-	List<Foe> findByKey(String fiscalCode, String productPrevinet, String productId);
+	List<Foe> findByKey(String rapporto, String productPrevinet, String productId);
 
 }

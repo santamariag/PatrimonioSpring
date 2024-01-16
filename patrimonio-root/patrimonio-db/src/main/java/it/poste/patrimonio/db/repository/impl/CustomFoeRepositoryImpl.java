@@ -26,9 +26,9 @@ public class CustomFoeRepositoryImpl<T, ID> implements CustomFoeRepository{
 	}
 
 	@Override
-	public List<Foe> findByKey(String fiscalCode, String productPrevinet, String productId) {
+	public List<Foe> findByKey(String rapporto, String productPrevinet, String productId) {
 		Query query=new Query();
-		query.addCriteria(Criteria.where("rapporto").is(fiscalCode)
+		query.addCriteria(Criteria.where("rapporto").is(rapporto)
 				.andOperator(Criteria.where("patrimonioOld.posizioni.cstrfin").is(productPrevinet)
 						.andOperator(Criteria.where("patrimonioOld.posizioni.idProd").is(productId))));
 
