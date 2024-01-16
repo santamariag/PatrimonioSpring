@@ -6,14 +6,14 @@ import org.springframework.batch.item.file.transform.Range;
 @Getter
 public enum AFBDetail {
 
-	AFB_RECORD( new Range(1,319)),
+	AFB_RECORD( new Range(1,340)),
 	BRANCH(new Range(1, 5)),
     AGENCY(new Range(6, 9)),
     NUMBER(new Range(10, 20)),
     ID_PRODUCT(new Range(21, 32)),
     QTA(new Range(33, 50)), //15 PARTE INTERA 3 DECIMALE
     CTV(new Range(136, 153)), //15 PARTE INTERA 3 DECIMALE
-    PRICE(new Range(302, 319)), //25 INTERA 6 DECIMALE
+    PRICE(new Range(302, 319)), //12 INTERA 6 DECIMALE
     REF_DATE(new Range(94, 101));
 
     private final Range range;

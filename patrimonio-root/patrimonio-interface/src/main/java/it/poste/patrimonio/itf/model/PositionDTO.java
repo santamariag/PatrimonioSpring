@@ -47,9 +47,6 @@ public class PositionDTO {
 	private String cndgc;
 	private String ictvRisX;
 	private String idProd;
-	private String fiscalCode;
-	private String branch;
-	private String rapporto;
 	private BigDecimal cs;
 	private BigDecimal qs;
 	private BigDecimal qtaint;

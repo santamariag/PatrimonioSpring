@@ -2,7 +2,7 @@ spring:
   application:
     name: PatrimonioBatch  
   profiles:
-    active: dev, gpm-mfm
+    active: dev, foe-afb
     
 ---
 

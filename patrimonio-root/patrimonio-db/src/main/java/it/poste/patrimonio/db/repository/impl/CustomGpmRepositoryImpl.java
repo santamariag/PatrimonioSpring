@@ -100,7 +100,7 @@ public class CustomGpmRepositoryImpl<T, ID> implements CustomGpmRepository{
 	public List<Gpm> findByKey(String fiscalCode, String productMifid, String productId) {
 		
 		Query query=new Query();
-		query.addCriteria(Criteria.where("patrimonioOld.posizioni.fiscalCode").is(fiscalCode)
+		query.addCriteria(Criteria.where("fiscalCode").is(fiscalCode)
 				.andOperator(Criteria.where("patrimonioOld.posizioni.cstrfin").is(productMifid)
 				.andOperator(Criteria.where("patrimonioOld.posizioni.idProd").is(productId))));
 		

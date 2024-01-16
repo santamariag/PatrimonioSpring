@@ -18,13 +18,22 @@ public class Titoli {
 	@Version
 	private Long version;
 	
-	private ExternalKeys externalKeys;
+	private String fiscalCode;
+	
+	private String rapporto; //concatenazione di filiale agenzia numero e rubrica (vedi Deposit)
+
+	private Deposit deposit;
+	
+	private String internalCustomerCode;
+	
+	private String customerDescr;
+	
+	private ExternalKeys externalKeys; // TODO forse non servono
+	
 	private PatrimonioOld patrimonioOld;
+	
 	private Patrimonio patrimonio;
 	
 	private List<Event> events;
-	
-	
-	
 
 }

@@ -8,6 +8,11 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import lombok.Data;
 
+/**
+ * Mapping for GPM/FOE
+ * @author santamariag
+ * TODO Titoli
+ */
 @Data
 public class Position {
 	
@@ -16,60 +21,57 @@ public class Position {
 	private String descrizioneBisogno;
 	private String idFamigliaProdotto;
 	private String descrizioneFamigliaProdotto;
-	private String nrap;
-	private String cstrfin;
-	private String xstrfin;
-	private String csdp;
+	private String nrap;  //deposit/number
+	private String cstrfin; //prodotto (cod linea)
+	private String xstrfin; //descrizione prodotto da recuperare tramite servizio
+	private String csdp; //deposit/index
 	private String cndgs;
-	private String trap;
+	private String trap; //tipo rapporto (GPM/FOE) su base ist (1/5)
 	private String strp;
-	private String xint;
+	private String xint; //descrizione cliente customerDescr
 	private String dtaper;
 	private String xblc;
-	private String cage;
+	private String cage; //deposit/agency
 	private String xstt;
 	private String tprm;
-	private String ddec;
+	private String ddec; //data corrente
 	private String dsca;
 	private String isin;
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qqta;
+	private BigDecimal qqta; //Quantità patrimonio
 	private String dreg;
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal iprzat;
+	private BigDecimal iprzat; //Prezzo
 	private String icamat;
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal ivalbas;
+	private BigDecimal ivalbas;  //Controvalore patrimonio
 	private String qqtavin;
-	private String cdivemi;
+	private String cdivemi; //Divisa
 	private String cdivtrz;
-	private String fpac;
-	private LocalDate dulprz;
-	private LocalDate dultacq;
-	private LocalDate dulcam;
+	private String fpac; //Presenza PAC (S/N)
+	private LocalDate dulprz; //data ultimo prezzo
+	private LocalDate dultacq; //data ultimo acquisto
+	private LocalDate dulcam; 
 	private String ccdrreg;
 	private String fese;
 	private PeseX peseX;
 	private String cndgc;
 	private String ictvRisX;
-	private String idProd;
-	private String fiscalCode;
-	private String branch;
-	private String rapporto;
+	private String idProd;  //ID prodotto
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal cs;
+	private BigDecimal cs;  //Controvalore SGR(CS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qs;
+	private BigDecimal qs;  //Quantità SGR(QS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qtaint;
+	private BigDecimal qtaint;  //Quantità interna
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal css;
+	private BigDecimal css;  //Controvalore sottoscrizioni sospese(CSS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qss;
+	private BigDecimal qss; //Quantità sottoscrizioni sospese(QSS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal crs;
+	private BigDecimal crs;  //Controvalore rimborsi sospesi(CRS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qrs;
+	private BigDecimal qrs;  //Quantità rimborsi sospesi(QRS)
 
 
 
