@@ -29,7 +29,7 @@ job:
   
 file-config:
   inputPath: src/main/resources
-  fileNamePattern: OSTE-MF-AUM-[^_]*_V1.CSV
+  fileNamePattern: POSTE-MF-AUM-[^_]*_V1.CSV
   processingPath: src/main/resources/processing
   completedPath: src/main/resources/completed
   discardedPath: src/main/resources/discarded
