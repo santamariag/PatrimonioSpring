@@ -12,9 +12,10 @@ public enum AFBDetail {
     NUMBER(new Range(10, 20)),
     ID_PRODUCT(new Range(21, 32)),
     QTA(new Range(33, 50)), //15 PARTE INTERA 3 DECIMALE
+    REF_DATE(new Range(94, 101)),
     CTV(new Range(136, 153)), //15 PARTE INTERA 3 DECIMALE
-    PRICE(new Range(302, 319)), //12 INTERA 6 DECIMALE
-    REF_DATE(new Range(94, 101));
+    PRICE(new Range(302, 319)); //12 INTERA 6 DECIMALE
+   
 
     private final Range range;
 
@@ -30,9 +31,9 @@ public enum AFBDetail {
                 NUMBER.getRange(),
                 ID_PRODUCT.getRange(),
                 QTA.getRange(),
+                REF_DATE.getRange(),
                 CTV.getRange(),
-                PRICE.getRange(),
-                REF_DATE.getRange()
+                PRICE.getRange()
                 };
     }
 

@@ -3,18 +3,16 @@ package it.poste.patrimonio.batch.bl.afb;
 import it.poste.patrimonio.batch.bl.config.FileConfig;
 import it.poste.patrimonio.batch.bl.listener.FileNameListener;
 import it.poste.patrimonio.batch.bl.listener.MoveFileListener;
-import it.poste.patrimonio.batch.bl.listener.StepExecutionContextInjector;
 import it.poste.patrimonio.batch.bl.processor.AFBBalanceToFoeProcessor;
+import it.poste.patrimonio.batch.bl.reader.AFBFileRowMapper;
 import it.poste.patrimonio.batch.bl.util.*;
 import it.poste.patrimonio.batch.bl.writer.AFBItemWriter;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.model.AFBBalanceDTO;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.LineCallbackHandler;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FixedLengthTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -74,7 +72,14 @@ public class FoeAFBBusinessConfig {
         lineTokenizer.setColumns(AFBDetail.getColumnRanges());
         lineTokenizer.setStrict(false);
         return lineTokenizer;
+       
     }
+    
+ private FieldSetMapper<AFBBalanceDTO> fieldSetMapper() {
+    	
+    	return new AFBFileRowMapper();
+    }
+    
     @Bean
     @Qualifier(AFB_FILE_CSV_READER_QUALIF)
     @StepScope
@@ -89,12 +94,8 @@ public class FoeAFBBusinessConfig {
         reader.setLineMapper(new DefaultLineMapper<AFBBalanceDTO>() {
             {
                setLineTokenizer(lineTokenizer());
-               setFieldSetMapper(new BeanWrapperFieldSetMapper<AFBBalanceDTO>() {
-                    {
-                        setTargetType(AFBBalanceDTO.class);
-                    }
-                });
-
+               setFieldSetMapper(fieldSetMapper());
+            
             }
         });
         

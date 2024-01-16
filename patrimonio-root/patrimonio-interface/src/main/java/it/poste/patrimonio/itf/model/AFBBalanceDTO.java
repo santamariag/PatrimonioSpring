@@ -13,14 +13,15 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class AFBBalanceDTO {
 	
-	private String fiscalCode;
-	private String productId;
-	private BigDecimal qta;
-	private BigDecimal ctv;
-	private String product;
 	private String branch;
 	private String agency;
 	private String number;
+	private String rub;
+	private String product;
+	private String productId;
+	private BigDecimal qta;
+	private BigDecimal ctv;
 	private BigDecimal price;
 	private String referenceDate;
+	
 }

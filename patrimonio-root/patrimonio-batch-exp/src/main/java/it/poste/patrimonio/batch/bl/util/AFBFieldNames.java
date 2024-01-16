@@ -1,6 +1,5 @@
 package it.poste.patrimonio.batch.bl.util;
 
-import java.math.BigDecimal;
 
 public class AFBFieldNames {
 
@@ -8,7 +7,7 @@ public class AFBFieldNames {
         throw new UnsupportedOperationException("Cannot initialize utility classes");
     }
 
-    public static final String AFB_RECORD = "contactRecord";
+    public static final String AFB_RECORD = "afbRecord";
     public static final String BRANCH = "branch";
     public static final String AGENCY = "agency";
     public static final String NUMBER = "number";
