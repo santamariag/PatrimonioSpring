@@ -15,8 +15,7 @@ import lombok.Data;
 @Data
 @CompoundIndexes({
     @CompoundIndex(name = "idx-ndg_prod_idprod", def = "{'ndg' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}"),
-    @CompoundIndex(name = "idx-fiscalcode_prod_idprod", def = "{'fiscalCode' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}"),
-    @CompoundIndex(name = "idx-rapporto_prod_idprod", def = "{'rapporto' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}")
+    @CompoundIndex(name = "idx-fiscalcode_prod_idprod", def = "{'fiscalCode' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}")
 })
 public class Gpm {
 	
