@@ -37,15 +37,16 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 	@Override
 	public List<Foe> process(AFBBalanceDTO item) throws Exception {
 		
-		String productPrevinet=retrieveProductPrevinet(item.getProduct());
-		List<Foe> foeList=foeRepository.findByKey(item.getBranch().concat(item.getAgency()).concat(item.getNumber()).concat("00000"), productPrevinet, item.getProductId());
+		String productPrevinet=item.getProduct();
+		String rapporto=item.getBranch().concat(item.getAgency()).concat(item.getNumber()).concat(item.getIndex());
+		List<Foe> foeList=foeRepository.findByKey(rapporto, productPrevinet, item.getProductId());
 		
 		if(foeList.isEmpty())
 			return null;
 		
 		
 		foeList.forEach(g->{
-			log.info("G "+g);;
+			log.info("F "+g);;
 			g.getPatrimonioOld().getPosizioni().forEach(p->{
 				if(productPrevinet.equals(p.getCstrfin())
 						&& item.getProductId().equals(p.getIdProd())){
@@ -53,7 +54,7 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 					p.setQs(item.getQta());
 					p.setQqta(calculateQqta(p));
 					p.setIvalbas(calculateCtv(p));
-					p.setDulprz(LocalDate.parse(item.getReferenceDate()));
+					p.setDulprz(item.getReferenceDate());
 					p.setIprzat(item.getPrice());
 				}
 			});
@@ -83,10 +84,5 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 		return qs.add(qss).subtract(qrs);
 	}
 
-
-	private String retrieveProductPrevinet(String product) {
-		// Invoke external service. For now retrieve the same value
-		return product;
-	}
 
 }

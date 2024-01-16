@@ -12,11 +12,10 @@ public enum AFBDetail {
     NUMBER(new Range(10, 20)),
     ID_PRODUCT(new Range(21, 32)),
     QTA(new Range(33, 50)), //15 PARTE INTERA 3 DECIMALE
-    REF_DATE(new Range(94, 101)),
+    REF_DATE(new Range(96, 103)),
     CTV(new Range(136, 153)), //15 PARTE INTERA 3 DECIMALE
     PRICE(new Range(302, 319)); //12 INTERA 6 DECIMALE
-   
-
+    
     private final Range range;
 
     AFBDetail(Range range) {

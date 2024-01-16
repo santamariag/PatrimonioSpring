@@ -5,14 +5,17 @@ import it.poste.patrimonio.batch.bl.listener.FileNameListener;
 import it.poste.patrimonio.batch.bl.listener.MoveFileListener;
 import it.poste.patrimonio.batch.bl.processor.AFBBalanceToFoeProcessor;
 import it.poste.patrimonio.batch.bl.reader.AFBFileRowMapper;
+
 import it.poste.patrimonio.batch.bl.util.*;
 import it.poste.patrimonio.batch.bl.writer.AFBItemWriter;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.model.AFBBalanceDTO;
+
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
+
 import org.springframework.batch.item.file.transform.FixedLengthTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -75,7 +78,8 @@ public class FoeAFBBusinessConfig {
        
     }
     
- private FieldSetMapper<AFBBalanceDTO> fieldSetMapper() {
+
+	private FieldSetMapper<AFBBalanceDTO> fieldSetMapper() {
     	
     	return new AFBFileRowMapper();
     }
@@ -95,7 +99,6 @@ public class FoeAFBBusinessConfig {
             {
                setLineTokenizer(lineTokenizer());
                setFieldSetMapper(fieldSetMapper());
-            
             }
         });
         

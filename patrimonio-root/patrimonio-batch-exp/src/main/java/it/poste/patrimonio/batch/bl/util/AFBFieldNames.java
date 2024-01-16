@@ -11,13 +11,16 @@ public class AFBFieldNames {
     public static final String BRANCH = "branch";
     public static final String AGENCY = "agency";
     public static final String NUMBER = "number";
+    public static final String INDEX = "index";
+    public static final String PRODUCT = "product";
     public static final String ID_PRODUCT ="productId";
     public static final String QTA ="qta";
+    public static final String REF_DATE = "referenceDate";
     public static final String CTV = "ctv";
     public static final String PRICE ="price";
-    public static final String REF_DATE = "referenceDate";
+    
     public static String[] getFieldnames() {
-        return new String[]{AFB_RECORD, BRANCH, AGENCY, NUMBER, ID_PRODUCT, QTA, CTV, PRICE, REF_DATE};
+        return new String[]{AFB_RECORD, BRANCH, AGENCY, NUMBER, ID_PRODUCT, QTA, REF_DATE, CTV, PRICE};
     }
 
 }
