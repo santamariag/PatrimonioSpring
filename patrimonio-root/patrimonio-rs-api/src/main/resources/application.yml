@@ -20,6 +20,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      auto-index-creation: true
 
 #spring.main.allow-circular-references: true 
 
