@@ -45,9 +45,9 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 			return null;
 		
 		
-		foeList.forEach(g->{
-			log.info("F "+g);;
-			g.getPatrimonioOld().getPosizioni().forEach(p->{
+		foeList.forEach(f->{
+			log.info("F "+f);;
+			f.getPatrimonioOld().getPosizioni().forEach(p->{
 				if(productPrevinet.equals(p.getCstrfin())
 						&& item.getProductId().equals(p.getIdProd())){
 					p.setCs(item.getCtv());
