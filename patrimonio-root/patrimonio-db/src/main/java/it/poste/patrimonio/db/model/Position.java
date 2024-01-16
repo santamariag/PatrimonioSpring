@@ -48,7 +48,8 @@ public class Position {
 	private String qqtavin;
 	private String cdivemi; //Divisa
 	private String cdivtrz;
-	private String fpac; //Presenza PAC (S/N)
+	private Long cpac; //Contatore PAC stato(presenza pac- 0,1=+1 in insert; 2,3=-1 in update)
+	private String fpac; //Presenza PAC (S se cpac>0/N altrimenti)
 	private LocalDate dulprz; //data ultimo prezzo
 	private LocalDate dultacq; //data ultimo acquisto
 	private LocalDate dulcam; 
