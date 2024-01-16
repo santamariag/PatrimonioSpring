@@ -38,7 +38,7 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 	public List<Foe> process(AFBBalanceDTO item) throws Exception {
 		
 		String productPrevinet=retrieveProductPrevinet(item.getProduct());
-		List<Foe> foeList=foeRepository.findByKey(item.getFiscalCode(), productPrevinet, item.getProductId());
+		List<Foe> foeList=foeRepository.findByKey(item.getBranch().concat(item.getAgency()).concat(item.getNumber()).concat("00000"), productPrevinet, item.getProductId());
 		
 		if(foeList.isEmpty())
 			return null;
