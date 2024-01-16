@@ -17,12 +17,14 @@ import org.mapstruct.ReportingPolicy;
 import it.poste.patrimonio.db.model.Event;
 import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Patrimonio;
+import it.poste.patrimonio.db.model.PeseX;
 import it.poste.patrimonio.db.model.Position;
 import it.poste.patrimonio.itf.model.EventDTO;
 import it.poste.patrimonio.itf.model.FoeDTO;
 import it.poste.patrimonio.itf.model.PatrimonioDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.EsitoTypeTypeNs2Nil;
+import it.poste.patrimonio.rs.specs.model.PeseXTypeTypeNs2;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, 
 		nullValuePropertyMappingStrategy =  NullValuePropertyMappingStrategy.IGNORE,
@@ -41,6 +43,11 @@ public interface FoeMapper {
 
 	})	
 	DettaglioPatrimonioTypeTypeNs2 modelToApi(Position model);
+	
+	@Mappings({
+		@Mapping(source = "pese", target = "pese", qualifiedByName = "bigDecimalToStringScale3" ),
+	})	
+	PeseXTypeTypeNs2 modelToApi(PeseX model);
 	
 	List<DettaglioPatrimonioTypeTypeNs2> modelListToApiList(List<Position> model);
 	

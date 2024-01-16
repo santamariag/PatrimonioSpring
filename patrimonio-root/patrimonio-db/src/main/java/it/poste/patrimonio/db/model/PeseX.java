@@ -1,10 +1,16 @@
 package it.poste.patrimonio.db.model;
 
+import java.math.BigDecimal;
+
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+
 import lombok.Data;
 
 @Data
 public class PeseX {
 	
-	private String pese;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal pese;
 
 }
