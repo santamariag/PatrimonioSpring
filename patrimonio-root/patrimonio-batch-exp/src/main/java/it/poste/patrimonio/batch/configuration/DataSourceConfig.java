@@ -1,10 +1,5 @@
 package it.poste.patrimonio.batch.configuration;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-
-import org.bson.Document;
-import org.bson.types.Decimal128;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.repository.JobRepository;
@@ -14,15 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.ReadingConverter;
-import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
-import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mongodb.ReadConcern;
@@ -58,7 +49,6 @@ public class DataSourceConfig {
 			MongoTemplate template = new MongoTemplate(mongoDatabaseFactory);
 			MappingMongoConverter converter = (MappingMongoConverter) template.getConverter();
 			converter.setMapKeyDotReplacement(".");
-			converter.setCustomConversions(customConversions());
 			return template;
 		}
 		
@@ -91,31 +81,6 @@ public class DataSourceConfig {
 		public MongoDatabaseFactory mongoDatabaseFactory() {
 			MongoClient mongoClient = MongoClients.create(uri);
 			return new SimpleMongoClientDatabaseFactory(mongoClient, dbName);
-		}
-		
-		MongoCustomConversions customConversions() {
-		    return new MongoCustomConversions(Arrays.asList(
-		        // writing converter, reader converter
-		        new DocumentDecimal128Converter(), new Decimal128DocumentConverter()
-		    ));
-		  }
-		
-		@WritingConverter
-		public static class DocumentDecimal128Converter implements Converter<Document, Decimal128> {
-
-			@Override
-			public Decimal128 convert(Document source) {
-				return new Decimal128((BigDecimal)source.get("patrimonioOld.posizioni.qqta"));
-			}
-		}
-
-		@ReadingConverter
-		public static class Decimal128DocumentConverter implements Converter<Decimal128, Document> {
-
-			@Override
-			public Document convert(Decimal128 source) {
-				return  new Document("patrimonioOld.posizioni.qqta",source.bigDecimalValue());
-			}
 		}
 
 }
