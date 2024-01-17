@@ -84,11 +84,11 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		log.info("REQUEST "+dettaglioPatrimonioInput);
 		
 		PatrimonioClienteOutputElementNs1 output = null;
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGPM())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGPM())) {
 			output = gpmService.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 
 		}
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGestionePrivate())) { 
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGestionePrivate())) { 
 			PatrimonioClienteOutputElementNs1 outputtmp = foeService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -99,7 +99,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 					output = outputtmp;
 			}
 		}
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagTitoli())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagTitoli())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = titoliService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -111,7 +111,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagBuoniPostali())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagBuoniPostali())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = bpService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -123,7 +123,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagCc())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagCc())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = ccService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -135,7 +135,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagFondi())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = fondiService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -147,7 +147,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagLibretti())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagLibretti())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = librettiService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -159,7 +159,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagNdgLegati())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagNdgLegati())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = rNdgService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -171,7 +171,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagPolizze())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagPolizze())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = polizzeService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -183,7 +183,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagPolizzeProtezione())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagPolizzeProtezione())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = polizzePrService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -195,7 +195,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 			}
 		}
 		
-		if (stringtoBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagCarte())) {
+		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagCarte())) {
 			PatrimonioClienteOutputElementNs1 outputtmp = cardService
 					.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());
 			if(outputtmp!=null) {
@@ -255,7 +255,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		
 	}
 	
-	private boolean stringtoBoolean(String flag) {
+	private boolean stringToBoolean(String flag) {
 		if(flag!=null && !flag.isBlank()&& 
 				(flag.equals("S") || flag.equals("Y")) ) {
 		return true;	
