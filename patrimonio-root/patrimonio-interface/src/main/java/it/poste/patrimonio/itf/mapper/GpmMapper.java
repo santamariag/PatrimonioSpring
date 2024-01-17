@@ -33,13 +33,14 @@ import it.poste.patrimonio.rs.specs.model.PeseXTypeTypeNs2;
 public interface GpmMapper {
 	
 	@Mappings({
-			@Mapping(source = "qqta", target = "qqta", qualifiedByName = "bigDecimalToStringScale3" ),
-			@Mapping(source = "iprzat", target = "iprzat", qualifiedByName = "bigDecimalToStringScale6"),
-			@Mapping(source = "icamat", target = "icamat", qualifiedByName = "bigDecimalToStringScale6"),
-			@Mapping(source = "ivalbas", target = "ivalbas", qualifiedByName = "bigDecimalToStringScale3"),
-			@Mapping(source = "qqtavin", target = "qqtavin", qualifiedByName = "bigDecimalToStringScale3"),			
-			@Mapping(source = "dulprz", target = "dulprz", dateFormat = "yyyyMMdd"),
-			@Mapping(source = "dulcam", target = "dulcam", dateFormat = "yyyyMMdd")
+			@Mapping(source = "detail", target = "."),
+			@Mapping(source = "detail.qqta", target = "qqta", qualifiedByName = "bigDecimalToStringScale3" ),
+			@Mapping(source = "detail.iprzat", target = "iprzat", qualifiedByName = "bigDecimalToStringScale6"),
+			@Mapping(source = "detail.icamat", target = "icamat", qualifiedByName = "bigDecimalToStringScale6"),
+			@Mapping(source = "detail.ivalbas", target = "ivalbas", qualifiedByName = "bigDecimalToStringScale3"),
+			@Mapping(source = "detail.qqtavin", target = "qqtavin", qualifiedByName = "bigDecimalToStringScale3"),			
+			@Mapping(source = "detail.dulprz", target = "dulprz", dateFormat = "yyyyMMdd"),
+			@Mapping(source = "detail.dulcam", target = "dulcam", dateFormat = "yyyyMMdd")
 
 	})	
 	DettaglioPatrimonioTypeTypeNs2 modelToApi(Position model);

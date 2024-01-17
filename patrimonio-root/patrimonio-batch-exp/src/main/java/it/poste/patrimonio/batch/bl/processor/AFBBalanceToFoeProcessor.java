@@ -48,14 +48,14 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 		foeList.forEach(f->{
 			log.info("F "+f);;
 			f.getPatrimonioOld().getPosizioni().forEach(p->{
-				if(productPrevinet.equals(p.getCstrfin())
-						&& item.getProductId().equals(p.getIdProd())){
-					p.setCs(item.getCtv());
-					p.setQs(item.getQta());
-					p.setQqta(calculateQqta(p));
-					p.setIvalbas(calculateCtv(p));
-					p.setDulprz(item.getReferenceDate());
-					p.setIprzat(item.getPrice());
+				if(productPrevinet.equals(p.getDetail().getCstrfin())
+						&& item.getProductId().equals(p.getDetail().getIdProd())){
+					p.getInternalCounters().setCs(item.getCtv());
+					p.getInternalCounters().setQs(item.getQta());
+					p.getDetail().setQqta(calculateQqta(p));
+					p.getDetail().setIvalbas(calculateCtv(p));
+					p.getDetail().setDulprz(item.getReferenceDate());
+					p.getDetail().setIprzat(item.getPrice());
 				}
 			});
 		});
@@ -67,9 +67,9 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 
 	private BigDecimal calculateCtv(Position p) {
 		//CS+CSS-CRS
-		BigDecimal cs=p.getCs()!=null?p.getCs():BigDecimal.ZERO;
-		BigDecimal css=p.getCss()!=null?p.getCss():BigDecimal.ZERO;
-		BigDecimal crs=p.getCrs()!=null?p.getCrs():BigDecimal.ZERO;
+		BigDecimal cs=p.getInternalCounters().getCs()!=null?p.getInternalCounters().getCs():BigDecimal.ZERO;
+		BigDecimal css=p.getInternalCounters().getCss()!=null?p.getInternalCounters().getCss():BigDecimal.ZERO;
+		BigDecimal crs=p.getInternalCounters().getCrs()!=null?p.getInternalCounters().getCrs():BigDecimal.ZERO;
 		
 		return cs.add(css).subtract(crs);
 	}
@@ -77,9 +77,9 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 
 	private BigDecimal calculateQqta(Position p) {
 		// QS+QSS-QRS
-		BigDecimal qs=p.getQs()!=null?p.getQs():BigDecimal.ZERO;
-		BigDecimal qss=p.getQss()!=null?p.getQss():BigDecimal.ZERO;
-		BigDecimal qrs=p.getQrs()!=null?p.getQrs():BigDecimal.ZERO;
+		BigDecimal qs=p.getInternalCounters().getQs()!=null?p.getInternalCounters().getQs():BigDecimal.ZERO;
+		BigDecimal qss=p.getInternalCounters().getQss()!=null?p.getInternalCounters().getQss():BigDecimal.ZERO;
+		BigDecimal qrs=p.getInternalCounters().getQrs()!=null?p.getInternalCounters().getQrs():BigDecimal.ZERO;
 		
 		return qs.add(qss).subtract(qrs);
 	}

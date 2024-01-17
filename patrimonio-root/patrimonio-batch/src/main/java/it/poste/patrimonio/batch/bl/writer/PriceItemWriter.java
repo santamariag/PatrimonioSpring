@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.transaction.annotation.Transactional;
 
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.model.Price;
@@ -46,9 +45,9 @@ public class PriceItemWriter implements ItemWriter<Price>{
         	Gpm next=it.next();
         	log.info("GPM "+next);
         	next.getPatrimonioOld().getPosizioni().forEach(p->{
-        		if(pricemap.containsKey(p.getIsin())){
-        			p.setIprzat(pricemap.get(p.getIsin()));
-        			p.setIvalbas(p.getIprzat().multiply(p.getQqta()));
+        		if(pricemap.containsKey(p.getDetail().getIsin())){
+        			p.getDetail().setIprzat(pricemap.get(p.getDetail().getIsin()));
+        			p.getDetail().setIvalbas(p.getDetail().getIprzat().multiply(p.getDetail().getQqta()));
         			//gpmToUpdate.add(next);
         			gpmRepository.saveGpm(next);
         		}

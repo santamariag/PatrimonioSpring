@@ -21,10 +21,9 @@ import com.mongodb.client.result.UpdateResult;
 
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.repository.CustomGpmRepository;
-import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
+
 public class CustomGpmRepositoryImpl<T, ID> implements CustomGpmRepository{
 	
 	@Autowired
@@ -47,17 +46,17 @@ public class CustomGpmRepositoryImpl<T, ID> implements CustomGpmRepository{
 	@Override
 	public long updatePriceOld(String isin, BigDecimal price) {
 	
-		Query query=new Query().addCriteria(Criteria.where("patrimonioOld.posizioni.isin").is(isin));
+		Query query=new Query().addCriteria(Criteria.where("patrimonioOld.posizioni.detail.isin").is(isin));
 		
 		
 		AggregationUpdate updateDefinition = AggregationUpdate.update()		
-				 											.set(SetOperation.builder().set("patrimonioOld.posizioni.iprzat").toValue(price).and()
-				 											.set("patrimonioOld.posizioni.ivalbas").toValue(ArithmeticOperators.Multiply.valueOf(price)
-				 													.multiplyBy(ArithmeticOperators.Multiply.valueOf(ConvertOperators.ToDecimal.toDecimal("patrimonioOld.posizioni.qqta")))));	 
+				 											.set(SetOperation.builder().set("patrimonioOld.posizioni.detail.iprzat").toValue(price).and()
+				 											.set("patrimonioOld.posizioni.detail.ivalbas").toValue(ArithmeticOperators.Multiply.valueOf(price)
+				 													.multiplyBy(ArithmeticOperators.Multiply.valueOf(ConvertOperators.ToDecimal.toDecimal("patrimonioOld.posizioni.detail.qqta")))));	 
 		
-		ArrayOperators.Filter.filter("patrimonioOld.posizioni.isin").as(isin).by(isin);
+		ArrayOperators.Filter.filter("patrimonioOld.posizioni.detail.isin").as(isin).by(isin);
 		
-		AggregationOperation match = Aggregation.match(Criteria.where("patrimonioOld.posizioni.isin").is(isin));
+		AggregationOperation match = Aggregation.match(Criteria.where("patrimonioOld.posizioni.detail.isin").is(isin));
 		AggregationOperation unwind = Aggregation.unwind("patrimonioOld.posizioni");
 		/*AggregationOperation group = Aggregation.group("_id")             
 		        .first("_class").as("_class")                
@@ -90,8 +89,6 @@ public class CustomGpmRepositoryImpl<T, ID> implements CustomGpmRepository{
 	//@Retryable(include = OptimisticLockingFailureException.class)
 	public Gpm saveGpm(Gpm gpm) {
 		
-		
-		gpm.getPatrimonioOld().getPosizioni().forEach(p->log.debug("----------ISIN {} PRICE {} QUANTITY {} CONTR {}",p.getIsin(), p.getIprzat(), p.getQqta(), p.getIvalbas()));
 		return template.save(gpm);
 	}
 
@@ -101,8 +98,8 @@ public class CustomGpmRepositoryImpl<T, ID> implements CustomGpmRepository{
 		
 		Query query=new Query();
 		query.addCriteria(Criteria.where("fiscalCode").is(fiscalCode)
-				.andOperator(Criteria.where("patrimonioOld.posizioni.cstrfin").is(productMifid)
-				.andOperator(Criteria.where("patrimonioOld.posizioni.idProd").is(productId))));
+				.andOperator(Criteria.where("patrimonioOld.posizioni.detail.cstrfin").is(productMifid)
+				.andOperator(Criteria.where("patrimonioOld.posizioni.detail.idProd").is(productId))));
 		
 		return template.find(query, Gpm.class);
 	}

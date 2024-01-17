@@ -70,14 +70,14 @@ public class UpdateGpmPrice implements Callable<Result>{
 		boolean modified=false;
 		for(Position p : gpm.getPatrimonioOld().getPosizioni()) {
 		//gpm.getPatrimonioOld().getPosizioni().forEach(p->{
-			if(pricemap.containsKey(p.getIsin())){
-				BigDecimal newPrice=pricemap.get(p.getIsin());
-				if(p.getIprzat().compareTo(newPrice)!=0) {
-					p.setIprzat(newPrice);
-					p.setIvalbas(p.getIprzat().multiply(p.getQqta()));
+			if(pricemap.containsKey(p.getDetail().getIsin())){
+				BigDecimal newPrice=pricemap.get(p.getDetail().getIsin());
+				if(p.getDetail().getIprzat().compareTo(newPrice)!=0) {
+					p.getDetail().setIprzat(newPrice);
+					p.getDetail().setIvalbas(p.getDetail().getIprzat().multiply(p.getDetail().getQqta()));
 					modified=true;
 				} else {
-					log.info("La posizione con isin {} ha già lo stesso prezzo", p.getIsin());
+					log.info("La posizione con isin {} ha già lo stesso prezzo", p.getDetail().getIsin());
 				}				
 			}
 		}//);

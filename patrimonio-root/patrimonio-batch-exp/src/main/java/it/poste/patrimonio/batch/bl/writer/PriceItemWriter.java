@@ -195,11 +195,11 @@ public class PriceItemWriter implements ItemStreamWriter<Price>{
 
 		log.info("+++++++"+gpm);
 		gpm.getPatrimonioOld().getPosizioni().forEach(p->{
-			if(pricemap.containsKey(p.getIsin())){
-				BigDecimal newPrice=pricemap.get(p.getIsin());
+			if(pricemap.containsKey(p.getDetail().getIsin())){
+				BigDecimal newPrice=pricemap.get(p.getDetail().getIsin());
 				//if(p.getIprzat().compareTo(newPrice)!=0) {
-				p.setIprzat(newPrice);
-				p.setIvalbas(p.getIprzat().multiply(p.getQqta()));
+				p.getDetail().setIprzat(newPrice);
+				p.getDetail().setIvalbas(p.getDetail().getIprzat().multiply(p.getDetail().getQqta()));
 				gpmRepository.saveGpm(gpm);
 				/*} else {
 				log.debug("La posizione con isin {} ha già lo stesso prezzo", p.getIsin());

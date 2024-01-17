@@ -23,19 +23,19 @@ public interface ITitoliRepository extends MongoRepository<Titoli, String>, Cust
 	public List<Titoli> findByNdgIn(List<String> ndg);
 	
 	@Meta(cursorBatchSize = 100)
-	@Query(value = "{ 'patrimonioOld.posizioni.isin' : { $in : ?0 } }")
+	@Query(value = "{ 'patrimonioOld.posizioni.detail.isin' : { $in : ?0 } }")
 	public Stream<Titoli> findByIsinIn(Set<String> isinList);
 	
 	//@Query(value = "{ 'patrimonioOld.posizioni.isin' : { $in : ?0 } }")
 	//public long updatePriceOld(String isin, BigDecimal price);
 	
-	@Query(value = "{ 'patrimonioOld.posizioni.isin' : { $in : ?0 } }")
+	@Query(value = "{ 'patrimonioOld.posizioni.detail.isin' : { $in : ?0 } }")
 	public Page<Titoli> findByIsinIn(Set<String> isinList, Pageable page);
 	
-	@Query(value = "{ $and : [ {'patrimonioOld.posizioni.isin' : { $in : ?0 } }, { 'patrimonioOld.posizioni.patrimonioOld.posizioni.iprzat' : { $nin : ?1 } } ] }")
+	@Query(value = "{ $and : [ {'patrimonioOld.posizioni.detail.isin' : { $in : ?0 } }, { 'patrimonioOld.posizioni.detail.iprzat' : { $nin : ?1 } } ] }")
 	public Page<Titoli> findByIsinInAndPriceNotIn(Set<String> isinList,  Collection<BigDecimal> prices, Pageable page);
 	
-	@Query(value = "{ 'patrimonioOld.posizioni.isin' : { $in : ?0 } }", count = true)
+	@Query(value = "{ 'patrimonioOld.posizioni.detail.isin' : { $in : ?0 } }", count = true)
 	public Long countByIsin(Set<String> isinList);
 	
 }
