@@ -1,15 +1,15 @@
 package it.poste.patrimonio.batch.bl.processor;
 
+import it.poste.patrimonio.bl.util.PositionUtil;
 import it.poste.patrimonio.db.model.Foe;
-import it.poste.patrimonio.db.model.Position;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.model.AFBBalanceDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +20,9 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 	private StepExecution stepExecution;
 	
 	private final IFoeRepository foeRepository;
+	
+	@Autowired
+	private PositionUtil positionUtil;
 	
 	
 	public AFBBalanceToFoeProcessor(IFoeRepository foeRepository) {
@@ -52,8 +55,8 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 						&& item.getProductId().equals(p.getDetail().getIdProd())){
 					p.getInternalCounters().setCs(item.getCtv());
 					p.getInternalCounters().setQs(item.getQta());
-					p.getDetail().setQqta(calculateQqta(p));
-					p.getDetail().setIvalbas(calculateCtv(p));
+					p.getDetail().setQqta(positionUtil.calculateQqta(p));
+					p.getDetail().setIvalbas(positionUtil.calculateCtv(p));
 					p.getDetail().setDulprz(item.getReferenceDate());
 					p.getDetail().setIprzat(item.getPrice());
 				}
@@ -63,26 +66,5 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 		return foeList;	
 		
 	}
-
-
-	private BigDecimal calculateCtv(Position p) {
-		//CS+CSS-CRS
-		BigDecimal cs=p.getInternalCounters().getCs()!=null?p.getInternalCounters().getCs():BigDecimal.ZERO;
-		BigDecimal css=p.getInternalCounters().getCss()!=null?p.getInternalCounters().getCss():BigDecimal.ZERO;
-		BigDecimal crs=p.getInternalCounters().getCrs()!=null?p.getInternalCounters().getCrs():BigDecimal.ZERO;
-		
-		return cs.add(css).subtract(crs);
-	}
-
-
-	private BigDecimal calculateQqta(Position p) {
-		// QS+QSS-QRS
-		BigDecimal qs=p.getInternalCounters().getQs()!=null?p.getInternalCounters().getQs():BigDecimal.ZERO;
-		BigDecimal qss=p.getInternalCounters().getQss()!=null?p.getInternalCounters().getQss():BigDecimal.ZERO;
-		BigDecimal qrs=p.getInternalCounters().getQrs()!=null?p.getInternalCounters().getQrs():BigDecimal.ZERO;
-		
-		return qs.add(qss).subtract(qrs);
-	}
-
 
 }
