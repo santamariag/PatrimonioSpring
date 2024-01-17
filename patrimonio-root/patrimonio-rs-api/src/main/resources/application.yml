@@ -16,15 +16,10 @@ spring:
   config:
     activate:
       on-profile: dev 
-  #mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER 
   data:
     mongodb:
       uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
       auto-index-creation: true
-
-#spring.main.allow-circular-references: true 
-
-
 
 logging:
   level:

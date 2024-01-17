@@ -1,8 +1,6 @@
 package it.poste.patrimonio.db.model;
 
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -40,6 +38,4 @@ public class Gpm {
 	
 	private Patrimonio patrimonio;
 	
-	private List<Event> events;
-
 }

@@ -14,12 +14,10 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
-import it.poste.patrimonio.db.model.Event;
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.model.Patrimonio;
 import it.poste.patrimonio.db.model.PeseX;
 import it.poste.patrimonio.db.model.Position;
-import it.poste.patrimonio.itf.model.EventDTO;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import it.poste.patrimonio.itf.model.PatrimonioDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;
@@ -80,12 +78,7 @@ public interface GpmMapper {
 	Gpm apiToModel(GpmDTO gpm);
 	
 	PatrimonioDTO map(Patrimonio value);
-	
-	EventDTO map(Event value);
-	
-	Patrimonio map(PatrimonioDTO value);
-	
-	Event map(EventDTO value);
-	
+		
+	Patrimonio map(PatrimonioDTO value);	
 
 }

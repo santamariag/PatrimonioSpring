@@ -1,8 +1,6 @@
 package it.poste.patrimonio.itf.model;
 
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 
@@ -33,6 +31,4 @@ public class FoeDTO {
 	private PatrimonioOldDTO patrimonioOld;
 	private PatrimonioDTO patrimonio;
 	
-	private List<EventDTO> events;
-
 }

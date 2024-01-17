@@ -216,8 +216,9 @@ public class DettaglioPatrimonioController implements DefaultApi{
 							.codiceErrore("TODO")
 							.descrizioneErrore("TODO"))); //TODO
 
-		}
-		output.setEsito(new EsitoTypeTypeNs2().esito("OK").dettaglioErrore(new ArrayList<>()));
+		} else
+			output.setEsito(new EsitoTypeTypeNs2().esito("OK").dettaglioErrore(new ArrayList<>()));
+		
 		return ResponseEntity.ok(output);
 	}
 
