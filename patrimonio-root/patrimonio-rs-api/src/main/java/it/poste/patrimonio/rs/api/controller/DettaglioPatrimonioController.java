@@ -255,7 +255,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		
 	}
 	
-	public boolean stringtoBoolean(String flag) {
+	private boolean stringtoBoolean(String flag) {
 		if(flag!=null && !flag.isBlank()&& 
 				(flag.equals("S") || flag.equals("Y")) ) {
 		return true;	
