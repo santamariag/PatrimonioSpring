@@ -60,6 +60,7 @@ public class OrchestratorService implements IOrchestratorService {
 	@Override
 	public PatrimonioClienteOutputElementNs1 retrievePatrimonioCliente(
 			DettaglioPatrimonioInput dettaglioPatrimonioInput) {
+		
 		PatrimonioClienteOutputElementNs1 output = null;
 		if (stringToBoolean(dettaglioPatrimonioInput.getPatrimonioClienteInput().getFlagGPM())) {
 			output = gpmService.findByNdgs(dettaglioPatrimonioInput.getPatrimonioClienteInput().getNdgList().getNdg());

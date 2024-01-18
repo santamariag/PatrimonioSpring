@@ -24,23 +24,25 @@ public class Detail {
 	private String trap; //tipo rapporto (GPM/FOE) su base ist (1/5)
 	private String strp;
 	private String xint; //descrizione cliente customerDescr
-	private String dtaper;
+	private LocalDate dtaper;
 	private String xblc;
 	private String cage; //deposit/agency
 	private String xstt;
 	private String tprm;
-	private String ddec; //data corrente
-	private String dsca;
+	private LocalDate ddec; //data corrente
+	private LocalDate dsca;
 	private String isin;
 	@Field(targetType = FieldType.DECIMAL128) 
 	private BigDecimal qqta; //Quantità patrimonio
-	private String dreg;
+	private LocalDate dreg;
 	@Field(targetType = FieldType.DECIMAL128) 
 	private BigDecimal iprzat; //Prezzo
-	private String icamat;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal icamat;
 	@Field(targetType = FieldType.DECIMAL128) 
 	private BigDecimal ivalbas;  //Controvalore patrimonio
-	private String qqtavin;
+	@Field(targetType = FieldType.DECIMAL128) 
+	private BigDecimal qqtavin;
 	private String cdivemi; //Divisa
 	private String cdivtrz;
 	private String fpac; //Presenza PAC (S se cpac>0/N altrimenti)

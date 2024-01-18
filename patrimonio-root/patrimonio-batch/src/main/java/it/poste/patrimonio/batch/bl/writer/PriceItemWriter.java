@@ -2,10 +2,10 @@ package it.poste.patrimonio.batch.bl.writer;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 
 import it.poste.patrimonio.db.model.Gpm;
@@ -29,13 +29,13 @@ public class PriceItemWriter implements ItemWriter<Price>{
 
     @Override
     //@Transactional
-    public void write(List<? extends Price> priceList) throws Exception {
+    public void write(Chunk<? extends Price> priceList) throws Exception {
     	
     	
         log.info("Saving {} prices objects", priceList.size());
         priceRepository.saveAll(priceList);
         
-        Map<String, BigDecimal> pricemap=priceList.stream().collect(Collectors.toMap(Price::getIsin, Price::getPrice));
+        Map<String, BigDecimal> pricemap=priceList.getItems().stream().collect(Collectors.toMap(Price::getIsin, Price::getPrice));
        
         Iterator<Gpm> it=gpmRepository.findByIsinIn(pricemap.keySet()).iterator();
         //List<Gpm> gpmToUpdate=new ArrayList<>();

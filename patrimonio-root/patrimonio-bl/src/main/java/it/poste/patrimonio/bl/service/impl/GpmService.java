@@ -30,6 +30,8 @@ public class GpmService implements IGpmService {
 		
 		List<Gpm> gpms= gpmRepository.findByNdgIn(ndgs);
 		
+		if(gpms.isEmpty())
+			return null;
 		
 		List<Position> allPositions=new ArrayList<>();
 		

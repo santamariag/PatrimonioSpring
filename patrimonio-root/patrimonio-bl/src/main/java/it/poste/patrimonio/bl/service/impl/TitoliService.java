@@ -30,6 +30,8 @@ public class TitoliService implements ITitoliService {
 		
 		List<Titoli> titoli= titoliRepository.findByNdgIn(ndgs);
 		
+		if(titoli.isEmpty())
+			return null;
 		
 		List<Position> allPositions=new ArrayList<>();
 		

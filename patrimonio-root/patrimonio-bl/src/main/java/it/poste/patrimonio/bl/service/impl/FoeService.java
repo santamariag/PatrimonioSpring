@@ -30,6 +30,8 @@ public class FoeService implements IFoeService {
 		
 		List<Foe> foes= foeRepository.findByNdgIn(ndgs);
 		
+		if(foes.isEmpty())
+			return null;
 		
 		List<Position> allPositions=new ArrayList<>();
 		

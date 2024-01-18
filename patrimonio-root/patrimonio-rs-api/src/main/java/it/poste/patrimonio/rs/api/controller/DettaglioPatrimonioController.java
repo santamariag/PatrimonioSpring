@@ -3,7 +3,6 @@ package it.poste.patrimonio.rs.api.controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +32,7 @@ public class DettaglioPatrimonioController implements DefaultApi{
 
 	@Override
 	public ResponseEntity<PatrimonioClienteOutputElementNs1> dettaglioPatrimonioPost(
-			@Valid DettaglioPatrimonioInput dettaglioPatrimonioInput, Optional<String> source,
+			DettaglioPatrimonioInput dettaglioPatrimonioInput, Optional<String> source,
 			Optional<String> requestID, Optional<String> routingRole, Optional<String> creationTime) {
 		
 		log.info("SOURCE "+source);

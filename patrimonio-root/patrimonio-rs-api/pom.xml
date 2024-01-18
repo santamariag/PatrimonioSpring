@@ -48,6 +48,11 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>patrimonio-rs-specs</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
