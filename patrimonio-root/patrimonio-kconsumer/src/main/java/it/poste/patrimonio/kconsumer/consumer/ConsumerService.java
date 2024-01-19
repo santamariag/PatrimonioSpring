@@ -20,7 +20,7 @@ public class ConsumerService {
 		this.gpmService= gpmService;
 	}
 
-	@KafkaListener(topics = "${kafka.topicName}", containerFactory = "kafkaListenerContainerFactory")
+	//@KafkaListener(topics = "${kafka.topicName}", containerFactory = "kafkaListenerContainerFactory")
 	@Transactional("transactionManager")
 	public void consume(ConsumerRecord<String, Object> cr) {
 
@@ -37,6 +37,14 @@ public class ConsumerService {
 
 			log.error("----- Message UNKNOWN!!!: {}", cr.toString());
 		}
+
+	}
+	
+	@KafkaListener(topics = "${kafka.topicName}", containerFactory = "kafkaListenerContainerFactoryTest", properties = {"auto.offset.reset = earliest"})
+	@Transactional("transactionManager")
+	public void consumeTest(ConsumerRecord<String, String> cr) {
+
+		log.info("----- Received message: {}", cr.toString());
 
 	}
 }

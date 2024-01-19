@@ -33,10 +33,10 @@ spring:
       uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
       dbName: Poste
 kafka:
-  bootstrapAddress: localhost:9092 #set this to your kafka bootstrap server
-  groupId: gpm
+  bootstrapAddress: kafka2.coll.testposte:9092 #set this to your kafka bootstrap server
+  groupId: test4
   jaas: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='; # Set this if you are using authentication
-  topicName: kafka-mongo-integration
+  topicName: idrkafka.titoordr.sourcedb.fiaf0001.dfina0c.a2tordr-json
   consumer:
     backOff:
       interval: 500
