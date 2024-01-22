@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import eu.tasgroup.redis.model.Student;
 
 @Repository
-public interface StudentRepository  extends CrudRepository<Student, String>{
+public interface StudentRepository  extends CrudRepository<Student, String>, CustomStudentRepository{
 
 }

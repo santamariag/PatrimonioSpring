@@ -25,7 +25,7 @@ public class StudentService {
 	public void saveStudent(Student student) {
 		
 		student.setTimeToLive(ttl);
-		repository.save(student);
+		repository.saveStudent(student);
 	}
 	
 	public Optional<Student> getStudent(String id){
