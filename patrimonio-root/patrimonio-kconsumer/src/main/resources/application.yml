@@ -2,7 +2,7 @@ spring:
   application:
     name: PatrimonioKConsumer 
   profiles:
-    active: dev
+    active: poste
   kafka:
     producer:
       transaction-id-prefix: tx-
@@ -33,14 +33,15 @@ spring:
       uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
       dbName: Poste
 kafka:
-  bootstrapAddress: kafka2.coll.testposte:9092 #set this to your kafka bootstrap server
-  groupId: test4
+  bootstrapAddress: localhost:9092 #set this to your kafka bootstrap server
+  groupId: test
   jaas: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='; # Set this if you are using authentication
-  topicName: idrkafka.titoordr.sourcedb.fiaf0001.dfina0c.a2tordr-json
+  topicName: kafka-mongo-integration
   consumer:
     backOff:
       interval: 500
       maxAttempts: 2
+    concurrency: 5
   
 logging:
   level:
@@ -49,3 +50,33 @@ logging:
         data: debug
         kafka:
           transaction: trace
+          
+---
+
+spring:
+  config:
+    activate:
+      on-profile: poste 
+  data:
+    mongodb:
+      uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      dbName: Poste
+kafka:
+  bootstrapAddress: kafka2.coll.testposte:9092 #set this to your kafka bootstrap server
+  groupId: test4
+  jaas: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='; # Set this if you are using authentication
+  topicName: idrkafka.titoordr.sourcedb.fiaf0001.dfina0c.a2tordr-json
+  consumer:
+    backOff:
+      interval: 500
+      maxAttempts: 2
+    concurrency: 5
+  
+logging:
+  level:
+    org:
+      springframework:
+        data: debug
+        kafka:
+          transaction: trace
+

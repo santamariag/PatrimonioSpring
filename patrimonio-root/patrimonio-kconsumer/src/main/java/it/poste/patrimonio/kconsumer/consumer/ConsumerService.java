@@ -2,6 +2,7 @@ package it.poste.patrimonio.kconsumer.consumer;
 
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Profile("dev")
 public class ConsumerService {
 
 	private final IGpmService gpmService;
@@ -20,7 +22,7 @@ public class ConsumerService {
 		this.gpmService= gpmService;
 	}
 
-	//@KafkaListener(topics = "${kafka.topicName}", containerFactory = "kafkaListenerContainerFactory")
+	@KafkaListener(topics = "${kafka.topicName}", containerFactory = "kafkaListenerContainerFactory")
 	@Transactional("transactionManager")
 	public void consume(ConsumerRecord<String, Object> cr) {
 
@@ -39,12 +41,5 @@ public class ConsumerService {
 		}
 
 	}
-	
-	@KafkaListener(topics = "${kafka.topicName}", containerFactory = "kafkaListenerContainerFactoryTest", properties = {"auto.offset.reset = earliest"})
-	@Transactional("transactionManager")
-	public void consumeTest(ConsumerRecord<String, String> cr) {
 
-		log.info("----- Received message: {}", cr.toString());
-
-	}
 }

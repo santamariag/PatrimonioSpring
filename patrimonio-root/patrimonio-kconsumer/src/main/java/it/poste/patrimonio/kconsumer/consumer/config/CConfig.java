@@ -9,6 +9,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
@@ -35,6 +36,7 @@ public class CConfig<TKey, TEvent> {
 	private KafkaConfig conf;
 
     @Bean
+    @Profile("dev")
     ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, conf.getBootstrapAddress());
@@ -55,6 +57,7 @@ public class CConfig<TKey, TEvent> {
     }
     
     @Bean
+    @Profile("poste")
     ConsumerFactory<String, String> consumerFactoryTest() {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, conf.getBootstrapAddress());
@@ -73,6 +76,7 @@ public class CConfig<TKey, TEvent> {
     }
 
     @Bean
+    @Profile("dev")
     ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(KafkaTemplate<TKey, TEvent> kafkaTemplate) {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
@@ -85,6 +89,7 @@ public class CConfig<TKey, TEvent> {
     }
     
     @Bean
+    @Profile("poste")
     ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactoryTest(KafkaTemplate<TKey, TEvent> kafkaTemplate) {
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();

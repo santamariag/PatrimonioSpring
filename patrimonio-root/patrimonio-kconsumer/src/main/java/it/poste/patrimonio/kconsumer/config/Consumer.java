@@ -6,5 +6,6 @@ import lombok.Data;
 public class Consumer {
 	
 	private BackOff backOff;
+	private int concurrency;
 
 }
