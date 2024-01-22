@@ -24,8 +24,11 @@ import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.util.backoff.FixedBackOff;
 
-
+import it.poste.patrimonio.itf.model.KeyDTO;
+import it.poste.patrimonio.itf.model.ValueDTO;
 import it.poste.patrimonio.kconsumer.config.KafkaConfig;
+import it.poste.patrimonio.kconsumer.deserializer.CustomDeserializerKeyDTO;
+import it.poste.patrimonio.kconsumer.deserializer.CustomDeserializerValueDTO;
 
 
 @EnableKafka
@@ -58,7 +61,7 @@ public class CConfig<TKey, TEvent> {
     
     @Bean
     @Profile("poste")
-    ConsumerFactory<String, String> consumerFactoryTest() {
+    ConsumerFactory<KeyDTO, ValueDTO> consumerFactoryTest() {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, conf.getBootstrapAddress());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, conf.getGroupId());
@@ -67,12 +70,17 @@ public class CConfig<TKey, TEvent> {
 
        /* properties.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 1000);
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);*/
-        
+        CustomDeserializerKeyDTO keyDeserializer = new CustomDeserializerKeyDTO();
+        CustomDeserializerValueDTO valueDeserializer = new CustomDeserializerValueDTO();
+       /*JsonDeserializer<KeyDTO> keyDeserializer = new JsonDeserializer<>();
+        keyDeserializer.addTrustedPackages("*");
+        JsonDeserializer<ValueDTO> valueDeserializer = new JsonDeserializer<>();
+        valueDeserializer.addTrustedPackages("*");*/
         //Set these if using SASL authentication or Confluent Cloud
         /*properties.put("security.protocol", "SASL_SSL");
     properties.put("sasl.mechanism", "PLAIN");
     properties.put("sasl.jaas.config", jaas);*/
-        return new DefaultKafkaConsumerFactory<String, String>(properties, new StringDeserializer(), new StringDeserializer());
+        return new DefaultKafkaConsumerFactory<>(properties, keyDeserializer, valueDeserializer);
     }
 
     @Bean
@@ -90,8 +98,8 @@ public class CConfig<TKey, TEvent> {
     
     @Bean
     @Profile("poste")
-    ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactoryTest(KafkaTemplate<TKey, TEvent> kafkaTemplate) {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+    ConcurrentKafkaListenerContainerFactory<KeyDTO, ValueDTO> kafkaListenerContainerFactoryTest(KafkaTemplate<TKey, TEvent> kafkaTemplate) {
+        ConcurrentKafkaListenerContainerFactory<KeyDTO, ValueDTO> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactoryTest());
         factory.setCommonErrorHandler(errorHandler(kafkaTemplate));
