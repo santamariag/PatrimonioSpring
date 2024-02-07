@@ -66,4 +66,19 @@ public class PositionUtil {
 		}
 	}
 
+	public void deleteData(String institute, CommonData data) {
+
+		switch (institute) {
+			case Constants.GPM_INST: {
+				gpmRepository.delete((Gpm) data);
+				break;
+			}
+			case Constants.FOE_INST: {
+				foeRepository.delete((Foe) data);
+				break;
+			}
+		}
+	}
+
+
 }
