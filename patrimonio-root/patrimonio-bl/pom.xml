@@ -45,7 +45,12 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>patrimonio-interface</artifactId>
-		</dependency>  
+		</dependency> 
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>patrimonio-event</artifactId>
+		</dependency> 
 		
 		<dependency>
     		<groupId>org.mapstruct</groupId>

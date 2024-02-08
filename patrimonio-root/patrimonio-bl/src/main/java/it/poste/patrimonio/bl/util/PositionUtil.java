@@ -9,6 +9,8 @@ import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.db.repository.IGpmRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.poste.patrimonio.db.model.Position;
@@ -16,7 +18,9 @@ import it.poste.patrimonio.db.model.Position;
 @Component
 public class PositionUtil {
 
+	@Autowired
 	IFoeRepository foeRepository;
+	@Autowired
 	IGpmRepository gpmRepository;
 	
 	public BigDecimal calculateCtv(Position p) {

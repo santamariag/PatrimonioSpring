@@ -1,11 +1,12 @@
 package it.poste.patrimonio.db.model;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import lombok.Data;
 
@@ -17,9 +18,26 @@ import lombok.Data;
 public class CommonData {
 	
 	@Id
+	private ObjectId id;
+	
+	@Indexed
 	private String ndg;
+	
 	@Version
 	private Long version;
+	
+	/**
+	 * flag per indicare se lo stato del documento è completo
+	 * da aggiungere in un indice assieme all'ndg per la ricerca da parte dell'API
+	 */
+	private boolean complete; 
+	
+	/**
+	 * da popolare coerentemente con gli eventi di blocco/Sblocco (da capire se esiste) anagrafica
+	 * il documento nasce con valore ATTIVO
+	 * da aggiungere eventualmente all'indice composto insieme a ndg e complete
+	 */
+	private Status status; //BLOCCATO-ATTIVO
 	
 	private String fiscalCode;
 	

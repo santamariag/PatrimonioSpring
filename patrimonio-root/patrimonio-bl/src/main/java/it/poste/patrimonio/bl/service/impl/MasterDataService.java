@@ -1,21 +1,19 @@
 package it.poste.patrimonio.bl.service.impl;
-import it.poste.patrimonio.bl.service.IFoeService;
-import it.poste.patrimonio.bl.service.IGpmService;
-import it.poste.patrimonio.bl.service.IMasterDataService;
-import it.poste.patrimonio.bl.util.PositionUtil;
-import it.poste.patrimonio.db.model.*;
-import it.poste.patrimonio.event.business.model.MasterDataCreation;
-import it.poste.patrimonio.event.business.model.MasterDataDelete;
-import it.poste.patrimonio.event.business.model.MasterDataLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
+import it.poste.patrimonio.bl.service.IMasterDataService;
+import it.poste.patrimonio.bl.util.PositionUtil;
+import it.poste.patrimonio.db.model.CommonData;
+import it.poste.patrimonio.db.model.Position;
+import it.poste.patrimonio.event.business.model.MasterDataCreation;
+import it.poste.patrimonio.event.business.model.MasterDataDelete;
+import it.poste.patrimonio.event.business.model.MasterDataLock;
 
 @Service
 public class MasterDataService implements IMasterDataService {
 
+	@Autowired
 	PositionUtil util;
 
 	public void masterDataCreation(MasterDataCreation dto){
@@ -31,12 +29,21 @@ public class MasterDataService implements IMasterDataService {
 		//data.setVersion();
 		//data.setExternalKeys();
 
+		/**
+		 * Direi che questo non va bene e non serve
+		 * quando si crea il cliente non si crea alcuna posizione
+		 * Quando arrivarà l 'evento che crea una posizione si creerà la posizione aggiungendola 
+		 * alla lista e i dati necessari che stanno anche nel contenitore vengono copiati nella posizione
+		 */
 		data.getPatrimonioOld().getPosizioni().forEach(p->{
 				p.getDetail().setCage(dto.getAgency());
 				p.getDetail().setNdg(dto.getNdg());
 			p.getDetail().setCsdp(dto.getIndex()); //csdp==rubrica?
 			p.getDetail().setXint(dto.getClientDesc());
-			p.getDetail().setXstt(dto.getStatus()); //stato attivo/bloccato?
+			/**
+			 * Da excel non mi risulta questosto campo per Gpm/Foe quindi non va popolato
+			 */
+			//p.getDetail().setXstt(dto.getStatus()); //stato attivo/bloccato?
 			p.getDetail().setTrap(dto.getInstitute());
 			});
 
