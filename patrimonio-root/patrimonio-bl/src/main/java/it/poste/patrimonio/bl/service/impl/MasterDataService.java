@@ -1,11 +1,10 @@
 package it.poste.patrimonio.bl.service.impl;
+import it.poste.patrimonio.db.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import it.poste.patrimonio.bl.service.IMasterDataService;
 import it.poste.patrimonio.bl.util.PositionUtil;
 import it.poste.patrimonio.db.model.CommonData;
-import it.poste.patrimonio.db.model.Position;
 import it.poste.patrimonio.event.business.model.MasterDataCreation;
 import it.poste.patrimonio.event.business.model.MasterDataDelete;
 import it.poste.patrimonio.event.business.model.MasterDataLock;
@@ -25,28 +24,10 @@ public class MasterDataService implements IMasterDataService {
 		data.setFiscalCode(dto.getTaxIdCode());
 		data.setInternalCustomerCode(dto.getClientIntCode());
 		data.setRapporto(dto.getDoss());
+		data.setStatus(Status.ACTIVE);
 		//data.setCustomerDescr();
 		//data.setVersion();
 		//data.setExternalKeys();
-
-		/**
-		 * Direi che questo non va bene e non serve
-		 * quando si crea il cliente non si crea alcuna posizione
-		 * Quando arrivarà l 'evento che crea una posizione si creerà la posizione aggiungendola 
-		 * alla lista e i dati necessari che stanno anche nel contenitore vengono copiati nella posizione
-		 */
-		data.getPatrimonioOld().getPosizioni().forEach(p->{
-				p.getDetail().setCage(dto.getAgency());
-				p.getDetail().setNdg(dto.getNdg());
-			p.getDetail().setCsdp(dto.getIndex()); //csdp==rubrica?
-			p.getDetail().setXint(dto.getClientDesc());
-			/**
-			 * Da excel non mi risulta questosto campo per Gpm/Foe quindi non va popolato
-			 */
-			//p.getDetail().setXstt(dto.getStatus()); //stato attivo/bloccato?
-			p.getDetail().setTrap(dto.getInstitute());
-			});
-
 		util.saveData(dto.getInstitute(), data);
 	}
 	public void masterDataDelete(MasterDataDelete dto){
@@ -56,9 +37,7 @@ public class MasterDataService implements IMasterDataService {
 
 	public void masterDataLock(MasterDataLock dto){
 		CommonData data = util.findDataByNdg(dto.getInstitute(), dto.getNdg());
-		for (Position pos : data.getPatrimonioOld().getPosizioni()){
-			pos.getDetail().setXstt("Blocked");
-		}
+		data.setStatus(Status.BLOCKED);
 		util.saveData(dto.getInstitute(), data);
 	}
 }
