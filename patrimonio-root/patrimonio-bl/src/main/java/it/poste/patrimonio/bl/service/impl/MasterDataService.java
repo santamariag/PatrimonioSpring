@@ -1,5 +1,5 @@
 package it.poste.patrimonio.bl.service.impl;
-import it.poste.patrimonio.db.model.Status;
+import it.poste.patrimonio.db.constants.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import it.poste.patrimonio.bl.service.IMasterDataService;

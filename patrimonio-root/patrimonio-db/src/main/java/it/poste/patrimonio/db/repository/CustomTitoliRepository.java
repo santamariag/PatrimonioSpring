@@ -1,6 +1,6 @@
 package it.poste.patrimonio.db.repository;
 
-import it.poste.patrimonio.db.model.titoli.Titoli;
+import it.poste.patrimonio.db.model.Titoli;
 
 public interface CustomTitoliRepository {
 	

@@ -13,8 +13,8 @@ import org.springframework.data.domain.Sort.Direction;
 
 import com.google.common.collect.Range;
 
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
-import it.poste.patrimonio.db.model.Position;
+import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.common.Position;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 import lombok.extern.slf4j.Slf4j;
 

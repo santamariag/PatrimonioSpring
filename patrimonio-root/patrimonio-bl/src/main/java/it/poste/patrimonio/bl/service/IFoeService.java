@@ -2,7 +2,7 @@ package it.poste.patrimonio.bl.service;
 
 import java.util.List;
 
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
+import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.itf.model.FoeDTO;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 

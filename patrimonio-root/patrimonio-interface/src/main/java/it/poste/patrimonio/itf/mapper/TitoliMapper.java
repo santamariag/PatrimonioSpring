@@ -14,10 +14,10 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
-import it.poste.patrimonio.db.model.Patrimonio;
-import it.poste.patrimonio.db.model.PeseX;
-import it.poste.patrimonio.db.model.Position;
-import it.poste.patrimonio.db.model.titoli.Titoli;
+import it.poste.patrimonio.db.model.common.Patrimonio;
+import it.poste.patrimonio.db.model.common.PeseX;
+import it.poste.patrimonio.db.model.common.Position;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.itf.model.PatrimonioDTO;
 import it.poste.patrimonio.itf.model.TitoliDTO;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioTypeTypeNs2;

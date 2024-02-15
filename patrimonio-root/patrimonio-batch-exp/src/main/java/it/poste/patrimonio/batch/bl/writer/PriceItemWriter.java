@@ -28,7 +28,7 @@ import com.google.common.collect.Range;
 import it.poste.patrimonio.batch.bl.config.WorkerConfig;
 import it.poste.patrimonio.batch.bl.parallel.Result;
 import it.poste.patrimonio.batch.bl.parallel.UpdateGpmPrice;
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
+import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.model.Price;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 import it.poste.patrimonio.db.repository.IPriceRepository;

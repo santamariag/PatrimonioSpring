@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.poste.patrimonio.bl.service.IFoeService;
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
-import it.poste.patrimonio.db.model.Position;
+import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.common.Position;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.mapper.FoeMapper;
 import it.poste.patrimonio.itf.model.FoeDTO;

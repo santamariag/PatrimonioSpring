@@ -3,7 +3,7 @@ package it.poste.patrimonio.db.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
+import it.poste.patrimonio.db.model.Gpm;
 
 public interface CustomGpmRepository {
 	

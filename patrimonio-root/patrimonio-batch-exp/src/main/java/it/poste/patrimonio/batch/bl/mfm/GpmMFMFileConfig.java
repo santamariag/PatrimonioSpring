@@ -31,7 +31,7 @@ import org.springframework.data.mongodb.MongoTransactionManager;
 import it.poste.patrimonio.batch.bl.config.JobNameConfig;
 import it.poste.patrimonio.batch.bl.config.WorkerConfig;
 import it.poste.patrimonio.batch.bl.util.BatchConstants;
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
+import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.itf.model.MFMBalanceDTO;
 
 

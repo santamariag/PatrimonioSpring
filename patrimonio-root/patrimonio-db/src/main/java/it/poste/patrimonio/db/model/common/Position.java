@@ -1,4 +1,4 @@
-package it.poste.patrimonio.db.model;
+package it.poste.patrimonio.db.model.common;
 
 import lombok.Data;
 

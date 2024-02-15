@@ -2,7 +2,7 @@ package it.poste.patrimonio.bl.service;
 
 import java.util.List;
 
-import it.poste.patrimonio.db.model.titoli.Titoli;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.itf.model.TitoliDTO;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 

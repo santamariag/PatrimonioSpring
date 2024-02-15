@@ -1,7 +1,8 @@
 package it.poste.patrimonio.db.model.gpmfoe;
 
 
-import it.poste.patrimonio.db.model.*;
+import it.poste.patrimonio.db.constants.Status;
+import it.poste.patrimonio.db.model.common.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;

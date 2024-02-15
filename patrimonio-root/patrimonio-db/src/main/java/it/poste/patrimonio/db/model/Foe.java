@@ -1,6 +1,7 @@
-package it.poste.patrimonio.db.model.gpmfoe;
+package it.poste.patrimonio.db.model;
 
 
+import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;

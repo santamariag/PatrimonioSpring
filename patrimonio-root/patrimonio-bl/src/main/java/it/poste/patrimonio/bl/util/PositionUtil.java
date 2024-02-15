@@ -5,15 +5,15 @@ import java.util.Collections;
 
 import it.poste.patrimonio.bl.exception.PatrimonioNotFoundException;
 import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
+import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.poste.patrimonio.db.model.Position;
+import it.poste.patrimonio.db.model.common.Position;
 
 @Component
 public class PositionUtil {

@@ -1,6 +1,6 @@
 package it.poste.patrimonio.batch.bl.writer;
 
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
+import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;

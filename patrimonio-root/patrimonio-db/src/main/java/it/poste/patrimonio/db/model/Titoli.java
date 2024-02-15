@@ -1,10 +1,10 @@
-package it.poste.patrimonio.db.model.titoli;
+package it.poste.patrimonio.db.model;
 
 
-import it.poste.patrimonio.db.model.Deposit;
-import it.poste.patrimonio.db.model.ExternalKeys;
-import it.poste.patrimonio.db.model.Patrimonio;
-import it.poste.patrimonio.db.model.PatrimonioOld;
+import it.poste.patrimonio.db.model.common.Deposit;
+import it.poste.patrimonio.db.model.common.ExternalKeys;
+import it.poste.patrimonio.db.model.common.Patrimonio;
+import it.poste.patrimonio.db.model.common.PatrimonioOld;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;

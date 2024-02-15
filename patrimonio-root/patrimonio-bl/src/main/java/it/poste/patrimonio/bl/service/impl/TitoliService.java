@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.poste.patrimonio.bl.service.ITitoliService;
-import it.poste.patrimonio.db.model.Position;
-import it.poste.patrimonio.db.model.titoli.Titoli;
+import it.poste.patrimonio.db.model.common.Position;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.db.repository.ITitoliRepository;
 import it.poste.patrimonio.itf.mapper.TitoliMapper;
 import it.poste.patrimonio.itf.model.TitoliDTO;

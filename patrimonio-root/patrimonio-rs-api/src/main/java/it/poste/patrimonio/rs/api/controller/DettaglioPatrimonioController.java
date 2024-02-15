@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.poste.patrimonio.bl.service.IOrchestratorService;
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
-import it.poste.patrimonio.db.model.titoli.Titoli;
+import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.rs.specs.api.DefaultApi;
 import it.poste.patrimonio.rs.specs.model.DettaglioErroreTypeTypeNs2;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioInput;

@@ -3,7 +3,7 @@ package it.poste.patrimonio.batch.bl.afb;
 import it.poste.patrimonio.batch.bl.config.JobNameConfig;
 import it.poste.patrimonio.batch.bl.config.WorkerConfig;
 import it.poste.patrimonio.batch.bl.util.BatchConstants;
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
+import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.itf.model.AFBBalanceDTO;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;

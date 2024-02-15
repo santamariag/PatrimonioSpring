@@ -4,8 +4,8 @@ package it.poste.patrimonio.itf.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 
-import it.poste.patrimonio.db.model.Deposit;
-import it.poste.patrimonio.db.model.ExternalKeys;
+import it.poste.patrimonio.db.model.common.Deposit;
+import it.poste.patrimonio.db.model.common.ExternalKeys;
 import lombok.Data;
 
 @Data

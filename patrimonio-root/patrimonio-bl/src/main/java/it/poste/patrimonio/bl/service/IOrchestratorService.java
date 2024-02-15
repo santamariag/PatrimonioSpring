@@ -1,8 +1,8 @@
 package it.poste.patrimonio.bl.service;
 
-import it.poste.patrimonio.db.model.gpmfoe.Foe;
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
-import it.poste.patrimonio.db.model.titoli.Titoli;
+import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.Titoli;
 import it.poste.patrimonio.rs.specs.model.DettaglioPatrimonioInput;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.poste.patrimonio.bl.service.IGpmService;
-import it.poste.patrimonio.db.model.gpmfoe.Gpm;
-import it.poste.patrimonio.db.model.Position;
+import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.common.Position;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 import it.poste.patrimonio.itf.mapper.GpmMapper;
 import it.poste.patrimonio.itf.model.GpmDTO;
