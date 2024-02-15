@@ -3,7 +3,7 @@ package it.poste.patrimonio.db.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.gpmfoe.Foe;
 import it.poste.patrimonio.db.repository.CustomFoeRepository;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;

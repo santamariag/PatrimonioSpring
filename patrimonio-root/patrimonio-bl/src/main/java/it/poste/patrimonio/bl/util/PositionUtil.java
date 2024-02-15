@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.Collections;
 
 import it.poste.patrimonio.bl.exception.PatrimonioNotFoundException;
-import it.poste.patrimonio.db.model.CommonData;
-import it.poste.patrimonio.db.model.Foe;
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
+import it.poste.patrimonio.db.model.gpmfoe.Foe;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 
@@ -42,11 +42,11 @@ public class PositionUtil {
 		return qs.add(qss).subtract(qrs);
 	}
 
-	public CommonData findDataByClient(String institute, String client){
+	public CommonDocument findDataByClient(String institute, String client){
 		return null; //TODO
 	}
 
-	public CommonData findDataByNdg(String institute, String ndg) {
+	public CommonDocument findDataByNdg(String institute, String ndg) {
 		return switch (institute) {
 			//TODO controlli
 			case Constants.GPM_INST -> gpmRepository.findByNdgIn(Collections.singletonList(ndg)).get(0);
@@ -56,7 +56,7 @@ public class PositionUtil {
 
 	}
 
-	public void saveData(String institute, CommonData data) {
+	public void saveData(String institute, CommonDocument data) {
 
 		switch (institute) {
 			case Constants.GPM_INST: {
@@ -70,7 +70,7 @@ public class PositionUtil {
 		}
 	}
 
-	public void deleteData(String institute, CommonData data) {
+	public void deleteData(String institute, CommonDocument data) {
 
 		switch (institute) {
 			case Constants.GPM_INST: {

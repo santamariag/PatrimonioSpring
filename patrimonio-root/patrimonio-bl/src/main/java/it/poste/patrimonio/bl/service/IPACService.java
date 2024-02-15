@@ -1,7 +1,7 @@
 package it.poste.patrimonio.bl.service;
 
-import it.poste.patrimonio.event.business.model.PacCreation;
-import it.poste.patrimonio.event.business.model.PacDelete;
+import it.poste.patrimonio.event.business.model.gpmfoe.PacCreation;
+import it.poste.patrimonio.event.business.model.gpmfoe.PacDelete;
 
 public interface IPACService {
 

@@ -14,7 +14,7 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 import it.poste.patrimonio.db.model.Patrimonio;
 import it.poste.patrimonio.db.model.PeseX;
 import it.poste.patrimonio.db.model.Position;

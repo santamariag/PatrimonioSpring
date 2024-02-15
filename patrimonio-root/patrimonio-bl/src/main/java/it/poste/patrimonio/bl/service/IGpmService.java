@@ -3,7 +3,7 @@ package it.poste.patrimonio.bl.service;
 import java.util.List;
 
 
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 import it.poste.patrimonio.itf.model.GpmDTO;
 import it.poste.patrimonio.rs.specs.model.PatrimonioClienteOutputElementNs1;
 

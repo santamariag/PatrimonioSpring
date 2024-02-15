@@ -1,6 +1,7 @@
-package it.poste.patrimonio.db.model;
+package it.poste.patrimonio.db.model.gpmfoe;
 
 
+import it.poste.patrimonio.db.model.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -15,7 +16,7 @@ import lombok.Data;
     @CompoundIndex(name = "idx-ndg_prod_idprod", def = "{'ndg' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}"),
     @CompoundIndex(name = "idx-rapporto_prod_idprod", def = "{'rapporto' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}")
 })
-public class CommonData {
+public class CommonDocument {
 	
 	@Id
 	private ObjectId id;

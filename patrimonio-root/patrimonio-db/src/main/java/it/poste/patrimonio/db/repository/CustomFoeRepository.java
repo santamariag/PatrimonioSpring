@@ -1,6 +1,6 @@
 package it.poste.patrimonio.db.repository;
 
-import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.gpmfoe.Foe;
 
 import java.util.List;
 

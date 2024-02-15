@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import com.mongodb.client.result.UpdateResult;
 
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 import it.poste.patrimonio.db.repository.CustomGpmRepository;
 
 

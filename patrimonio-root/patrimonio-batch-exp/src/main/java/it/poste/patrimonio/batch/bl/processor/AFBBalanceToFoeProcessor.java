@@ -1,7 +1,7 @@
 package it.poste.patrimonio.batch.bl.processor;
 
 import it.poste.patrimonio.bl.util.PositionUtil;
-import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.gpmfoe.Foe;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.model.AFBBalanceDTO;
 import lombok.extern.slf4j.Slf4j;

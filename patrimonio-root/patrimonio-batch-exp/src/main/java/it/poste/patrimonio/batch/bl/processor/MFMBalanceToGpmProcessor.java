@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import it.poste.patrimonio.bl.util.PositionUtil;
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 import it.poste.patrimonio.itf.model.MFMBalanceDTO;
 import lombok.extern.slf4j.Slf4j;

@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import it.poste.patrimonio.bl.service.IMasterDataService;
 import it.poste.patrimonio.bl.util.PositionUtil;
-import it.poste.patrimonio.db.model.CommonData;
-import it.poste.patrimonio.event.business.model.MasterDataCreation;
-import it.poste.patrimonio.event.business.model.MasterDataDelete;
-import it.poste.patrimonio.event.business.model.MasterDataLock;
+import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
+import it.poste.patrimonio.event.business.model.gpmfoe.MasterDataCreation;
+import it.poste.patrimonio.event.business.model.gpmfoe.MasterDataDelete;
+import it.poste.patrimonio.event.business.model.gpmfoe.MasterDataLock;
 
 @Service
 public class MasterDataService implements IMasterDataService {
@@ -16,7 +16,7 @@ public class MasterDataService implements IMasterDataService {
 	PositionUtil util;
 
 	public void masterDataCreation(MasterDataCreation dto){
-		CommonData data = new CommonData();
+		CommonDocument data = new CommonDocument();
 		data.setNdg(dto.getNdg());
 		data.getDeposit().setAgency(dto.getAgency());
 		data.getDeposit().setBranch(dto.getBranch());
@@ -31,12 +31,12 @@ public class MasterDataService implements IMasterDataService {
 		util.saveData(dto.getInstitute(), data);
 	}
 	public void masterDataDelete(MasterDataDelete dto){
-		CommonData data = util.findDataByNdg(dto.getInstitute(), dto.getNdg());
+		CommonDocument data = util.findDataByNdg(dto.getInstitute(), dto.getNdg());
 		util.deleteData(dto.getInstitute(), data);
 	}
 
 	public void masterDataLock(MasterDataLock dto){
-		CommonData data = util.findDataByNdg(dto.getInstitute(), dto.getNdg());
+		CommonDocument data = util.findDataByNdg(dto.getInstitute(), dto.getNdg());
 		data.setStatus(Status.BLOCKED);
 		util.saveData(dto.getInstitute(), data);
 	}

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 import it.poste.patrimonio.db.model.Price;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 import it.poste.patrimonio.db.repository.IPriceRepository;

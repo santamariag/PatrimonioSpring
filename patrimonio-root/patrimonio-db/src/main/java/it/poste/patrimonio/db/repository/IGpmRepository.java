@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.Meta;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.model.gpmfoe.Gpm;
 
 public interface IGpmRepository extends MongoRepository<Gpm, String>, CustomGpmRepository {
 	

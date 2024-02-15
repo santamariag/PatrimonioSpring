@@ -1,4 +1,4 @@
-package it.poste.patrimonio.event.business.model;
+package it.poste.patrimonio.event.business.model.gpmfoe;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FundOrderCreation {
+public class CancellationFromProductCompany {
 	
 	private String ndg;
 	private String clientIntCode; //codice interno cliente

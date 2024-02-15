@@ -4,7 +4,7 @@ package it.poste.patrimonio.db.repository.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import it.poste.patrimonio.db.model.Titoli;
+import it.poste.patrimonio.db.model.titoli.Titoli;
 import it.poste.patrimonio.db.repository.CustomTitoliRepository;
 
 

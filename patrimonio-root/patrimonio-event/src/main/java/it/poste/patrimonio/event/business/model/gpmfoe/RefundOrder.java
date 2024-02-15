@@ -1,4 +1,4 @@
-package it.poste.patrimonio.event.business.model;
+package it.poste.patrimonio.event.business.model.gpmfoe;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
