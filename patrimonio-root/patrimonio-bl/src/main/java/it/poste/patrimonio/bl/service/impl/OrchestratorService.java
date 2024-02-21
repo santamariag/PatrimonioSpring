@@ -215,4 +215,12 @@ public class OrchestratorService implements IOrchestratorService {
 	}
 
 
+	@Override
+	public void update(String id, Gpm gpm) {
+		
+		gpmService.update(id, gpm);
+		
+	}
+
+
 }

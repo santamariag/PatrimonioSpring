@@ -2,6 +2,7 @@ package it.poste.patrimonio.bl.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,22 @@ public class GpmService implements IGpmService {
 	public void add(GpmDTO gpm) {
 		
 		gpmRepository.save(mapper.apiToModel(gpm));	
+	}
+
+	@Override
+	public void update(String id, Gpm gpm) {
+		
+		 Optional<Gpm> gpmOpt=gpmRepository.findById(id);
+		 
+		 if(gpmOpt.isPresent()) {
+			 
+			 Gpm target=gpmOpt.get();
+		
+			 mapper.map(gpm, target);
+			 
+			 gpmRepository.save(target);
+		 }
+		
 	}
 
 }

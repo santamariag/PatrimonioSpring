@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,6 +71,18 @@ public class DettaglioPatrimonioController implements DefaultApi{
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		
 	}
+	
+	@PutMapping(value = "/updateGpm/{id}", consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> updateDettaglioPatrimonioGpm(@PathVariable String id, @RequestBody Gpm gpm) {
+		
+		log.info("REQUEST "+gpm);
+		
+		service.update(id, gpm);
+		
+		return ResponseEntity.status(HttpStatus.OK).build();
+		
+	}
+	
 	
 	@PostMapping(value = "/addFoe")
 	public ResponseEntity<Void> addDettaglioPatrimonioFoe(@RequestBody Foe foe) {
