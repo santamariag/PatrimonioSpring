@@ -1,5 +1,6 @@
-package it.poste.patrimonio.event.business.model.gpmfoe;
+package it.poste.patrimonio.event.business.impl.gpmfoe;
 
+import it.poste.patrimonio.event.business.model.IGpmFoeBusinessEvent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MasterDataDelete {
+public class MasterDataLock implements IGpmFoeBusinessEvent {
 
 	private String ndg;
 	private String branch; //filiale
@@ -21,5 +22,10 @@ public class MasterDataDelete {
 	private String status;
 	private String taxIdCode; //codice fiscale
 	private String institute; //(tipo rapporto 1 GPM, 5 FOE)
+
+	@Override
+	public String getKey() {
+		return getInstitute() + "#" + getNdg();
+	}
 
 }

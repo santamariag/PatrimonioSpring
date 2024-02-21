@@ -1,5 +1,6 @@
-package it.poste.patrimonio.event.business.model.gpmfoe;
+package it.poste.patrimonio.event.business.impl.gpmfoe;
 
+import it.poste.patrimonio.event.business.model.IGpmFoeBusinessEvent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SubscriptionFeedback {
+public class CancellationFromBackOffice implements IGpmFoeBusinessEvent {
 	
 	private String ndg;
 	private String clientIntCode; //codice interno cliente
@@ -17,8 +18,13 @@ public class SubscriptionFeedback {
 	private String productCode;
 	private String productId;
 	private String reason; // causale
-	private String flagMfM;
-	private String status;
 	private String ctvCos;
 	private String nomMov;
+
+
+	@Override
+	public String getKey() {
+		return getInstitute() + "#" + getNdg();
+	}
+
 }

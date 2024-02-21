@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import it.poste.patrimonio.bl.service.IPACService;
 import it.poste.patrimonio.bl.util.Constants;
 import it.poste.patrimonio.bl.util.PositionUtil;
-import it.poste.patrimonio.event.business.model.gpmfoe.PacCreation;
-import it.poste.patrimonio.event.business.model.gpmfoe.PacDelete;
+import it.poste.patrimonio.event.business.impl.gpmfoe.PacCreation;
+import it.poste.patrimonio.event.business.impl.gpmfoe.PacDelete;
 
 @Service
 public class PACService implements IPACService {

@@ -1,6 +1,6 @@
 package it.poste.patrimonio.bl.service;
 
-import it.poste.patrimonio.event.business.model.gpmfoe.*;
+import it.poste.patrimonio.event.business.impl.gpmfoe.*;
 
 public interface IPositionService {
         void insertSubOrder(SubscriptionOrder order);

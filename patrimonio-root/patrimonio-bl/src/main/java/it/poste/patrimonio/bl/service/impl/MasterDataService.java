@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import it.poste.patrimonio.bl.service.IMasterDataService;
 import it.poste.patrimonio.bl.util.PositionUtil;
 import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
-import it.poste.patrimonio.event.business.model.gpmfoe.MasterDataCreation;
-import it.poste.patrimonio.event.business.model.gpmfoe.MasterDataDelete;
-import it.poste.patrimonio.event.business.model.gpmfoe.MasterDataLock;
+import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataCreation;
+import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataDelete;
+import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataLock;
 
 @Service
 public class MasterDataService implements IMasterDataService {

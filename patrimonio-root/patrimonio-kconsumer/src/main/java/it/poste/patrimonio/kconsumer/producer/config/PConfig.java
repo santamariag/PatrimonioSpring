@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
@@ -85,6 +86,7 @@ public class PConfig<TKey, TEvent> {
     }
 
     @Bean
+	@Primary
     KafkaTemplate<TKey, TEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }

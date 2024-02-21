@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>patrimonio-kconsumer</artifactId>
 	<name>patrimonio-kconsumer</name>
-	
+	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,7 +69,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<mainClass>it.poste.patrimonio.kconsumer.PatrimonioKConsumerApplication</mainClass>
+							<addResources>true</addResources>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
+
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

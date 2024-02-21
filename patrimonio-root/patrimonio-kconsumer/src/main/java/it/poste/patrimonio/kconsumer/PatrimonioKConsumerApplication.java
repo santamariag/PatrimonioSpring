@@ -15,7 +15,5 @@ public class PatrimonioKConsumerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PatrimonioKConsumerApplication.class, args);
 	}
-	
-	
 
 }
