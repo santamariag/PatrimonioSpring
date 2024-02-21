@@ -15,8 +15,6 @@ public interface IGpmService {
 	public void add(Gpm gpm);
 	
 	public void add(GpmDTO gpm);
-
-	public void update(String id, Gpm gpm);
 	
 	
 

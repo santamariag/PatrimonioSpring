@@ -79,8 +79,6 @@ public interface GpmMapper {
 	
 	PatrimonioDTO map(Patrimonio value);
 		
-	Patrimonio map(PatrimonioDTO value);
-	
-	void map (Gpm source,@MappingTarget Gpm target);
+	Patrimonio map(PatrimonioDTO value);	
 
 }

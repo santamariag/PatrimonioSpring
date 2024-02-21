@@ -16,6 +16,4 @@ public interface IOrchestratorService {
 
 	public void add(Titoli titoli);
 
-	public void update(String id, Gpm gpm);
-
 }
