@@ -10,6 +10,15 @@ server:
   servlet:
     context-path: /patrimonio
     
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        data: DEBUG
+    root: INFO
+
+    
 ---
 
 spring:
@@ -18,13 +27,32 @@ spring:
       on-profile: dev 
   data:
     mongodb:
-      uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      #uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      #uri: mongodb://usroffpat:fU4On6ra@soffpvdb01v.rete.testposte:27017/offpatrimonio?authSource=offpatrimonio&authMechanism=SCRAM-SHA-256&directConnection=true&retryWrites=true&w=majority
+      host: soffpvdb01v.rete.testposte
+      port: 27017
+      database: offpatrimonio
+      authentication-database: offpatrimonio
+      username: usroffpat
+      password: fU4On6ra
+      #authentication-mechanism: SCRAM-SHA-256
       auto-index-creation: true
+      
+---
 
-logging:
-  level:
-    org:
-      springframework:
-        web: DEBUG
-        data: DEBUG
-    root: INFO
+spring:
+  config:
+    activate:
+      on-profile: coll 
+  data:
+    mongodb:
+      #uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      #uri: mongodb://usroffpat:i8EKJ28X@toffpvdb01v.rete.testposte:27019,toffpvdb02v.rete.testposte:27019,toffpvdb03v.rete.testposte:27019/offpatrimonio?authSource=offpatrimonio&authMechanism=SCRAM-SHA-256&retryWrites=true&w=majority
+      host: toffpvdb01v.rete.testposte,toffpvdb02v.rete.testposte,toffpvdb03v.rete.testposte
+      port: 27019
+      database: offpatrimonio
+      authentication-database: offpatrimonio
+      username: usroffpat
+      password: i8EKJ28X
+      #authentication-mechanism: SCRAM-SHA-256
+      auto-index-creation: true
