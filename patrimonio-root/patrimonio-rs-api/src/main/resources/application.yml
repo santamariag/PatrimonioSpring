@@ -2,7 +2,7 @@ spring:
   application:
     name: PatrimonioRSAPI   
   profiles:
-    active: dev
+    active: local
 
 
 server:
@@ -18,7 +18,17 @@ logging:
         data: DEBUG
     root: INFO
 
-    
+ 
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local 
+  data:
+    mongodb:
+      uri: mongodb://localhost:28017/Poste?retryWrites=true&w=majority # Set this to mongodb connection string
+      
 ---
 
 spring:
