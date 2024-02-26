@@ -19,10 +19,10 @@ public class GpmFoeController {
     @PostMapping("/send")
     public String sendMessage(@RequestParam("message") String message) {
 
-        CancellationForChargeFailure cancellationForChargeFailure = new CancellationForChargeFailure();
-        CancellationFromBackOffice cancellationFromBackOffice = new CancellationFromBackOffice();
-        CancellationFromClient cancellationFromClient = new CancellationFromClient();
-        CancellationFromProductCompany cancellationFromProductCompany = new CancellationFromProductCompany();
+        Cancellation cancellationForChargeFailure = new Cancellation();
+        Cancellation cancellationFromBackOffice = new Cancellation();
+        Cancellation cancellationFromClient = new Cancellation();
+        Cancellation cancellationFromProductCompany = new Cancellation();
         FundOrderCreation fundOrderCreation = new FundOrderCreation();
         MasterDataCreation masterDataCreation = new MasterDataCreation();
         MasterDataDelete masterDataDelete = new MasterDataDelete();

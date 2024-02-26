@@ -50,6 +50,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>patrimonio-event</artifactId>
+			<version>${revision}</version>
 		</dependency> 
 		
 		<dependency>

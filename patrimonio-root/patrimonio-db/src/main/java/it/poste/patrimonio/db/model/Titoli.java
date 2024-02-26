@@ -1,39 +1,8 @@
 package it.poste.patrimonio.db.model;
 
-
-import it.poste.patrimonio.db.model.common.Deposit;
-import it.poste.patrimonio.db.model.common.ExternalKeys;
-import it.poste.patrimonio.db.model.common.Patrimonio;
-import it.poste.patrimonio.db.model.common.PatrimonioOld;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-
 @Document(collection = "secs")
-@Data
-public class Titoli {
-	
-	@Id
-	private String ndg;
-	@Version
-	private Long version;
-	
-	private String fiscalCode;
-	
-	private String rapporto; //concatenazione di filiale agenzia numero e rubrica (vedi Deposit)
+public class Titoli extends CommonDocument{
 
-	private Deposit deposit;
-	
-	private String internalCustomerCode;
-	
-	private String customerDescr;
-	
-	private ExternalKeys externalKeys; // TODO forse non servono
-	
-	private PatrimonioOld patrimonioOld;
-	
-	private Patrimonio patrimonio;
-	
 }

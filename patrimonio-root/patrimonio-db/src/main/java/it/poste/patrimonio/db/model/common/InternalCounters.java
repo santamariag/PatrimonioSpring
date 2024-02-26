@@ -12,18 +12,18 @@ public class InternalCounters {
 	
 	private Long cpac; //Contatore PAC stato(presenza pac- 0,1=+1 in insert; 2,3=-1 in update)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal cs;  //Controvalore SGR(CS)
+	private BigDecimal cs = BigDecimal.ZERO;  //Controvalore SGR(CS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qs;  //Quantità SGR(QS)
+	private BigDecimal qs = BigDecimal.ZERO;  //Quantità SGR(QS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qtaint;  //Quantità interna
+	private BigDecimal qtaint = BigDecimal.ZERO;  //Quantità interna
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal css;  //Controvalore sottoscrizioni sospese(CSS)
+	private BigDecimal css = BigDecimal.ZERO;  //Controvalore sottoscrizioni sospese(CSS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qss; //Quantità sottoscrizioni sospese(QSS)
+	private BigDecimal qss = BigDecimal.ZERO; //Quantità sottoscrizioni sospese(QSS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal crs;  //Controvalore rimborsi sospesi(CRS)
+	private BigDecimal crs = BigDecimal.ZERO;  //Controvalore rimborsi sospesi(CRS)
 	@Field(targetType = FieldType.DECIMAL128) 
-	private BigDecimal qrs;  //Quantità rimborsi sospesi(QRS)
+	private BigDecimal qrs = BigDecimal.ZERO;  //Quantità rimborsi sospesi(QRS)
 
 }

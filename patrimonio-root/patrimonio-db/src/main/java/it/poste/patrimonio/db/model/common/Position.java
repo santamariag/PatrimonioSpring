@@ -13,5 +13,9 @@ public class Position {
 	private Detail detail;
 	
 	private InternalCounters internalCounters;
-	
+
+	public Position(Detail detail) {
+		this.setDetail(detail);
+		this.setInternalCounters(new InternalCounters());
+	}
 }

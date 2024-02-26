@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,8 +20,8 @@ public class FundOrderCreation implements IGpmFoeBusinessEvent {
 	private String productCode;
 	private String productId;
 	private String reason; // causale
-	private String ctvCos;
-	private String nomMov;
+	private BigDecimal ctvCos;
+	private BigDecimal nomMov;
 
 	@Override
 	public String getKey() {

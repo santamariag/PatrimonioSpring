@@ -1,4 +1,4 @@
-package it.poste.patrimonio.db.model.gpmfoe;
+package it.poste.patrimonio.db.model;
 
 
 import it.poste.patrimonio.db.constants.Status;

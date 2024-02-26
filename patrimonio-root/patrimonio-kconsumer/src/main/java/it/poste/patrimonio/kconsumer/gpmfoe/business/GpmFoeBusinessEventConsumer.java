@@ -27,23 +27,24 @@ public class GpmFoeBusinessEventConsumer {
     IPositionService positionService;
 
     @KafkaHandler
-    public void handleCancellationForChargeFailureEvent(CancellationForChargeFailure message) {
-        positionService.orderCancellationForChareFailure(message);
+    public void handleCancellationForChargeFailureEvent(Cancellation message) {
+        //TODO aggiungere in questi metodi provenienza ordine di cancellazione?
+        positionService.orderCancellation(message);
     }
 
     @KafkaHandler
-    public void handleCancellationFromBackOfficeEvent(CancellationFromBackOffice message) {
-        positionService.orderCancellationFromBackOffice(message);
+    public void handleCancellationFromBackOfficeEvent(Cancellation message) {
+        positionService.orderCancellation(message);
     }
 
     @KafkaHandler
-    public void handleCancellationFromClientEvent(CancellationFromClient message) {
-        positionService.orderCancellationFromClient(message);
+    public void handleCancellationFromClientEvent(Cancellation message) {
+        positionService.orderCancellation(message);
     }
 
     @KafkaHandler
-    public void handleCancellationFromProductCompanyEvent(CancellationFromProductCompany message) {
-        positionService.orderCancellationFromProductCompany(message);
+    public void handleCancellationFromProductCompanyEvent(Cancellation message) {
+        positionService.orderCancellation(message);
     }
 
     @KafkaHandler
@@ -78,12 +79,12 @@ public class GpmFoeBusinessEventConsumer {
 
     @KafkaHandler
     public void handleRefundFeedbackEvent(RefundFeedback message) {
-       positionService.refundOrderFeedback(message);
+        positionService.refundOrderFeedback(message);
     }
 
     @KafkaHandler
     public void handleRefundOrderEvent(RefundOrder message) {
-       positionService.insertRefundOrder(message);
+        positionService.insertRefundOrder(message);
     }
 
     @KafkaHandler

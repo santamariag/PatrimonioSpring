@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,8 +22,8 @@ public class SubscriptionFeedback  implements IGpmFoeBusinessEvent {
 	private String reason; // causale
 	private String flagMfM;
 	private String status;
-	private String ctvCos;
-	private String nomMov;
+	private BigDecimal ctvCos;
+	private BigDecimal nomMov;
 
 	@Override
 	public String getKey() {

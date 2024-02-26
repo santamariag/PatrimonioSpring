@@ -1,7 +1,6 @@
 package it.poste.patrimonio.db.model;
 
 
-import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,6 +12,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
     @CompoundIndex(name = "idx-fiscalcode_prod_idprod", def = "{'fiscalCode' : 1, 'patrimonioOld.posizioni.cstrfin': 1, 'patrimonioOld.posizioni.idProd': 1}")
 })
 public class Gpm extends CommonDocument {
-	
 
 }

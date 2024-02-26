@@ -2,10 +2,10 @@ package it.poste.patrimonio.event.business.model;
 
 public class EventMapping {
     public static final String GPEFOE_TYPE_MAPPINGS =
-        "business-event.gpm-foe.cancellation-for-charge-failure"   + ":it.poste.patrimonio.event.business.impl.gpmfoe.CancellationForChargeFailure, " +
-        "business-event.gpm-foe.cancellation-from-backoffice"      + ":it.poste.patrimonio.event.business.impl.gpmfoe.CancellationFromBackOffice,"+
-        "business-event.gpm-foe.cancellation-from-client"          + ":it.poste.patrimonio.event.business.impl.gpmfoe.CancellationFromClient, " +
-        "business-event.gpm-foe.cancellation-from-product-company" + ":it.poste.patrimonio.event.business.impl.gpmfoe.CancellationFromProductCompany, " +
+        "business-event.gpm-foe.cancellation-for-charge-failure"   + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation, " +
+        "business-event.gpm-foe.cancellation-from-backoffice"      + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation,"+
+        "business-event.gpm-foe.cancellation-from-client"          + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation, " +
+        "business-event.gpm-foe.cancellation-from-product-company" + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation, " +
         "business-event.gpm-foe.fund-order-creation"               + ":it.poste.patrimonio.event.business.impl.gpmfoe.FundOrderCreation, " +
         "business-event.gpm-foe.master-data-creation"              + ":it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataCreation, " +
         "business-event.gpm-foe.master-data-delete"                + ":it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataDelete, " +

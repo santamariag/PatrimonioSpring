@@ -1,13 +1,13 @@
 package it.poste.patrimonio.bl.service.impl;
 
 import it.poste.patrimonio.db.model.common.Position;
-import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
+import it.poste.patrimonio.db.model.CommonDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.poste.patrimonio.bl.service.IPACService;
 import it.poste.patrimonio.bl.util.Constants;
-import it.poste.patrimonio.bl.util.PositionUtil;
+import it.poste.patrimonio.bl.util.BusinessLogicUtil;
 import it.poste.patrimonio.event.business.impl.gpmfoe.PacCreation;
 import it.poste.patrimonio.event.business.impl.gpmfoe.PacDelete;
 
@@ -15,7 +15,7 @@ import it.poste.patrimonio.event.business.impl.gpmfoe.PacDelete;
 public class PACService implements IPACService {
 
 	@Autowired
-    PositionUtil util;
+    BusinessLogicUtil util;
 
     @Override
     public void pacCreation(PacCreation dto) {

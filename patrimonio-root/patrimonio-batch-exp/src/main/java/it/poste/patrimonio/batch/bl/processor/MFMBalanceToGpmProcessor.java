@@ -8,7 +8,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import it.poste.patrimonio.bl.util.PositionUtil;
+import it.poste.patrimonio.bl.util.BusinessLogicUtil;
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.repository.IGpmRepository;
 import it.poste.patrimonio.itf.model.MFMBalanceDTO;
@@ -24,7 +24,7 @@ public class MFMBalanceToGpmProcessor implements ItemProcessor<MFMBalanceDTO, Li
 	private final IGpmRepository gpmRepository;
 	
 	@Autowired
-	private PositionUtil positionUtil;
+	private BusinessLogicUtil businessLogicUtil;
 	
 	
 	public MFMBalanceToGpmProcessor(IGpmRepository gpmRepository) {
@@ -60,8 +60,8 @@ public class MFMBalanceToGpmProcessor implements ItemProcessor<MFMBalanceDTO, Li
 						&& item.getProductId().equals(p.getDetail().getIdProd())){
 					p.getInternalCounters().setCs(item.getCtv());
 					p.getInternalCounters().setQs(item.getQtaSub().subtract(item.getQtaRef()));
-					p.getDetail().setQqta(positionUtil.calculateQqta(p));
-					p.getDetail().setIvalbas(positionUtil.calculateCtv(p));
+					p.getDetail().setQqta(businessLogicUtil.calculateQqta(p));
+					p.getDetail().setIvalbas(businessLogicUtil.calculateCtv(p));
 					p.getDetail().setDulprz(LocalDate.parse(referenceDate));
 				}
 			});

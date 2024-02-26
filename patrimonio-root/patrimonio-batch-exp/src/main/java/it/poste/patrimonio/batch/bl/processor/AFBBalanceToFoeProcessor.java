@@ -1,6 +1,6 @@
 package it.poste.patrimonio.batch.bl.processor;
 
-import it.poste.patrimonio.bl.util.PositionUtil;
+import it.poste.patrimonio.bl.util.BusinessLogicUtil;
 import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.itf.model.AFBBalanceDTO;
@@ -22,7 +22,7 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 	private final IFoeRepository foeRepository;
 	
 	@Autowired
-	private PositionUtil positionUtil;
+	private BusinessLogicUtil businessLogicUtil;
 	
 	
 	public AFBBalanceToFoeProcessor(IFoeRepository foeRepository) {
@@ -55,8 +55,8 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 						&& item.getProductId().equals(p.getDetail().getIdProd())){
 					p.getInternalCounters().setCs(item.getCtv());
 					p.getInternalCounters().setQs(item.getQta());
-					p.getDetail().setQqta(positionUtil.calculateQqta(p));
-					p.getDetail().setIvalbas(positionUtil.calculateCtv(p));
+					p.getDetail().setQqta(businessLogicUtil.calculateQqta(p));
+					p.getDetail().setIvalbas(businessLogicUtil.calculateCtv(p));
 					p.getDetail().setDulprz(item.getReferenceDate());
 					p.getDetail().setIprzat(item.getPrice());
 				}

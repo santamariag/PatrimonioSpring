@@ -3,8 +3,8 @@ import it.poste.patrimonio.db.constants.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import it.poste.patrimonio.bl.service.IMasterDataService;
-import it.poste.patrimonio.bl.util.PositionUtil;
-import it.poste.patrimonio.db.model.gpmfoe.CommonDocument;
+import it.poste.patrimonio.bl.util.BusinessLogicUtil;
+import it.poste.patrimonio.db.model.CommonDocument;
 import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataCreation;
 import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataDelete;
 import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataLock;
@@ -13,7 +13,7 @@ import it.poste.patrimonio.event.business.impl.gpmfoe.MasterDataLock;
 public class MasterDataService implements IMasterDataService {
 
 	@Autowired
-	PositionUtil util;
+	BusinessLogicUtil util;
 
 	public void masterDataCreation(MasterDataCreation dto){
 		CommonDocument data = new CommonDocument();
