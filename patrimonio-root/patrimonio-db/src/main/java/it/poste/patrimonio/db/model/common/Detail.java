@@ -21,14 +21,14 @@ public class Detail {
 	private String xstrfin; //descrizione prodotto da recuperare tramite servizio
 	private String csdp; //deposit/index
 	private String cndgs;
-	private String trap; //tipo rapporto (GPM/FOE) su base ist (1/5)
+	private String trap; //tipo rapporto (GPM/FOE/TIT) su base ist (1/5)
 	private String strp;
 	private String xint; //descrizione cliente customerDescr
 	private LocalDate dtaper;
 	private String xblc;
 	private String cage; //deposit/agency
 	private String xstt;
-	private String tprm;
+	private String tprm; // tipo titolo
 	private LocalDate ddec; //data corrente
 	private LocalDate dsca;
 	private String isin;
