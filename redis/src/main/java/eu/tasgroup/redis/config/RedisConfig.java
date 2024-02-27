@@ -5,21 +5,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.RedisKeyValueAdapter.EnableKeyspaceEvents;
-import org.springframework.data.redis.core.RedisKeyValueAdapter.ShadowCopy;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @Configuration
-@EnableRedisRepositories(enableKeyspaceEvents = EnableKeyspaceEvents.ON_STARTUP, shadowCopy = ShadowCopy.OFF)
+/*@EnableRedisRepositories(keyspaceConfiguration = RedisConfig.MyKeyspaceConfiguration.class, 
+						 enableKeyspaceEvents = EnableKeyspaceEvents.ON_STARTUP, 
+						 shadowCopy = ShadowCopy.OFF)*/
 public class RedisConfig {
 	
 	@Value("${spring.data.redis.host}")
 	private String host;
 	@Value("${spring.data.redis.port}")
 	private int port;
-
-
+	
+	
 	@Bean
 	LettuceConnectionFactory lettuceConnectionFactory() {
 		
@@ -30,26 +29,22 @@ public class RedisConfig {
 	}
 
 	@Bean
-	public RedisTemplate<String, Object> redisTemplate() {
-	    RedisTemplate<String, Object> template = new RedisTemplate<>();
+	public RedisTemplate<?, ?> redisTemplate() {
+	    RedisTemplate<?, ?> template = new RedisTemplate<>();
 	    template.setConnectionFactory(lettuceConnectionFactory());
 	    return template;
 	}
 	
-	/*@Bean
-	public RedisMappingContext keyValueMappingContext() {
-		return new RedisMappingContext(new MappingConfiguration(new IndexConfiguration(), new MyKeyspaceConfiguration()));
-	}
+	/*public class MyKeyspaceConfiguration extends KeyspaceConfiguration {
 
-	public static class MyKeyspaceConfiguration extends KeyspaceConfiguration {
+		@Value("${keyspace.tech.ttl:60}")
+		private Long ttl;
 
-        @Override
-        protected Iterable<KeyspaceSettings> initialConfiguration() {
-            KeyspaceSettings keyspaceSettings = new KeyspaceSettings(Student.class, "Student");
-            keyspaceSettings.setTimeToLive(ttl);
-            return Collections.singleton(keyspaceSettings);
-        }
-    }*/
-
-
+		@Override
+		protected Iterable<KeyspaceSettings> initialConfiguration() {
+			KeyspaceSettings keyspaceSettings = new KeyspaceSettings(TechMessageKey.class, "TechMessageKey");
+			keyspaceSettings.setTimeToLive(ttl);
+			return Collections.singleton(keyspaceSettings);
+		}
+	}*/
 }

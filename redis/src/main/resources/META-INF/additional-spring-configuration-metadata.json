@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "keyspace.tech.ttl",
+    "type": "java.lang.String",
+    "description": "A description for 'keyspace.tech.ttl'"
+  },
+  {
+    "name": "keyspace.student.ttl",
+    "type": "java.lang.String",
+    "description": "A description for 'keyspace.student.ttl'"
+  }
+]}
