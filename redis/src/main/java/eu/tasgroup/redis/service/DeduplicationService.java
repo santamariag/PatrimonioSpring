@@ -10,7 +10,7 @@ public class DeduplicationService {
 	
 	private final CustomTechMessageRepository repository;
 	
-	private static final String GPM_FOE_TECH_KEY_PREFIX="GPM_FOE_TECH_";
+	private static final String GPM_FOE_TECH_KEY_PREFIX="GPM_FOE_TECH:";
 	
 	public DeduplicationService(CustomTechMessageRepository repository) {
 		this.repository = repository;

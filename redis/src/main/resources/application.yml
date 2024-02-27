@@ -6,7 +6,7 @@ spring:
       
 keyspace:
   tech:
-    ttl: 1m
+    ttl: 1d
   student:
     ttl: 1
       
