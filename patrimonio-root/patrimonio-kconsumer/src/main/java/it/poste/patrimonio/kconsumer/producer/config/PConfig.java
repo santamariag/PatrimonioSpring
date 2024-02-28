@@ -3,6 +3,7 @@ package it.poste.patrimonio.kconsumer.producer.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.poste.patrimonio.kconsumer.config.KafkaConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,6 @@ import com.mongodb.TransactionOptions;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-
-import it.poste.patrimonio.kconsumer.config.KafkaConfig;
 
 @Configuration
 public class PConfig<TKey, TEvent> {

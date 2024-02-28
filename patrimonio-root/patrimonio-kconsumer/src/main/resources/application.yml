@@ -21,10 +21,10 @@ patrimonio:
     group-id: patrimonio
     topic:
       gpmgoe:
-        cdc: gpmfoe_cdc_events
+        cdc-events: gpmfoe_cdc_events
         business-events: gpmfoe_business_events
       titoli:
-        cdc: titoli_cdc_events
+        cdc-events: titoli_cdc_events
         business-events: titoli_business_events
 
 

@@ -3,6 +3,7 @@ package it.poste.patrimonio.kconsumer.consumer.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.poste.patrimonio.kconsumer.config.KafkaConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -26,7 +27,6 @@ import org.springframework.util.backoff.FixedBackOff;
 
 import it.poste.patrimonio.itf.model.KeyDTO;
 import it.poste.patrimonio.itf.model.ValueDTO;
-import it.poste.patrimonio.kconsumer.config.KafkaConfig;
 import it.poste.patrimonio.kconsumer.deserializer.CustomDeserializerKeyDTO;
 import it.poste.patrimonio.kconsumer.deserializer.CustomDeserializerValueDTO;
 

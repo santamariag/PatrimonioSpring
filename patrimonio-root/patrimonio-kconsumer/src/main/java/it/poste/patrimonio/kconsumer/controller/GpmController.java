@@ -1,13 +1,13 @@
 package it.poste.patrimonio.kconsumer.controller;
 
+import it.poste.patrimonio.kconsumer.producer.Producer;
+import it.poste.patrimonio.kconsumer.util.KeyExtractor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.poste.patrimonio.itf.model.GpmDTO;
-import it.poste.patrimonio.kconsumer.producer.Producer;
-import it.poste.patrimonio.kconsumer.util.KeyExtractor;
 
 @RestController
 @RequestMapping("/api")

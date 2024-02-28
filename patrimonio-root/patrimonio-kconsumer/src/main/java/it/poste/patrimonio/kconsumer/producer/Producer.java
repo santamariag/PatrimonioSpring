@@ -3,13 +3,13 @@ package it.poste.patrimonio.kconsumer.producer;
 
 import java.util.concurrent.CompletableFuture;
 
+import it.poste.patrimonio.kconsumer.config.KafkaConfig;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import it.poste.patrimonio.kconsumer.config.KafkaConfig;
 import lombok.extern.slf4j.Slf4j;
 
 @Component

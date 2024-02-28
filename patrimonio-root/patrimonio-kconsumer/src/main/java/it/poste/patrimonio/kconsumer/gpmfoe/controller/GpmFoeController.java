@@ -3,6 +3,7 @@ package it.poste.patrimonio.kconsumer.gpmfoe.controller;
 import it.poste.patrimonio.event.business.impl.gpmfoe.*;
 
 import it.poste.patrimonio.kconsumer.gpmfoe.business.GpmFoeBusinessEventProducer;
+import it.poste.patrimonio.kconsumer.gpmfoe.cdc.GpmFoeCdcEventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,10 @@ public class GpmFoeController {
     @Autowired
     private GpmFoeBusinessEventProducer gpmFoeBusinessEventProducer;
 
-    @PostMapping("/send")
+    @Autowired
+    private GpmFoeCdcEventProducer gpmFoeCdcEventProducer;
+
+    @PostMapping("/send_business_event")
     public String sendMessage(@RequestParam("message") String message) {
 
         Cancellation cancellationForChargeFailure = new Cancellation();
@@ -66,6 +70,12 @@ public class GpmFoeController {
 
         return "Message sent: " + message;
 
+    }
+
+    @PostMapping("/send_business_event")
+    public String sendCdcMessage ( @RequestParam("key") String key, @RequestParam("message") String message ) {
+        gpmFoeCdcEventProducer.sendEvent(key, message);
+        return "Message sent: " + message;
     }
 
 }

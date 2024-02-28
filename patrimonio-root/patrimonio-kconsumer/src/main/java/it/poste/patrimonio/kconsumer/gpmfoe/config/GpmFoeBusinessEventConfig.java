@@ -6,6 +6,9 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.boot.ssl.DefaultSslBundleRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -19,9 +22,24 @@ import java.util.Map;
 @Configuration
 public class GpmFoeBusinessEventConfig {
 
+    @Autowired
+    DefaultSslBundleRegistry defaultSslBundleRegistry;
 
-    public ProducerFactory<String, IGpmFoeBusinessEvent> producerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
+    @Bean(name="GpmFoeBusinessEventKTFactory")
+    public KafkaTemplate<String, IGpmFoeBusinessEvent> GpmFoeBusinessEventKTFactory(KafkaProperties defaultProperties) {
+        return new KafkaTemplate<>(producerFactory(defaultProperties));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> GpmFoeBusinessEventKLCFactory(KafkaProperties defaultProperties) {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory(defaultProperties));
+        return factory;
+    }
+
+
+    public ProducerFactory<String, IGpmFoeBusinessEvent> producerFactory(KafkaProperties properties) {
+        Map<String, Object> configProps = properties.buildProducerProperties(defaultSslBundleRegistry);
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         //configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -31,10 +49,10 @@ public class GpmFoeBusinessEventConfig {
         return new DefaultKafkaProducerFactory<>(configProps,new StringSerializer(), new JsonSerializer<>());
     }
 
-    private ConsumerFactory<String, Object> consumerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "my-group-id");
+    private ConsumerFactory<String, Object> consumerFactory(KafkaProperties properties) {
+
+        Map<String, Object> configProps = properties.buildConsumerProperties(defaultSslBundleRegistry);
+        //configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "my-group-id");
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
@@ -43,16 +61,5 @@ public class GpmFoeBusinessEventConfig {
     }
 
 
-    @Bean(name="GpmFoeBusinessEventKTFactory")
-    public KafkaTemplate<String, IGpmFoeBusinessEvent> GpmFoeBusinessEventKTFactory() {
-        return new KafkaTemplate<>(producerFactory());
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Object> GpmFoeBusinessEventKLCFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-        return factory;
-    }
 
 }
