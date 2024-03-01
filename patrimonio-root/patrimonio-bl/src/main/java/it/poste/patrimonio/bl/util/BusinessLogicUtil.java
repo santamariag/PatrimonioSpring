@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import it.poste.patrimonio.db.constants.Status;
 import it.poste.patrimonio.db.model.common.PatrimonioOld;
 import it.poste.patrimonio.db.model.CommonDocument;
 import it.poste.patrimonio.db.model.Foe;
@@ -122,5 +123,17 @@ public class BusinessLogicUtil {
                 break;
             }
         }
+    }
+    public Status checkStatus(String status){
+        if(status.equals(Constants.ACTIVE_CHECK)){
+                return Status.ACTIVE;
+            }
+        if (Constants.BLOCKED_CHECK.contains(status)){
+            return Status.BLOCKED;
+        }
+        if (Constants.CLOSED_CHECK.contains(status)){
+            return Status.CLOSED;
+        }
+        return Status.ACTIVE;
     }
 }

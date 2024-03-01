@@ -37,7 +37,7 @@ public class MasterDataService implements IMasterDataService {
 
 	public void masterDataLock(MasterDataLock dto){
 		CommonDocument data = util.findDataByNdg(dto.getInstitute(), dto.getNdg());
-		data.setStatus(Status.BLOCKED);
+		data.setStatus(util.checkStatus(dto.getStatus()));
 		util.saveData(dto.getInstitute(), data);
 	}
 }
