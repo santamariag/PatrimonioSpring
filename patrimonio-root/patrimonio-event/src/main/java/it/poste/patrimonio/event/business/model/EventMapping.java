@@ -1,7 +1,7 @@
 package it.poste.patrimonio.event.business.model;
 
 public class EventMapping {
-    public static final String GPEFOE_TYPE_MAPPINGS =
+    public static final String GPEFOE_BUSINESS_EVENT_TYPE_MAPPINGS =
         "business-event.gpm-foe.cancellation-for-charge-failure"   + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation, " +
         "business-event.gpm-foe.cancellation-from-backoffice"      + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation,"+
         "business-event.gpm-foe.cancellation-from-client"          + ":it.poste.patrimonio.event.business.impl.gpmfoe.Cancellation, " +
@@ -18,5 +18,12 @@ public class EventMapping {
         "business-event.gpm-foe.subscription-order"                + ":it.poste.patrimonio.event.business.impl.gpmfoe.SubscriptionOrder";
 
 
-    public static final String TITOLI_TYPE_MAPPINGS = "business-event.titoli.TestTitoliEvent" + ":it.poste.patrimonio.event.business.impl.titoli.TestTitoliEvent";
+    public static final String TITOLI_BUSINESS_EVENT_TYPE_MAPPINGS =
+        "business-event.titoli.CTirEvent" + ":it.poste.patrimonio.event.business.impl.titoli.CtirEvent,"+
+                "business-event.titoli.DepositEvent" + ":it.poste.patrimonio.event.business.impl.titoli.DepositEvent,"+
+                "business-event.titoli.ExchangeRateEvent" + ":it.poste.patrimonio.event.business.impl.titoli.ExchangeRateEvent,"+
+                "business-event.titoli.PositionEvent" + ":it.poste.patrimonio.event.business.impl.titoli.PositionEvent,"+
+                "business-event.titoli.PriceEvent" + ":it.poste.patrimonio.event.business.impl.titoli.PriceEvent,"+
+                "business-event.titoli.RprzEvent" + ":it.poste.patrimonio.event.business.impl.titoli.RprzEvent,"+
+                "business-event.titoli.TitrEvent" + ":it.poste.patrimonio.event.business.impl.titoli.TitrEvent";
 }

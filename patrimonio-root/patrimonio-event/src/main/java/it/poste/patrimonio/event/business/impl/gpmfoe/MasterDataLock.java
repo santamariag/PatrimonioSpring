@@ -25,7 +25,7 @@ public class MasterDataLock implements IGpmFoeBusinessEvent {
 
 	@Override
 	public String getKey() {
-		return getInstitute() + "#" + getNdg();
+		return institute + "#" + ndg;
 	}
 
 }

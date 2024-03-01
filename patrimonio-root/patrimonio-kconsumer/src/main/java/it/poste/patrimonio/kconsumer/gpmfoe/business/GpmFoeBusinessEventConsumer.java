@@ -4,6 +4,7 @@ import it.poste.patrimonio.bl.service.IMasterDataService;
 import it.poste.patrimonio.bl.service.IPACService;
 import it.poste.patrimonio.bl.service.IPositionService;
 import it.poste.patrimonio.event.business.impl.gpmfoe.*;
+import it.poste.patrimonio.itf.model.AFBBalanceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -96,5 +97,10 @@ public class GpmFoeBusinessEventConsumer {
     public void handleSubscriptionOrderEvent(SubscriptionOrder message) {
         positionService.insertSubOrder(message);
     }
+
+//    @KafkaHandler
+//    public void handle(AFBBalanceDTO message) {
+//        foeService.AFBBalance(message);
+//    }
 
 }

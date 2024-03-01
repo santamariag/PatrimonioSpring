@@ -27,7 +27,7 @@ public class RefundFeedback implements IGpmFoeBusinessEvent {
 
 	@Override
 	public String getKey() {
-		return getInstitute() + "#" + getNdg();
+		return institute + "#" + ndg;
 	}
 
 }

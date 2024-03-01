@@ -28,7 +28,7 @@ public class RefundOrder implements IGpmFoeBusinessEvent {
 
 	@Override
 	public String getKey() {
-		return getInstitute() + "#" + getNdg();
+		return institute + "#" + ndg;
 	}
 
 }

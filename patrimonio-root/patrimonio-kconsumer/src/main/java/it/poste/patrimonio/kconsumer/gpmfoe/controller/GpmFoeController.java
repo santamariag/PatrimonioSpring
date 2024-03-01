@@ -72,7 +72,7 @@ public class GpmFoeController {
 
     }
 
-    @PostMapping("/send_business_event")
+    @PostMapping("/send_cdc_event")
     public String sendCdcMessage ( @RequestParam("key") String key, @RequestParam("message") String message ) {
         gpmFoeCdcEventProducer.sendEvent(key, message);
         return "Message sent: " + message;

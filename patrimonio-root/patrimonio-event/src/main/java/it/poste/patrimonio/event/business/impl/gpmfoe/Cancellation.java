@@ -27,6 +27,6 @@ public class Cancellation implements IGpmFoeBusinessEvent {
 
     @Override
     public String getKey() {
-        return getInstitute() + "#" + getNdg();
+        return institute + "#" + ndg;
     }
 }

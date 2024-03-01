@@ -21,20 +21,29 @@ import java.util.Map;
 @Configuration
 public class GpmFoeCdcEventConfig {
 
-    @Autowired
-    DefaultSslBundleRegistry defaultSslBundleRegistry;
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> GpmFoeCdcEventKLCFactory(KafkaProperties defaultProperties) {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory(defaultProperties));
-        return factory;
+    public ProducerFactory<String, String> producerFactory(KafkaProperties properties, DefaultSslBundleRegistry defaultSslBundleRegistry) {
+        Map<String,Object> configProps = properties.buildConsumerProperties(defaultSslBundleRegistry);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProps,new StringSerializer(), new JsonSerializer<>());
     }
 
-    private ConsumerFactory<String, String> consumerFactory(KafkaProperties properties) {
+    private ConsumerFactory<String, String> consumerFactory(KafkaProperties properties, DefaultSslBundleRegistry defaultSslBundleRegistry) {
         Map<String,Object> configProps = properties.buildConsumerProperties(defaultSslBundleRegistry);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(configProps);
+    }
+
+    @Bean(name="GpmFoeCdcEventKTFactory")
+    public KafkaTemplate<String, String> GpmFoeCdcEventKTFactory(KafkaProperties defaultProperties, DefaultSslBundleRegistry defaultSslBundleRegistry) {
+        return new KafkaTemplate<>(producerFactory(defaultProperties, defaultSslBundleRegistry));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> GpmFoeCdcEventKLCFactory(KafkaProperties defaultProperties, DefaultSslBundleRegistry defaultSslBundleRegistry) {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory(defaultProperties,  defaultSslBundleRegistry));
+        return factory;
     }
 
 }

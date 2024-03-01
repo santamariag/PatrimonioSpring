@@ -16,7 +16,7 @@ public class SubscriptionOrder implements IGpmFoeBusinessEvent {
 	
 	private String ndg;
 	private String clientIntCode; //codice interno cliente
-	private String institute; //(tipo rapporto 1 GPM, 5 FOE)
+	private String institute; // (tipo rapporto 1 GPM, 5 FOE)
 	private String productCode;
 	private String productId;
 	private String reason; // causale
@@ -28,8 +28,6 @@ public class SubscriptionOrder implements IGpmFoeBusinessEvent {
 	private BigDecimal ctvMov;
 
 	@Override
-	public String getKey() {
-		return getInstitute() + "#" + getNdg();
-	}
+	public String getKey() { return institute + "#" + ndg; }
 
 }

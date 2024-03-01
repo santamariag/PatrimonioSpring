@@ -19,7 +19,7 @@ public class TitoliBusinessEventProducer {
     private KafkaTemplate<String, ITitoliBusinessEvent> kafkaTemplate;
 
     public void sendEvent(ITitoliBusinessEvent message) {
-        kafkaTemplate.send(topic, message.getKey(), message);
+        kafkaTemplate.send(topic, message.getKafkaKey(), message);
     }
 
 }

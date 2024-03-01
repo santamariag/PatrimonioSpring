@@ -4,8 +4,10 @@ import it.poste.patrimonio.event.business.model.ITitoliBusinessEvent;
 import lombok.Data;
 
 @Data
-public class TestTitoliEvent implements ITitoliBusinessEvent {
-
-    String key;
-
+public class RprzEvent implements ITitoliBusinessEvent {
+    String target;
+    @Override
+    public String getKafkaKey() {
+        return null;
+    }
 }
