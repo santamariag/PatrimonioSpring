@@ -53,8 +53,8 @@ public class AFBBalanceToFoeProcessor implements ItemProcessor<AFBBalanceDTO, Li
 			f.getPatrimonioOld().getPosizioni().forEach(p->{
 				if(productPrevinet.equals(p.getDetail().getCstrfin())
 						&& item.getProductId().equals(p.getDetail().getIdProd())){
-					p.getInternalCounters().setCs(item.getCtv());
-					p.getInternalCounters().setQs(item.getQta());
+					p.getInternalCountersGpmFoe().setCs(item.getCtv());
+					p.getInternalCountersGpmFoe().setQs(item.getQta());
 					p.getDetail().setQqta(businessLogicUtil.calculateQqta(p));
 					p.getDetail().setIvalbas(businessLogicUtil.calculateCtv(p));
 					p.getDetail().setDulprz(item.getReferenceDate());

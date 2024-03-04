@@ -24,9 +24,9 @@ public class PACService implements IPACService {
 
         for (Position pos : data.getPatrimonioOld().getPosizioni()){
             if (pos.getDetail().getIdProd().equals(dto.getProductId())){
-                Long cpac = pos.getInternalCounters().getCpac();
-                pos.getInternalCounters().setCpac(cpac + 1);
-                if (pos.getInternalCounters().getCpac() > 0) {
+                Long cpac = pos.getInternalCountersGpmFoe().getCpac();
+                pos.getInternalCountersGpmFoe().setCpac(cpac + 1);
+                if (pos.getInternalCountersGpmFoe().getCpac() > 0) {
                     pos.getDetail().setFpac(Constants.Y);
                 }
                 break;
@@ -43,9 +43,9 @@ public class PACService implements IPACService {
 
         for (Position pos : data.getPatrimonioOld().getPosizioni()){
             if (pos.getDetail().getIdProd().equals(dto.getProductId())){
-                Long cpac = pos.getInternalCounters().getCpac();
-                pos.getInternalCounters().setCpac(cpac - 1);
-                if (pos.getInternalCounters().getCpac() < 1) {
+                Long cpac = pos.getInternalCountersGpmFoe().getCpac();
+                pos.getInternalCountersGpmFoe().setCpac(cpac - 1);
+                if (pos.getInternalCountersGpmFoe().getCpac() < 1) {
                     pos.getDetail().setFpac(Constants.N);
                 }
                 break;

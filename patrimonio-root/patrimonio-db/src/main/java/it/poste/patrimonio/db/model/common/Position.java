@@ -1,5 +1,7 @@
 package it.poste.patrimonio.db.model.common;
 
+import it.poste.patrimonio.db.model.gpmfoe.InternalCountersGpmFoe;
+import it.poste.patrimonio.db.model.titoli.InternalCountersTitoli;
 import lombok.Data;
 
 /**
@@ -12,10 +14,12 @@ public class Position {
 	
 	private Detail detail;
 	
-	private InternalCounters internalCounters;
+	private InternalCountersGpmFoe internalCountersGpmFoe;
 
+	private InternalCountersTitoli internalCountersTitoli;
 	public Position(Detail detail) {
 		this.setDetail(detail);
-		this.setInternalCounters(new InternalCounters());
+		this.setInternalCountersGpmFoe(new InternalCountersGpmFoe());
+		this.setInternalCountersTitoli(new InternalCountersTitoli());
 	}
 }

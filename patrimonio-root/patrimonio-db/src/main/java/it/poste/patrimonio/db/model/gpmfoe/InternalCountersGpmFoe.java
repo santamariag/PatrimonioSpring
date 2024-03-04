@@ -1,4 +1,4 @@
-package it.poste.patrimonio.db.model.common;
+package it.poste.patrimonio.db.model.gpmfoe;
 
 import java.math.BigDecimal;
 
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 import lombok.Data;
 
 @Data
-public class InternalCounters {
+public class InternalCountersGpmFoe {
 	
 	private Long cpac; //Contatore PAC stato(presenza pac- 0,1=+1 in insert; 2,3=-1 in update)
 	@Field(targetType = FieldType.DECIMAL128) 

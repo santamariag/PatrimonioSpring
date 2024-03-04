@@ -31,9 +31,9 @@ public class BusinessLogicUtil {
 
     public BigDecimal calculateCtv(Position p) {
         //CS+CSS-CRS
-        BigDecimal cs = p.getInternalCounters().getCs() != null ? p.getInternalCounters().getCs() : BigDecimal.ZERO;
-        BigDecimal css = p.getInternalCounters().getCss() != null ? p.getInternalCounters().getCss() : BigDecimal.ZERO;
-        BigDecimal crs = p.getInternalCounters().getCrs() != null ? p.getInternalCounters().getCrs() : BigDecimal.ZERO;
+        BigDecimal cs = p.getInternalCountersGpmFoe().getCs() != null ? p.getInternalCountersGpmFoe().getCs() : BigDecimal.ZERO;
+        BigDecimal css = p.getInternalCountersGpmFoe().getCss() != null ? p.getInternalCountersGpmFoe().getCss() : BigDecimal.ZERO;
+        BigDecimal crs = p.getInternalCountersGpmFoe().getCrs() != null ? p.getInternalCountersGpmFoe().getCrs() : BigDecimal.ZERO;
 
         return cs.add(css).subtract(crs);
     }
@@ -41,9 +41,9 @@ public class BusinessLogicUtil {
 
     public BigDecimal calculateQqta(Position p) {
         // QS+QSS-QRS
-        BigDecimal qs = p.getInternalCounters().getQs() != null ? p.getInternalCounters().getQs() : BigDecimal.ZERO;
-        BigDecimal qss = p.getInternalCounters().getQss() != null ? p.getInternalCounters().getQss() : BigDecimal.ZERO;
-        BigDecimal qrs = p.getInternalCounters().getQrs() != null ? p.getInternalCounters().getQrs() : BigDecimal.ZERO;
+        BigDecimal qs = p.getInternalCountersGpmFoe().getQs() != null ? p.getInternalCountersGpmFoe().getQs() : BigDecimal.ZERO;
+        BigDecimal qss = p.getInternalCountersGpmFoe().getQss() != null ? p.getInternalCountersGpmFoe().getQss() : BigDecimal.ZERO;
+        BigDecimal qrs = p.getInternalCountersGpmFoe().getQrs() != null ? p.getInternalCountersGpmFoe().getQrs() : BigDecimal.ZERO;
 
         return qs.add(qss).subtract(qrs);
     }

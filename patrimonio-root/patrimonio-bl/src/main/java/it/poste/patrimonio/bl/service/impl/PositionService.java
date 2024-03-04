@@ -4,7 +4,7 @@ import it.poste.patrimonio.bl.service.IPositionService;
 import it.poste.patrimonio.bl.util.Constants;
 import it.poste.patrimonio.bl.util.BusinessLogicUtil;
 import it.poste.patrimonio.db.model.common.Detail;
-import it.poste.patrimonio.db.model.common.InternalCounters;
+import it.poste.patrimonio.db.model.gpmfoe.InternalCountersGpmFoe;
 import it.poste.patrimonio.db.model.common.Position;
 import it.poste.patrimonio.db.model.CommonDocument;
 import it.poste.patrimonio.event.business.impl.gpmfoe.*;
@@ -43,12 +43,16 @@ public class PositionService implements IPositionService {
         return new Position(detail);
     }
 
-    private void updateQtaAndCtv(Position pos, InternalCounters counters) {
+    private void updateQtaAndCtv(Position pos, InternalCountersGpmFoe counters) {
         //quantità patrimonio: QS+QSS-QRS
         pos.getDetail().setQqta((counters.getQs().add(counters.getQss()).subtract(counters.getQrs())));
         //controvalore patrimonio: CS+CSS-CRS
         pos.getDetail().setIvalbas((counters.getCs().add(counters.getCss())).subtract(counters.getCrs()));
         log.info("PositionService.updateQtaAndCtv - Counters updated");
+    }
+
+    private BigDecimal ctvOrNom(String inst, BigDecimal ctv, BigDecimal nom){
+        return (FOE_INST.equals(inst)) ? ctv : nom;
     }
 
     //7
@@ -63,13 +67,13 @@ public class PositionService implements IPositionService {
         pos.getDetail().setCdivemi(dto.getCurrency());
         log.info("PositionService.insertSubOrder - Detail updated");
 
-        //Aggiornare qtaInt, css, qss
+        //Aggiornare qtaInt, css, qss (g)
         //se flag-mfm = s e codice stato = ese:
         // - quantità interna += nominale
         //se flag-mfm <> s e codice stato = ins:
         //- CSS += ctv mov
         //- QSS += nominale
-        InternalCounters counters = pos.getInternalCounters();
+        InternalCountersGpmFoe counters = pos.getInternalCountersGpmFoe();
         if (Constants.Y.equals(dto.getFlagMfM())) {
             if (STATUS_ESE.equals(dto.getStatus())) {
                 log.info("PositionService.insertSubOrder - Updating qtaInt");
@@ -79,7 +83,7 @@ public class PositionService implements IPositionService {
             }
         } else if (STATUS_INS.equals(dto.getStatus())) {
             log.info("PositionService.insertSubOrder - Updating css and qss");
-            counters.setCss(counters.getCss().add(dto.getCtvMov()));
+            counters.setCss(counters.getCss().add(ctvOrNom(dto.getInstitute(), dto.getCtvMov(), dto.getNomMov())));
             counters.setQss(counters.getQss().add(dto.getNomMov()));
         }
 
@@ -95,18 +99,20 @@ public class PositionService implements IPositionService {
         CommonDocument data = util.findOrCreateDocumentByNdg(dto.getInstitute(), dto.getNdg());
         if (data != null) {
             Position pos = findOrCreatePosition(data, dto.getProductId(), dto.getProductCode());
-            //se flag-mfm <> s e codice stato = ese:
+
+            //se flag-mfm <> s e codice stato = ese: (i)
             //- quantità interna = + nominale
             //- CSS = - "ctv-cos"
             //- QSS = - nominale
-            InternalCounters counters = pos.getInternalCounters();
+            InternalCountersGpmFoe counters = pos.getInternalCountersGpmFoe();
             if (!Constants.Y.equals(dto.getFlagMfM()) && STATUS_ESE.equals(dto.getStatus())) {
                 log.info("PositionService.subOrderFeedback - Updating qtaInt, css, and qss");
                 counters.setQtaint(counters.getQtaint().add(dto.getNomMov()));
                 pos.getDetail().setQqta(BigDecimal.ZERO); //(p)
                 pos.getDetail().setIvalbas(BigDecimal.ZERO); //(p)
-                counters.setCss(counters.getCss().subtract(dto.getCtvCos()));
-                counters.setQss(counters.getQss().subtract(dto.getNomMov()));
+                counters.setCss(counters.getCss().subtract(ctvOrNom(dto.getInstitute(), dto.getCtvCos(), dto.getNomMov())));
+                if (!FOE_INST.equals(dto.getInstitute()))
+                    counters.setQss(counters.getQss().subtract(dto.getNomMov()));
             }
 
             updateQtaAndCtv(pos, counters);
@@ -122,13 +128,14 @@ public class PositionService implements IPositionService {
         CommonDocument data = util.findOrCreateDocumentByNdg(dto.getInstitute(), dto.getNdg());
         if (data != null) {
             Position pos = findOrCreatePosition(data, dto.getProductId(), dto.getProductCode());
-            //Aggiornare qtaInt, css, qss
+
+            //Aggiornare qtaInt, css, qss (h)
             //se flag-mfm = s e codice stato = ese:
             //- quantità interna -= nominale
             //se flag-mfm <> s e codice stato = ins:
             //- CRS += ctv mov
             //- QRS += nominale
-            InternalCounters counters = pos.getInternalCounters();
+            InternalCountersGpmFoe counters = pos.getInternalCountersGpmFoe();
             if (Constants.Y.equals(dto.getFlagMfM())) {
                 if (STATUS_ESE.equals(dto.getStatus())) {
                     log.info("PositionService.insertRefundOrder - Updating qtaInt");
@@ -138,7 +145,7 @@ public class PositionService implements IPositionService {
                 }
             } else if (STATUS_INS.equals(dto.getStatus())) {
                 log.info("PositionService.insertRefundOrder - Updating crs and qrs");
-                counters.setCrs(counters.getCrs().add(dto.getCtvMov()));
+                counters.setCrs(counters.getCrs().add(ctvOrNom(dto.getInstitute(), dto.getCtvMov(), dto.getNomMov())));
                 counters.setQrs(counters.getQrs().add(dto.getNomMov()));
             }
 
@@ -160,19 +167,20 @@ public class PositionService implements IPositionService {
         CommonDocument data = util.findOrCreateDocumentByNdg(dto.getInstitute(), dto.getNdg());
         if (data != null) {
             Position pos = findOrCreatePosition(data, dto.getProductId(), dto.getProductCode());
-            //se flag-mfm <> s e codice stato = ese:
+
+            //se flag-mfm <> s e codice stato = ese: (l)
             //- quantità interna -= nominale
             //- CRS -= ctv-cos
             //- QRS -= nominale
-
-            InternalCounters counters = pos.getInternalCounters();
+            InternalCountersGpmFoe counters = pos.getInternalCountersGpmFoe();
             if (!Constants.Y.equals(dto.getFlagMfM()) && STATUS_ESE.equals(dto.getStatus())) {
                 log.info("PositionService.refundOrderFeedback - Updating qtaInt, crs, and qrs");
                 counters.setQtaint(counters.getQtaint().subtract(dto.getNomMov()));
                 pos.getDetail().setQqta(BigDecimal.ZERO); //(p)
                 pos.getDetail().setIvalbas(BigDecimal.ZERO); //(p)
-                counters.setCrs(counters.getCrs().subtract(dto.getCtvCos()));
-                counters.setQrs(counters.getQrs().subtract(dto.getNomMov()));
+                counters.setCrs(counters.getCrs().subtract(ctvOrNom(dto.getInstitute(), dto.getCtvCos(), dto.getNomMov())));
+                if (!FOE_INST.equals(dto.getInstitute()))
+                    counters.setQrs(counters.getQrs().subtract(dto.getNomMov()));
             }
 
             updateQtaAndCtv(pos, counters);
@@ -193,17 +201,17 @@ public class PositionService implements IPositionService {
         CommonDocument data = util.findOrCreateDocumentByNdg(dto.getInstitute(), dto.getNdg());
         if (data != null) {
             Position pos = findOrCreatePosition(data, dto.getProductId(), dto.getProductCode());
-            InternalCounters counters = pos.getInternalCounters();
+            InternalCountersGpmFoe counters = pos.getInternalCountersGpmFoe();
 
             switch (dto.getReason()) {
                 case REASON_SOTT: {
                     log.info("PositionService.orderCancellation - Updating css and qss");
-                    counters.setCss(counters.getCss().subtract(dto.getCtvCos()));
+                    counters.setCss(counters.getCss().subtract(ctvOrNom(dto.getInstitute(), dto.getCtvCos(), dto.getNomMov())));
                     counters.setQss(counters.getQss().subtract(dto.getNomMov()));
                 }
                 case REASON_RIMB: {
                     log.info("PositionService.orderCancellation - Updating crs and qrs");
-                    counters.setCrs(counters.getCrs().subtract(dto.getCtvCos()));
+                    counters.setCrs(counters.getCrs().subtract(ctvOrNom(dto.getInstitute(), dto.getCtvCos(), dto.getNomMov())));
                     counters.setQrs(counters.getQrs().subtract(dto.getNomMov()));
                 }
             }
@@ -224,7 +232,7 @@ public class PositionService implements IPositionService {
 
             //quantità interna = + nominale
             log.info("PositionService.insertFundOrder - Updating qtaInt");
-            InternalCounters counters = pos.getInternalCounters();
+            InternalCountersGpmFoe counters = pos.getInternalCountersGpmFoe();
             counters.setQtaint(counters.getQtaint().add(dto.getNomMov()));
             pos.getDetail().setQqta(BigDecimal.ZERO); //(p)
             pos.getDetail().setIvalbas(BigDecimal.ZERO); //(p)

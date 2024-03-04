@@ -58,8 +58,8 @@ public class MFMBalanceToGpmProcessor implements ItemProcessor<MFMBalanceDTO, Li
 			g.getPatrimonioOld().getPosizioni().forEach(p->{
 				if(productMifid.equals(p.getDetail().getCstrfin())
 						&& item.getProductId().equals(p.getDetail().getIdProd())){
-					p.getInternalCounters().setCs(item.getCtv());
-					p.getInternalCounters().setQs(item.getQtaSub().subtract(item.getQtaRef()));
+					p.getInternalCountersGpmFoe().setCs(item.getCtv());
+					p.getInternalCountersGpmFoe().setQs(item.getQtaSub().subtract(item.getQtaRef()));
 					p.getDetail().setQqta(businessLogicUtil.calculateQqta(p));
 					p.getDetail().setIvalbas(businessLogicUtil.calculateCtv(p));
 					p.getDetail().setDulprz(LocalDate.parse(referenceDate));
