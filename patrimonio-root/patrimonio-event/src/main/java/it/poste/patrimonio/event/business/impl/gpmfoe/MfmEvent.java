@@ -7,28 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AFBItem implements IGpmFoeBusinessEvent {
+public class MfmEvent implements IGpmFoeBusinessEvent {
     private String ndg;
-    private String branch;
-    private String agency;
-    private String number;
-    private String index;
-    private String product;
+    private String fiscalCode;
     private String productId;
-    private BigDecimal qta;
-    private LocalDate referenceDate;
+    private BigDecimal qtaSub;
+    private BigDecimal qtaRef;
     private BigDecimal ctv;
-    private BigDecimal price;
+    private String product;
 
     @Override
     public String getKey() {
-        return "5" + "#" + ndg;
+        return "1" + "#" + ndg;
     }
 }
 

@@ -1,11 +1,6 @@
 package it.poste.patrimonio.kconsumer.gpmfoe.business;
 import it.poste.patrimonio.bl.service.*;
-import it.poste.patrimonio.db.model.Foe;
-import it.poste.patrimonio.db.model.Gpm;
-import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.event.business.impl.gpmfoe.*;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
@@ -103,11 +98,11 @@ public class GpmFoeBusinessEventConsumer {
     }
 
     @KafkaHandler
-    public void handleAFBItemEvent(AFBItem message) {
+    public void handleAFBItemEvent(AfbEvent message) {
         gpmFoeService.updateFoe(message);
     }
     @KafkaHandler
-    public void handleMFMItemEvent(MFMItem message) {
+    public void handleMFMItemEvent(MfmEvent message) {
         gpmFoeService.updateGpm(message);
     }
 

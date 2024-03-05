@@ -1,6 +1,6 @@
 package it.poste.patrimonio.event.business.impl.titoli;
 
-import it.poste.patrimonio.event.business.model.Consts;
+import it.poste.patrimonio.event.business.model.BusinessEventConsts;
 import it.poste.patrimonio.event.business.model.ITitoliBusinessEvent;
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class PriceEvent implements ITitoliBusinessEvent {
 
     @Override
     public String getKafkaKey() {
-        if ( Consts.EV_TARGET_POSITION.equals(target) ) {
+        if ( BusinessEventConsts.EV_TARGET_POSITION.equals(target) ) {
             return branch+agency+doss+index;
         }else{
             return isin;

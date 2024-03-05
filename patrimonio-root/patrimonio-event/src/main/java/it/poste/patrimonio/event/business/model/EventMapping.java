@@ -15,7 +15,9 @@ public class EventMapping {
         "business-event.gpm-foe.refund-feedback"                   + ":it.poste.patrimonio.event.business.impl.gpmfoe.RefundFeedback, " +
         "business-event.gpm-foe.refund-order"                      + ":it.poste.patrimonio.event.business.impl.gpmfoe.RefundOrder, " +
         "business-event.gpm-foe.subscription-feedback"             + ":it.poste.patrimonio.event.business.impl.gpmfoe.SubscriptionFeedback, " +
-        "business-event.gpm-foe.subscription-order"                + ":it.poste.patrimonio.event.business.impl.gpmfoe.SubscriptionOrder";
+        "business-event.gpm-foe.subscription-order"                + ":it.poste.patrimonio.event.business.impl.gpmfoe.SubscriptionOrder," +
+        "business-event.gpm-foe.afb"                               + ":it.poste.patrimonio.event.business.impl.gpmfoe.AfbEvent," +
+        "business-event.gpm-foe.mfm"                               + ":it.poste.patrimonio.event.business.impl.gpmfoe.MfmEvent";
 
 
     public static final String TITOLI_BUSINESS_EVENT_TYPE_MAPPINGS =

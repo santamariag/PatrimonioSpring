@@ -13,18 +13,22 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MFMItem implements IGpmFoeBusinessEvent {
+public class AfbEvent implements IGpmFoeBusinessEvent {
     private String ndg;
-    private String fiscalCode;
-    private String productId;
-    private BigDecimal qtaSub;
-    private BigDecimal qtaRef;
-    private BigDecimal ctv;
+    private String branch;
+    private String agency;
+    private String number;
+    private String index;
     private String product;
+    private String productId;
+    private BigDecimal qta;
+    private LocalDate referenceDate;
+    private BigDecimal ctv;
+    private BigDecimal price;
 
     @Override
     public String getKey() {
-        return "1" + "#" + ndg;
+        return "5" + "#" + ndg;
     }
 }
 

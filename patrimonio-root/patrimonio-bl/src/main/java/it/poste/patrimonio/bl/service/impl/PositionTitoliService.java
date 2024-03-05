@@ -69,7 +69,7 @@ public class PositionTitoliService implements IPositionTitoliService {
             processPageContent(page.getContent());
 
 
-            message.setTarget("POSITION");
+            message.setTarget(Consts.EV_TARGET_POSITION);
             sender.send(message);
 
         */

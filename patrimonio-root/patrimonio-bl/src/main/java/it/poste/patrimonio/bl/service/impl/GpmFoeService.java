@@ -6,8 +6,8 @@ import it.poste.patrimonio.db.model.Foe;
 import it.poste.patrimonio.db.model.Gpm;
 import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.db.repository.IGpmRepository;
-import it.poste.patrimonio.event.business.impl.gpmfoe.AFBItem;
-import it.poste.patrimonio.event.business.impl.gpmfoe.MFMItem;
+import it.poste.patrimonio.event.business.impl.gpmfoe.AfbEvent;
+import it.poste.patrimonio.event.business.impl.gpmfoe.MfmEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class GpmFoeService implements IGpmFoeService {
     @Autowired
     BusinessLogicUtil util;
     @Override
-    public void updateFoe(AFBItem message) {
+    public void updateFoe(AfbEvent message) {
         Foe foe=new Foe();
         foe.getPatrimonioOld().getPosizioni().forEach(p->{
             p.getInternalCountersGpmFoe().setCs(message.getCtv());
@@ -34,7 +34,7 @@ public class GpmFoeService implements IGpmFoeService {
     }
 
     @Override
-    public void updateGpm(MFMItem message) {
+    public void updateGpm(MfmEvent message) {
         Gpm gpm=new Gpm();
         gpm.getPatrimonioOld().getPosizioni().forEach(p->{
             p.getInternalCountersGpmFoe().setCs(message.getCtv());
