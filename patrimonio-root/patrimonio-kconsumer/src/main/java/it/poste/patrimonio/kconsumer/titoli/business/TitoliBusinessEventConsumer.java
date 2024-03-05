@@ -45,11 +45,7 @@ public class TitoliBusinessEventConsumer {
         if (Consts.EV_TARGET_POSITION.equals(message.getTarget())){
             service.processCtirEventPosition(message);
         } else {
-            List<CtirEvent> list = service.processCtirEventFinancialInstrument(message);
-            for (CtirEvent event: list
-                 ) {
-                titoliBusinessEventProducer.sendEvent(event);
-            }
+           service.processCtirEventFinancialInstrument(message, (event)-> titoliBusinessEventProducer.sendEvent(event) );
         }
     }
 
@@ -59,11 +55,7 @@ public class TitoliBusinessEventConsumer {
         if (Consts.EV_TARGET_POSITION.equals(message.getTarget())){
             service.processTitrEventPosition(message);
         } else {
-            List<CtirEvent> list = service.processTitrEventFinancialInstrument(message);
-            for (CtirEvent event: list
-            ) {
-                titoliBusinessEventProducer.sendEvent(event);
-            }
+            service.processTitrEventFinancialInstrument(message, (event)-> titoliBusinessEventProducer.sendEvent(event));
         }
     }
 
@@ -73,11 +65,8 @@ public class TitoliBusinessEventConsumer {
         if (Consts.EV_TARGET_POSITION.equals(message.getTarget())){
             service.processPriceEventPosition(message);
         } else {
-            List<CtirEvent> list = service.processPriceEventFinancialInstrument(message);
-            for (CtirEvent event: list
-            ) {
-                titoliBusinessEventProducer.sendEvent(event);
-            }
+           service.processPriceEventFinancialInstrument(message, (event)-> titoliBusinessEventProducer.sendEvent(event));
+
         }
     }
 
@@ -87,11 +76,8 @@ public class TitoliBusinessEventConsumer {
         if (Consts.EV_TARGET_POSITION.equals(message.getTarget())){
             service.processRprzEventPosition(message);
         } else {
-            List<CtirEvent> list = service.processRprzEventFinancialInstrument(message);
-            for (CtirEvent event: list
-            ) {
-                titoliBusinessEventProducer.sendEvent(event);
-            }
+            service.processRprzEventFinancialInstrument(message, (event)-> titoliBusinessEventProducer.sendEvent(event));
+
         }
     }
 
@@ -101,11 +87,8 @@ public class TitoliBusinessEventConsumer {
         if (Consts.EV_TARGET_POSITION.equals(message.getTarget())){
             service.processExchangeRateEventPosition(message);
         } else {
-            List<CtirEvent> list = service.processExchangeRateEvent(message);
-            for (CtirEvent event: list
-            ) {
-                titoliBusinessEventProducer.sendEvent(event);
-            }
+            service.processExchangeRateEvent(message, (event)-> titoliBusinessEventProducer.sendEvent(event));
+
         }
     }
 }

@@ -19,11 +19,11 @@ public class EventMapping {
 
 
     public static final String TITOLI_BUSINESS_EVENT_TYPE_MAPPINGS =
-        "business-event.titoli.CTirEvent" + ":it.poste.patrimonio.event.business.impl.titoli.CtirEvent,"+
-                "business-event.titoli.DepositEvent" + ":it.poste.patrimonio.event.business.impl.titoli.DepositEvent,"+
-                "business-event.titoli.ExchangeRateEvent" + ":it.poste.patrimonio.event.business.impl.titoli.ExchangeRateEvent,"+
-                "business-event.titoli.PositionEvent" + ":it.poste.patrimonio.event.business.impl.titoli.PositionEvent,"+
-                "business-event.titoli.PriceEvent" + ":it.poste.patrimonio.event.business.impl.titoli.PriceEvent,"+
-                "business-event.titoli.RprzEvent" + ":it.poste.patrimonio.event.business.impl.titoli.RprzEvent,"+
-                "business-event.titoli.TitrEvent" + ":it.poste.patrimonio.event.business.impl.titoli.TitrEvent";
+        "business-event.titoli.CTirEvent"         + ":it.poste.patrimonio.event.business.impl.titoli.CtirEvent,"+
+        "business-event.titoli.DepositEvent"      + ":it.poste.patrimonio.event.business.impl.titoli.DepositEvent,"+
+        "business-event.titoli.ExchangeRateEvent" + ":it.poste.patrimonio.event.business.impl.titoli.ExchangeRateEvent,"+
+        "business-event.titoli.PositionEvent"     + ":it.poste.patrimonio.event.business.impl.titoli.PositionEvent,"+
+        "business-event.titoli.PriceEvent"        + ":it.poste.patrimonio.event.business.impl.titoli.PriceEvent,"+
+        "business-event.titoli.RprzEvent"         + ":it.poste.patrimonio.event.business.impl.titoli.RprzEvent,"+
+        "business-event.titoli.TitrEvent"         + ":it.poste.patrimonio.event.business.impl.titoli.TitrEvent";
 }

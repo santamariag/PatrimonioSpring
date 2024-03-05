@@ -10,15 +10,12 @@ public class DepositEvent implements ITitoliBusinessEvent {
     private String agency; // agenzia
     private String doss; // numero
     private String index; // rubrica
+
     @Override
     public String getKafkaKey() {
         return branch+agency+doss+index;
     }
 
     private String ndg;
-
-
-
-
 
 }

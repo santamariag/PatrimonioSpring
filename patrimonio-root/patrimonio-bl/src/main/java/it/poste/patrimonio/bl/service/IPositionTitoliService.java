@@ -1,31 +1,43 @@
 package it.poste.patrimonio.bl.service;
 
+import it.poste.patrimonio.bl.service.impl.PositionTitoliService;
 import it.poste.patrimonio.event.business.impl.titoli.*;
+import it.poste.patrimonio.event.business.model.ITitoliBusinessEvent;
 
 import java.util.List;
 
 public interface IPositionTitoliService {
-    void processDepositEvent(DepositEvent message);
 
-    void processCtirEventPosition(CtirEvent message);
 
-    List<CtirEvent> processCtirEventFinancialInstrument(CtirEvent message);
+    @FunctionalInterface
+    public interface BusinessEventSender {
+        boolean send(ITitoliBusinessEvent string);
+    }
 
-    void processPositionEvent(PositionEvent message);
+    // Deposit
+        void processDepositEvent(DepositEvent message);
 
-    void processTitrEventPosition(TitrEvent message);
+    // Position
+        void processPositionEvent(PositionEvent message);
 
-    List<CtirEvent> processTitrEventFinancialInstrument(TitrEvent message);
+    // Ctir
+        void processCtirEventPosition(CtirEvent message);
+        void processCtirEventFinancialInstrument(CtirEvent message, BusinessEventSender sender);
 
-    List<CtirEvent> processPriceEventFinancialInstrument(PriceEvent message);
+    // Titr
+        void processTitrEventPosition(TitrEvent message);
+        void processTitrEventFinancialInstrument(TitrEvent message, BusinessEventSender sender);
 
-    void processPriceEventPosition(PriceEvent message);
+    // Price
+        void processPriceEventPosition(PriceEvent message);
+        void processPriceEventFinancialInstrument(PriceEvent message, BusinessEventSender sender);
 
-    void processRprzEventPosition(RprzEvent message);
+    // Rprz
+        void processRprzEventPosition(RprzEvent message);
+        void processRprzEventFinancialInstrument(RprzEvent message, BusinessEventSender sender);
 
-    List<CtirEvent> processRprzEventFinancialInstrument(RprzEvent message);
+    // ExchangeRate
+        void processExchangeRateEventPosition(ExchangeRateEvent message);
+        void processExchangeRateEvent(ExchangeRateEvent message, BusinessEventSender sender);
 
-    void processExchangeRateEventPosition(ExchangeRateEvent message);
-
-    List<CtirEvent> processExchangeRateEvent(ExchangeRateEvent message);
 }
