@@ -18,9 +18,8 @@
     <module>patrimonio-config</module>
     <module>patrimonio-event</module>    
     <module>patrimonio-interface</module>
-    <module>patrimonio-rs-api</module>    
-    <module>patrimonio-batch</module> 
-    <module>patrimonio-batch-exp</module>
+    <module>patrimonio-rs-api</module>
+    <module>patrimonio-batch</module>
     <module>patrimonio-kconsumer</module>
   </modules>
     

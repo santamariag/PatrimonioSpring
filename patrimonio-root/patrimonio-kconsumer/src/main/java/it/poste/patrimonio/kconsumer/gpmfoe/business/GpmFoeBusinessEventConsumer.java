@@ -1,10 +1,12 @@
 package it.poste.patrimonio.kconsumer.gpmfoe.business;
-
-import it.poste.patrimonio.bl.service.IMasterDataService;
-import it.poste.patrimonio.bl.service.IPACService;
-import it.poste.patrimonio.bl.service.IPositionService;
+import it.poste.patrimonio.bl.service.*;
+import it.poste.patrimonio.db.model.Foe;
+import it.poste.patrimonio.db.model.Gpm;
+import it.poste.patrimonio.db.repository.IFoeRepository;
 import it.poste.patrimonio.event.business.impl.gpmfoe.*;
-import it.poste.patrimonio.itf.model.AFBBalanceDTO;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Component;
         containerFactory = "GpmFoeBusinessEventKLCFactory"
 )
 public class GpmFoeBusinessEventConsumer {
+    @Autowired
+    IGpmFoeService gpmFoeService;
 
     @Autowired
     IMasterDataService masterDataService;
@@ -98,9 +102,13 @@ public class GpmFoeBusinessEventConsumer {
         positionService.insertSubOrder(message);
     }
 
-//    @KafkaHandler
-//    public void handle(AFBBalanceDTO message) {
-//        foeService.AFBBalance(message);
-//    }
+    @KafkaHandler
+    public void handleAFBItemEvent(AFBItem message) {
+        gpmFoeService.updateFoe(message);
+    }
+    @KafkaHandler
+    public void handleMFMItemEvent(MFMItem message) {
+        gpmFoeService.updateGpm(message);
+    }
 
 }

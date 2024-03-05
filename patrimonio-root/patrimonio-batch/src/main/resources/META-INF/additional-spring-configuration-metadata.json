@@ -1,5 +1,77 @@
-{"properties": [{
-  "name": "spring.data.mongodb.dbname",
-  "type": "java.lang.String",
-  "description": "A description for 'spring.data.mongodb.dbname'"
-}]}
+{"properties": [
+  {
+    "name": "spring.data.mongodb.dbname",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.dbname'"
+  },
+  {
+    "name": "gpm.page-size",
+    "type": "java.lang.String",
+    "description": "A description for 'gpm.page-size'"
+  },
+  {
+    "name": "file-config.input-path",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.input-path'"
+  },
+  {
+    "name": "file-config.fileName",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.fileName'"
+  },
+  {
+    "name": "file-config.processingPath",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.processingPath'"
+  },
+  {
+    "name": "file-config.completedPath",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.completedPath'"
+  },
+  {
+    "name": "file-config.discardedPath",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.discardedPath'"
+  },
+  {
+    "name": "job.multi-exec.always",
+    "type": "java.lang.String",
+    "description": "A description for 'job.multi-exec.always'"
+  },
+  {
+    "name": "job.multi-exec.allowed",
+    "type": "java.lang.String",
+    "description": "A description for 'job.multi-exec.allowed'"
+  },
+  {
+    "name": "job.multi-exec.name-suffix",
+    "type": "java.lang.String",
+    "description": "A description for 'job.multi-exec.name-suffix'"
+  },
+  {
+    "name": "file-config.noop",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.noop'"
+  },
+  {
+    "name": "worker.page-size",
+    "type": "java.lang.String",
+    "description": "A description for 'worker.page-size'"
+  },
+  {
+    "name": "worker.maxNumber",
+    "type": "java.lang.String",
+    "description": "A description for 'worker.maxNumber'"
+  },
+  {
+    "name": "worker.chunkSize",
+    "type": "java.lang.String",
+    "description": "A description for 'worker.chunkSize'"
+  },
+  {
+    "name": "file-config.fileNamePattern",
+    "type": "java.lang.String",
+    "description": "A description for 'file-config.fileNamePattern'"
+  }
+]}

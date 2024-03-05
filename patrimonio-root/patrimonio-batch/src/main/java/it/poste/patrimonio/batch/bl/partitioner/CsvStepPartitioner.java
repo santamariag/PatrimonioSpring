@@ -8,16 +8,19 @@ import java.util.Map;
 
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.poste.patrimonio.batch.bl.config.FileConfig;
 import lombok.extern.slf4j.Slf4j;
 
 
-import static it.poste.patrimonio.batch.bl.util.BatchConstants.FILENAME;;
 @Slf4j
 @Component
 public class CsvStepPartitioner implements Partitioner {
+	
+	@Autowired
+	private FileConfig fileConfig;
 	
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {
@@ -25,7 +28,7 @@ public class CsvStepPartitioner implements Partitioner {
 
         int noOfLines = 0;
         try {
-            noOfLines = getNoOfLines(FILENAME);
+            noOfLines = getNoOfLines(fileConfig.getProcessingPath().concat(System.getProperty("file.separator")).concat(fileConfig.getFileNamePattern())); //Non usare pattern ma recuperare il filename dal contesto impostato da listener precedente
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,13 +37,13 @@ public class CsvStepPartitioner implements Partitioner {
         int lastLine = gridSize;
         int partitionNumber = 0;
 
-        while(firstLine <= noOfLines) {
+        while(firstLine < noOfLines) {
 
             if(lastLine >= noOfLines) {
                 lastLine = noOfLines;
             }
 
-            log.info("Partition number : {}, first line is : {}, last  line is : {} ", partitionNumber, firstLine, lastLine);
+            log.info("Partition number : {}, first line is : {}, last  line is : {} ", partitionNumber, firstLine+1, lastLine);
 
             ExecutionContext value = new ExecutionContext();
 
@@ -60,9 +63,9 @@ public class CsvStepPartitioner implements Partitioner {
         return result;
     }
 
-    public int getNoOfLines(String fileName) throws IOException {
-        ClassPathResource classPathResource = new ClassPathResource(fileName);
-        LineNumberReader reader = new LineNumberReader(new FileReader(classPathResource.getFile().getAbsolutePath()));
+    public int getNoOfLines(String filePath) throws IOException {
+        //FileSystemResource resource = new FileSystemResource(filePath);
+        LineNumberReader reader = new LineNumberReader(new FileReader(filePath));
         reader.skip(Long.MAX_VALUE);
         reader.close();
         return reader.getLineNumber();
